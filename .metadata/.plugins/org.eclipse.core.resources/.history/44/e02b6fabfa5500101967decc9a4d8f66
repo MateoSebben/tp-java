@@ -1,0 +1,48 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="entities.Facultad" %>
+
+<%
+    Facultad facu = (Facultad) request.getAttribute("facultadEditar");
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Facultad</title>
+    <link href="style/bootstrap.css" rel="stylesheet">
+    
+</head>
+<body>
+<div class="container">
+    <h2>Editar Facultad</h2>
+
+    <form action="editarFacultad" method="post">
+        <input type="hidden" name="id" value="<%= facu.getId() %>" />
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required value="<%= facu.getNombre() %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" value="<%= facu.getDireccion() %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="emailContacto" class="form-label">Email de Contacto</label>
+            <input type="email" class="form-control" id="emailContacto" name="emailContacto" value="<%= facu.getEmailContacto() %>">
+        </div>
+
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" value="<%= facu.getTelefono() %>">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <a href="listaFacultades" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<%@page import="entities.Usuario"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="entities.Facultad"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+	<title>Sitio Web Java</title>
+	
+	<!-- Bootstrap core CSS -->
+    <link href="style/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="style/start.css" rel="stylesheet">
+    
+    
+    <%
+    	Usuario u = (Usuario)session.getAttribute("usuario");
+    	LinkedList<Facultad> lf = (LinkedList<Facultad>)request.getAttribute("listaFacultades");
+    
+    %>
+</head>
+<body>
+
+<div class="container">
+		<div class="row">
+        	<h4>Facultades</h4>
+            	<div class="col-12 col-sm-12 col-lg-12">
+                	<div class="table-responsive">
+                    	<table class="table">
+                    		<thead>
+                    			<tr>
+                    				<th>id</th>
+                    		    	<th>nombre</th>
+                        			<th>direccion</th>
+                        			<th>emailContacto</th>
+                        			<th>telefono</th>
+                        			<th>fechaAlta</th>
+                        			<th></th>
+                        			<th></th>
+                      			</tr>
+                      		</thead>
+                    		<tbody>
+                    		<% for (Facultad fac : lf) { %>
+                    			<tr>
+                    				<td><%=fac.getId()%></td>
+                    				<td><%=fac.getNombre()%></td>
+                    				<td><%=fac.getDireccion()%></td>
+                    				<td><%=fac.getEmailContacto()%></td>
+                    				<td><%=fac.getTelefono()%></td>
+                    				<td><%=fac.getFechaAlta()%></td>
+                    				<td><form action="editarFacultad" method="post">
+           						    <input type="hidden" name="id" value="<%= fac.getId() %>" />
+            						<button type="submit" class="btn btn-outline-primary">Editar</button></form></td><!-- editar --> 
+                    				<td><form action="eliminarFacultad" method="post">
+           						    <input type="hidden" name="idFac" value="<%= fac.getId() %>" />
+            						<button type="submit" class="btn btn-outline-danger" onclick="return confirm('¿Seguro que desea eliminar esta facultad?');">Borrar</button></form></td><!-- borrar -->
+                    			</tr>
+                    		<% } %>
+                    		</tbody>	
+                    		
+                    		<div class="download-button">
+  <div class="icon">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 16l4-4h-3V4h-2v8H8l4 4zM5 18v2h14v-2H5z" fill="#fff"></path>
+    </svg>
+  </div>
+  <div class="label">Agregar</div>
+  <div class="loading">
+    <span></span>
+  </div>
+</div>
+	</div> <!-- /container -->
+	
+	
+	
+
+	
+
+</body>
+</html>
