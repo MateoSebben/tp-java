@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Recursos Académicos Compartidos</title>
+    
+    <!-- Custom styles for this template -->
+    <link href="style/home.css" rel="stylesheet">
+  
+</head>
+<body>
+    <!-- Header con Navegación -->
+    <header>
+        <nav>
+            <a href="#" class="logo">📚 SGRACA</a>
+            <div class="nav-buttons">
+                <a href="index.html" class="btn btn-login">Iniciar Sesión</a>
+                <a href="signup" class="btn btn-register">Registrarse</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Sección Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
+                <p>Una plataforma colaborativa donde estudiantes universitarios pueden compartir, organizar y acceder a materiales de estudio de manera eficiente y equitativa.</p>
+            </div>
+        </section>
+
+        <!-- Características Principales -->
+        <section class="features">
+            <h2>¿Qué puedes hacer en nuestra plataforma?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📤</div>
+                    <h3>Subir Recursos</h3>
+                    <p>Comparte tus apuntes, exámenes, ejercicios resueltos y otros materiales de estudio con la comunidad estudiantil.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Búsqueda Avanzada</h3>
+                    <p>Encuentra rápidamente los recursos que necesitas filtrando por facultad, materia, año, tipo de material y palabras clave.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>Organización Inteligente</h3>
+                    <p>Mantén tus recursos organizados por categorías y accede fácilmente a todo tu material de estudio.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Colaboración Estudiantil</h3>
+                    <p>Conecta con otros estudiantes, comparte conocimiento y construye una comunidad académica sólida.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Acceso Seguro</h3>
+                    <p>Sistema con diferentes niveles de acceso que garantiza la seguridad y correcta gestión de los contenidos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Acceso Rápido</h3>
+                    <p>Interfaz intuitiva y rápida que optimiza tu tiempo de estudio y facilita el descubrimiento de material relevante.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beneficios -->
+        <section class="benefits">
+            <div class="benefits-content">
+                <h2>Beneficios de usar SGRACA</h2>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <h4>🎯 Ahorra Tiempo</h4>
+                        <p>Encuentra rápidamente los recursos que necesitas sin perder tiempo buscando.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>💡 Mejora tu Rendimiento</h4>
+                        <p>Accede a material de calidad compartido por otros estudiantes exitosos.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>🌐 Comunidad Activa</h4>
+                        <p>Forma parte de una red de estudiantes comprometidos con el aprendizaje.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>📈 Crecimiento Académico</h4>
+                        <p>Contribuye al crecimiento de la comunidad universitaria compartiendo tus recursos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta">
+            <h2>¿Listo para comenzar?</h2>
+            <p>Únete a nuestra comunidad de estudiantes y comienza a compartir y acceder a recursos académicos de calidad.</p>
+            <div class="hero-buttons">
+                <a href="signup" class="btn btn-hero btn-register">Crear Cuenta Gratis</a>
+                <a href="index.html" class="btn btn-hero btn-login">Ya tengo cuenta</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Sistema de Gestión de Recursos Académicos Compartidos. Todos los derechos reservados.</p>
+        <p>Desarrollado para facilitar el intercambio de conocimiento en el entorno universitario.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Efecto de scroll en header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+    </script>
+</body>
+</html>

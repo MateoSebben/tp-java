@@ -3,4 +3,7 @@
   <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v8.5 V2-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v8.5 V2" name="Tomcat v8.5 V2" runtime-id="apache-tomcat-8.5.99" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="2">
     <list key="modules" value0="SitioWebJava::org.eclipse.jst.jee.server:SitioWebJava::jst.web::3.1"/>
   </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v8.5 Tp at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v8.5 Tp at localhost" name="Tomcat v8.5 version2" runtime-id="Tomcat v8.5 Tp" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="2">
+    <list key="modules" value0="SitioWebJava::org.eclipse.jst.jee.server:SitioWebJava::jst.web::3.1"/>
+  </server>
 </servers>
