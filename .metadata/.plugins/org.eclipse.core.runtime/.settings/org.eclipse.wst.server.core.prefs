@@ -1,3 +1,0 @@
-eclipse.preferences.version=1
-module-start-timeout=300000
-runtimes=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<runtimes>\r\n  <runtime id\="Tomcat v8.5 Tp" location\="F\:/Apuntes/ALEXIS UTN/Electivas/Java/Proyectos/Server/apache-tomcat-8.5.99" name\="Tomcat v8.5 Tp" runtime-type-id\="org.eclipse.jst.server.tomcat.runtime.85" timestamp\="0"/>\r\n  <runtime id\="apache-tomcat-8.5.99" location\="C\:/Users/Usuario/OneDrive/Escritorio/Mateo/UTN/Electivas/Java/PaginaWebJavaTp/Servers/apache-tomcat-8.5.99" name\="apache-tomcat-8.5.99" runtime-type-id\="org.eclipse.jst.server.tomcat.runtime.85" timestamp\="0"/>\r\n</runtimes>\r\n

@@ -1,0 +1,28 @@
+# Archivos de Eclipse 
+.metadata/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.DS_Store
+*.class
+
+# Archivos de configuración de Eclipse
+*.launch
+*.settings/
+bin/
+build/
+
+# Archivos de control de versiones antiguos o temporales
+*.orig
+*.rej
+
+# Archivos específicos de IDEs
+.idea/
+*.iml
+.vscode/
+
+# Archivos del sistema
+Thumbs.db
+desktop.ini

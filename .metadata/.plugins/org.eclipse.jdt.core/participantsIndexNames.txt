@@ -1,9 +1,0 @@
-INDEX VERSION 1.134
-F:\Apuntes\ALEXIS UTN\Electivas\Java\PaginaWebJavaTp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\693085886.index
-\SitioWebJava\src\main\java
-C:\Users\Usuario\OneDrive\Escritorio\Mateo\UTN\Electivas\Java\PaginaWebJavaTp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\693085886.index
-\SitioWebJava\src\main\java
-C:\Users\Usuario\OneDrive\Escritorio\Mateo\UTN\Electivas\Java\PaginaWebJavaTp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1110273645.index
-\SitioWebJava\src\main\java
-F:\Apuntes\ALEXIS UTN\Electivas\Java\PaginaWebJavaTp\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1110273645.index
-\SitioWebJava\src\main\java
