@@ -125,10 +125,6 @@ public class DataUsuario {
 */
 
 
-
-
-
-
 package data;
 
 import entities.Usuario;
@@ -150,7 +146,6 @@ public class DataUsuario {
             conn = DbConnector.getInstancia().getConn();
 
             // Preparar y ejecutar la consulta.
-            // La tabla es 'usuario', no 'persona' según tu esquema.
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT id, nombre, apellido, email, rol FROM usuario");
 
@@ -274,9 +269,6 @@ public class DataUsuario {
                 u.setId(keyResultSet.getInt(1));
             }
 
-            //DataRol dr = new DataRol(); // Lógica para roles externos, si aplica.
-            //dr.setRolesDePersona(p); // Lógica para asignar roles si fueran tablas separadas.
-
         } catch (SQLException e) {
             e.printStackTrace();
             // Lanza una excepción para notificar el fallo de la operación de inserción.
@@ -290,6 +282,38 @@ public class DataUsuario {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+          
         }
     }
+    
+    public boolean existeEmail(String email) {
+    	PreparedStatement stmt = null;
+    	ResultSet rs = null;
+    	boolean existe = false;
+    	
+    	try {
+			Connection conn = DbConnector.getInstancia().getConn();
+			stmt = conn.prepareStatement("SELECT 1 FROM usuario WHERE email=?");
+			stmt.setString(1, email);
+			rs = stmt.executeQuery();
+			
+			if (rs != null && rs.next()) {
+				existe = true;				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if (rs != null ) rs.close();
+				if (stmt != null) stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+    	return existe;
+    }
+    
 }
