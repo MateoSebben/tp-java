@@ -26,3 +26,9 @@ build/
 # Archivos del sistema
 Thumbs.db
 desktop.ini
+
+# Configuración específica de Eclipse
+.classpath
+.project
+Servers/
+

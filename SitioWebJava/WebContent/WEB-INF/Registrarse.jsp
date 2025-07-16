@@ -9,8 +9,11 @@
     <!-- Custom styles for this template -->
     <link href="style/signup.css" rel="stylesheet">
     
+
+    
+    
 </head>
-<body>
+<body  style="font-family: sans-serif;">
   <div class="form-wrapper">
     <form class="form" method="post" action="signup">
         <h1 class="title">Registrarse </h1>
