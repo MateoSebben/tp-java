@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGRAC - Sistema de Gestión de Recursos Académicos Compartidos</title>
     <link rel="stylesheet" href="style/styles.css">
+    <link rel="stylesheet" href="style/welcome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
 </head>
 <body>
     <div class="app-container">
@@ -97,6 +101,12 @@
                     <i class="fas fa-cog"></i>
                     <span class="nav-text">Configuración</span>
                 </a>
+                
+                <!-- Cerrar Sesion -->
+                	<a href="#" class="nav-item" data-bs-toggle="modal" data-bs-target="#modalCerrarSesion">
+    				<ion-icon name="log-out-outline"></ion-icon>
+    				<span class="nav-text-so">Cerrar Sesión</span>
+					</a>
             </nav>
         </div>
 
@@ -217,6 +227,31 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <!-- ACA -->
+    
+    <!-- Modal de confirmación de cierre de sesión -->
+<div class="modal fade" id="modalCerrarSesion" tabindex="-1" aria-labelledby="modalCerrarSesionLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-3 shadow">
+
+      <div class="modal-header bg-primary text-white border-0">
+        <h5 class="modal-title" id="modalCerrarSesionLabel">¿Estás seguro de que deseas cerrar sesión?</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body text-dark">
+      </div>
+
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="Logout" class="btn btn-danger">Cerrar Sesión</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>    
 </body>
 </html>

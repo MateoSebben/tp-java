@@ -70,7 +70,7 @@
                       			</tr>
                       		</thead>
                     		<tbody>
-                    		<% for (Facultad fac : lf) { %>
+                    		<%  for (Facultad fac : lf) { %>
                     			<tr>
                     				<td><%=fac.getId()%></td>
                     				<td><%=fac.getNombre()%></td>

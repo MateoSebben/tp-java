@@ -45,8 +45,7 @@ public class Signin extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		//System.out.println("EMAIL: " + email);
-		//System.out.println("PASSWORD: " + password);
+		
 		
 		// validar email y password
 		
@@ -54,13 +53,6 @@ public class Signin extends HttpServlet {
 		usu.setPassword(password);
 		
 		usu = ctrl.validate(usu);
-		/*LinkedList<Usuario> usuarios = ctrl.getAll();
-	
-		
-		request.getSession().setAttribute("usuario", usu);
-		request.setAttribute("listaUsuarios", usuarios);
-		
-		request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);*/
 		
 		if (usu != null) {
 	        // Login válido
@@ -77,19 +69,6 @@ public class Signin extends HttpServlet {
 	        request.getRequestDispatcher("login.jsp").forward(request, response);
 	    }
 		
-		
-		
-		/*usu = ctrl.validate(usu);
-
-		if (usu != null) {
-		    System.out.println("Nombre recuperado: " + usu.getNombre());
-		    System.out.println("Apellido recuperado: " + usu.getApellido());
-
-		    response.getWriter().append("Bienvenido ").append(usu.getNombre()).append(" ").append(usu.getApellido());
-		} else {
-		    // Login fallido: usuario no encontrado
-		    response.getWriter().append("Email o contraseña incorrectos.");
-		}*/
 
 	}
 

@@ -187,4 +187,25 @@ body, html {
   
 }
 
+/* --- NUEVOS ESTILOS PARA MOSTRAR/OCULTAR CONTRASEÑA --- */
+
+.form label.password-label {
+    position: relative; 
+    display: block; 
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    cursor: pointer;
+    font-size: 1.2em; 
+    color: #888; 
+    z-index: 2; 
+}
+
+.form label.password-label .input {
+    padding-right: 40px; 
+}
 
