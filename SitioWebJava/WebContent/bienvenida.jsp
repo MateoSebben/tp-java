@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGRAC - Sistema de Gestión de Recursos Académicos Compartidos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style/styles.css">
     <link rel="stylesheet" href="style/welcome.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
 </head>
@@ -19,19 +19,20 @@
             <!-- Header del sidebar -->
             <div class="sidebar-header">
                 <div class="logo">
-                    <i class="fas fa-graduation-cap"></i>
+                    <ion-icon name="school-outline" size="large"></ion-icon>
                     <span class="logo-text">SGRAC</span>
                 </div>
                 <button class="sidebar-toggle" id="sidebarToggle">
-                    <i class="fas fa-bars"></i>
+                    <ion-icon name="menu-outline" size="large"></ion-icon>
                 </button>
             </div>
 
             <!-- Navegación -->
             <nav class="sidebar-nav">
+            
                 <!-- Inicio -->
                 <a href="index.jsp" class="nav-item active">
-                    <i class="fas fa-home"></i>
+                    <ion-icon name="home-outline"></ion-icon>
                     <span class="nav-text">Inicio</span>
                 </a>
 
@@ -39,20 +40,20 @@
                 <div class="nav-section">
                     <button class="nav-section-header" onclick="toggleSection('recursos')">
                         <i class="fas fa-chevron-down section-arrow" id="recursos-arrow"></i>
-                        <i class="fas fa-book-open"></i>
+                       <ion-icon name="book-outline"></ion-icon>
                         <span class="nav-text">Recursos</span>
                     </button>
                     <div class="nav-subsection" id="recursos-section">
                         <a href="upload.jsp" class="nav-subitem">
-                            <i class="fas fa-upload"></i>
+                            <ion-icon name="cloud-upload-outline"></ion-icon>
                             <span class="nav-text">Subir Material</span>
                         </a>
                         <a href="my-resources.jsp" class="nav-subitem">
-                            <i class="fas fa-file-text"></i>
+                            <ion-icon name="document-text-outline"></ion-icon>
                             <span class="nav-text">Mis Recursos</span>
                         </a>
                         <a href="shared.jsp" class="nav-subitem">
-                            <i class="fas fa-share-alt"></i>
+                            <ion-icon name="share-social-outline"></ion-icon>
                             <span class="nav-text">Compartidos</span>
                         </a>
                     </div>
@@ -62,7 +63,7 @@
                 <div class="nav-section">
                     <button class="nav-section-header" onclick="toggleSection('busqueda')">
                         <i class="fas fa-chevron-right section-arrow" id="busqueda-arrow"></i>
-                        <i class="fas fa-search"></i>
+                        <ion-icon name="search-outline"></ion-icon>
                         <span class="nav-text">Búsqueda</span>
                     </button>
                     <div class="nav-subsection collapsed" id="busqueda-section">
@@ -81,7 +82,7 @@
                 <div class="nav-section">
                     <button class="nav-section-header" onclick="toggleSection('perfil')">
                         <i class="fas fa-chevron-right section-arrow" id="perfil-arrow"></i>
-                        <i class="fas fa-users"></i>
+                        <ion-icon name="person-outline"></ion-icon>
                         <span class="nav-text">Perfil</span>
                     </button>
                     <div class="nav-subsection collapsed" id="perfil-section">
@@ -98,7 +99,7 @@
 
                 <!-- Configuración -->
                 <a href="settings.jsp" class="nav-item">
-                    <i class="fas fa-cog"></i>
+                    <ion-icon name="settings-outline"></ion-icon>
                     <span class="nav-text">Configuración</span>
                 </a>
                 
@@ -112,16 +113,17 @@
 
         <!-- Contenido principal -->
         <div class="main-content">
+        
             <!-- Header -->
             <header class="main-header">
                 <h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
                 <div class="header-actions">
                     <button class="btn btn-outline">
-                        <i class="fas fa-bell"></i>
+                        <ion-icon name="notifications-outline"></ion-icon>
                         <span>Notificaciones</span>
                     </button>
                     <button class="btn btn-primary">
-                        <i class="fas fa-upload"></i>
+                        <ion-icon name="cloud-upload-outline"></ion-icon>
                         <span>Subir Material</span>
                     </button>
                 </div>
@@ -130,10 +132,11 @@
             <!-- Contenido de bienvenida -->
             <main class="content">
                 <div class="welcome-container">
+                
                     <!-- Bienvenida principal -->
                     <div class="welcome-hero">
                         <div class="welcome-badge">
-                            <i class="fas fa-graduation-cap"></i>
+                            <ion-icon name="school-outline" size="large"></ion-icon>
                             <span>Bienvenido al SGRAC</span>
                         </div>
                         <h2>Comparte y Accede a Recursos Académicos</h2>
@@ -147,7 +150,7 @@
                     <div class="features-grid">
                         <div class="feature-card">
                             <div class="feature-header">
-                                <i class="fas fa-upload feature-icon upload"></i>
+                                <ion-icon name="cloud-upload-outline" size="large"></ion-icon>
                                 <h3>Sube y Organiza</h3>
                             </div>
                             <p>
@@ -158,7 +161,7 @@
 
                         <div class="feature-card">
                             <div class="feature-header">
-                                <i class="fas fa-search feature-icon search"></i>
+                                <ion-icon name="search-outline" size="large"></ion-icon>
                                 <h3>Búsqueda Avanzada</h3>
                             </div>
                             <p>
@@ -169,7 +172,7 @@
 
                         <div class="feature-card">
                             <div class="feature-header">
-                                <i class="fas fa-share-alt feature-icon share"></i>
+                                <ion-icon name="share-social-outline" size="large"></ion-icon>
                                 <h3>Colaboración</h3>
                             </div>
                             <p>
@@ -213,11 +216,11 @@
                         </p>
                         <div class="cta-buttons">
                             <button class="btn btn-primary btn-large">
-                                <i class="fas fa-upload"></i>
+                                <ion-icon name="cloud-upload-outline"></ion-icon>
                                 <span>Subir mi primer material</span>
                             </button>
                             <button class="btn btn-outline btn-large">
-                                <i class="fas fa-search"></i>
+                                <ion-icon name="search-outline"></ion-icon>
                                 <span>Explorar recursos</span>
                             </button>
                         </div>
