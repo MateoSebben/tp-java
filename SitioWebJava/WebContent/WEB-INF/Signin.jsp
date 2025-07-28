@@ -19,7 +19,7 @@
 
 <body style="font-family: sans-serif;">
   <div class="form-wrapper">
-    <form class="form" method="post" action="bienvenida.jsp">
+    <form class="form" method="post" action="Signin">
         <h1 class="title">Iniciar Sesión </h1>
         <p class="message">Ingresá ahora y empeza a interactuar!</p>
 

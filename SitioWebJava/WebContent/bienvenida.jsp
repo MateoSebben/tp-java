@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style/styles.css">
     <link rel="stylesheet" href="style/welcome.css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
 </head>
 <body>
     <div class="app-container">
+    
         <!-- Sidebar estilo Notion -->
         <div class="sidebar" id="sidebar">
+        
             <!-- Header del sidebar -->
             <div class="sidebar-header">
                 <div class="logo">
@@ -39,7 +39,7 @@
                 <!-- Sección Recursos -->
                 <div class="nav-section">
                     <button class="nav-section-header" onclick="toggleSection('recursos')">
-                        <i class="fas fa-chevron-down section-arrow" id="recursos-arrow"></i>
+                        <ion-icon name="chevron-down-outline" id="recursos-arrow"></ion-icon>
                        <ion-icon name="book-outline"></ion-icon>
                         <span class="nav-text">Recursos</span>
                     </button>
@@ -62,17 +62,17 @@
                 <!-- Sección Búsqueda -->
                 <div class="nav-section">
                     <button class="nav-section-header" onclick="toggleSection('busqueda')">
-                        <i class="fas fa-chevron-right section-arrow" id="busqueda-arrow"></i>
+                        <ion-icon name="chevron-forward-outline" id="busqueda-arrow"></ion-icon>
                         <ion-icon name="search-outline"></ion-icon>
                         <span class="nav-text">Búsqueda</span>
                     </button>
                     <div class="nav-subsection collapsed" id="busqueda-section">
                         <a href="search.jsp" class="nav-subitem">
-                            <i class="fas fa-search"></i>
+                            <ion-icon name="search-circle-outline"></ion-icon>
                             <span class="nav-text">Buscar Material</span>
                         </a>
                         <a href="filters.jsp" class="nav-subitem">
-                            <i class="fas fa-filter"></i>
+                            <ion-icon name="filter-outline"></ion-icon>
                             <span class="nav-text">Filtros Avanzados</span>
                         </a>
                     </div>
@@ -81,17 +81,17 @@
                 <!-- Sección Perfil -->
                 <div class="nav-section">
                     <button class="nav-section-header" onclick="toggleSection('perfil')">
-                        <i class="fas fa-chevron-right section-arrow" id="perfil-arrow"></i>
+                        <ion-icon name="chevron-forward-outline" id="perfil-arrow"></ion-icon>
                         <ion-icon name="person-outline"></ion-icon>
                         <span class="nav-text">Perfil</span>
                     </button>
                     <div class="nav-subsection collapsed" id="perfil-section">
                         <a href="profile.jsp" class="nav-subitem">
-                            <i class="fas fa-user"></i>
+                            <ion-icon name="person-circle-outline"></ion-icon>
                             <span class="nav-text">Mi Perfil</span>
                         </a>
                         <a href="notifications.jsp" class="nav-subitem">
-                            <i class="fas fa-bell"></i>
+                            <ion-icon name="notifications-outline"></ion-icon>
                             <span class="nav-text">Notificaciones</span>
                         </a>
                     </div>
@@ -256,5 +256,35 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>    
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
+<script>
+// Función para alternar las secciones del sidebar
+function toggleSection(sectionName) {
+    const section = document.getElementById(sectionName + '-section');
+    const arrow = document.getElementById(sectionName + '-arrow');
+    
+    if (section.classList.contains('collapsed')) {
+        // Expandir sección
+        section.classList.remove('collapsed');
+        arrow.setAttribute('name', 'chevron-down-outline');
+    } else {
+        // Colapsar sección
+        section.classList.add('collapsed');
+        arrow.setAttribute('name', 'chevron-forward-outline');
+    }
+}
+
+// Event listener para el botón de toggle del sidebar
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+        });
+    }
+});
+</script>
 </body>
 </html>

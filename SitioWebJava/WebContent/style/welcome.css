@@ -8,3 +8,87 @@ ion-icon {
 	color: black; 
 }
 
+/* Estilos para el Toggle Section*/
+
+/* Estilos para las subsecciones del sidebar */
+.nav-subsection {
+    max-height: 200px; /* Altura máxima cuando está expandido */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.nav-subsection.collapsed {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Estilos para las flechas */
+.section-arrow {
+    transition: transform 0.3s ease;
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+/* Estilos para el botón de sección */
+.nav-section-header {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 12px 16px;
+    text-align: left;
+    cursor: pointer;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    margin: 2px 0;
+}
+
+.nav-section-header:hover {
+    background-color: #f1f5f9;
+    color: #334155;
+}
+
+.nav-section-header ion-icon {
+    font-size: 20px;
+}
+
+/* Asegurar que los subitems tengan el estilo correcto */
+.nav-subitem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px 8px 40px; /* Indentación adicional para subitems */
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    margin: 1px 8px;
+    font-size: 14px;
+}
+
+.nav-subitem:hover {
+    background-color: #e2e8f0;
+    color: #334155;
+    text-decoration: none;
+}
+
+.nav-subitem i {
+    font-size: 16px;
+    width: 16px;
+    text-align: center;
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.nav-section {
+    margin-bottom: 4px;
+}
+
+.nav-text {
+    font-weight: 500;
+}
+

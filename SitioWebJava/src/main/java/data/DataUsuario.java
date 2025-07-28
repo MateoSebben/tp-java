@@ -186,7 +186,6 @@ public class DataUsuario {
     }
 
     public Usuario getByUser(Usuario usu) {
-        //DataRol dr=new DataRol(); // Comentado si no usas roles externos
         Usuario u = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
