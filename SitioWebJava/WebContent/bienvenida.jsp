@@ -44,7 +44,7 @@
                         <span class="nav-text">Recursos</span>
                     </button>
                     <div class="nav-subsection" id="recursos-section">
-                        <a href="upload.jsp" class="nav-subitem">
+                        <a href="upload" class="nav-subitem">
                             <ion-icon name="cloud-upload-outline"></ion-icon>
                             <span class="nav-text">Subir Material</span>
                         </a>
@@ -122,10 +122,12 @@
                         <ion-icon name="notifications-outline"></ion-icon>
                         <span>Notificaciones</span>
                     </button>
-                    <button class="btn btn-primary">
+                    <a href="upload">
+                    <button class="btn btn-primary" >
                         <ion-icon name="cloud-upload-outline"></ion-icon>
-                        <span>Subir Material</span>
+                       	<span>Subir Material</span>                  
                     </button>
+                    </a>
                 </div>
             </header>
 
@@ -215,10 +217,12 @@
                             accediendo a recursos académicos.
                         </p>
                         <div class="cta-buttons">
+                            <a href="upload">
                             <button class="btn btn-primary btn-large">
                                 <ion-icon name="cloud-upload-outline"></ion-icon>
                                 <span>Subir mi primer material</span>
                             </button>
+                            </a>
                             <button class="btn btn-outline btn-large">
                                 <ion-icon name="search-outline"></ion-icon>
                                 <span>Explorar recursos</span>

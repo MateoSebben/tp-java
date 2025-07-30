@@ -46,6 +46,7 @@ public class Facultad {
 	public void setFechaAlta(LocalDate fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
+	
 	@Override
 	public String toString() {
 		return "Facultad [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", emailContacto="
