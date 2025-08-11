@@ -8,19 +8,18 @@
     <title>Subir Recurso Académico</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="style/upload.css">
 </head>
-<body>
+<body style=" background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);">
     <%  
     // Se podria hacer un método para que se vayan actualizando las facultades
            String[] facultades = {
-            "Facultad de Ingeniería",
-            "Facultad de Ciencias Exactas",
-            "Facultad de Medicina",
-            "Facultad de Derecho",
-            "Facultad de Ciencias Económicas",
-            "Facultad de Filosofía y Letras",
-            "Facultad de Arquitectura"
+            "Universidad Tecnologica Nacional",
+            "Universidad Nacional de Rosario",
+            "Universidad Abierta Interamericana",
+            "Universidad Nacional de La Plata",
+            "Universidad de Buenos Aires",
+            "Universidad del Gran Rosario"
         };
         
         String[] tiposArchivo = {
@@ -37,14 +36,29 @@
         
         String[] años = {"2020", "2021", "2022", "2023", "2024", "2025"};
     %>
+    
 
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="bienvenida.jsp" class="text-decoration-none">
+                        <ion-icon name="home-outline"></ion-icon> Inicio
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <ion-icon name="cloud-upload-outline"></ion-icon> Subir Material
+                </li>
+            </ol>
+        </nav>
+        
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary text-black" style="background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);">
                         <h3 class="mb-0">
-                            <i class="fas fa-upload me-2"></i>
+                            <ion-icon name="cloud-upload-sharp" size="large"></ion-icon>
                             Subir Nuevo Recurso Académico
                         </h3>
                     </div>
@@ -64,16 +78,17 @@
                         <% } %>
 
                         <form action="upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                            
                             <!-- Subida de archivo -->
                             <div class="mb-4">
-                                <label class="form-label fw-bold">Archivo *</label>
+                                <label class="form-label fw-bold">Archivo</label>
                                 <div class="upload-area" onclick="document.getElementById('archivo').click()">
                                     <input type="file" id="archivo" name="archivo" class="d-none" required
                                            accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.xls,.xlsx,.ppt,.pptx">
                                     <div id="upload-content">
-                                        <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                                        <ion-icon name="cloud-upload" size="large"></ion-icon>
                                         <p class="text-muted">Haz clic para seleccionar un archivo</p>
-                                        <small class="text-muted">PDF, DOC, TXT, imágenes, Excel, PowerPoint (máx. 50MB)</small>
+                                        <small class="text-muted">PDF, DOC, TXT, PNG, JPG, Excel, PowerPoint (máx. 50MB)</small>
                                     </div>
                                 </div>
                                 <div id="file-info" class="mt-2 d-none">
@@ -90,7 +105,7 @@
                             <!-- Información académica -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="facultad" class="form-label fw-bold">Facultad *</label>
+                                    <label for="facultad" class="form-label fw-bold">Facultad</label>
                                     <select class="form-select" id="facultad" name="facultad" required>
                                         <option value="">Selecciona una facultad</option>
                                         <% for (String facultad : facultades) { %>
@@ -99,7 +114,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="carrera" class="form-label fw-bold">Carrera *</label>
+                                    <label for="carrera" class="form-label fw-bold">Carrera</label>
                                     <input type="text" class="form-control" id="carrera" name="carrera" 
                                            placeholder="Ej: Ingeniería en Sistemas" required>
                                 </div>
@@ -107,12 +122,12 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="materia" class="form-label fw-bold">Materia *</label>
+                                    <label for="materia" class="form-label fw-bold">Materia</label>
                                     <input type="text" class="form-control" id="materia" name="materia" 
                                            placeholder="Ej: Algoritmos y Estructuras de Datos" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="año" class="form-label fw-bold">Año de Cursada *</label>
+                                    <label for="año" class="form-label fw-bold">Año de Cursada</label>
                                     <select class="form-select" id="año" name="año" required>
                                         <option value="">Selecciona el año</option>
                                         <% for (String año : años) { %>
@@ -125,8 +140,8 @@
                             <!-- Tipo de archivo y título -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="tipoArchivo" class="form-label fw-bold">Tipo de Material *</label>
-                                    <select class="form-select" id="tipoArchivo" name="tipoArchivo" required>
+                                    <label for="tipoArchivo" class="form-label fw-bold">Tipo de Material</label>
+                                    <select class="form-select" id="tipoArchivo" name="tipoMaterial" required>
                                         <option value="">Selecciona el tipo</option>
                                         <% for (String tipo : tiposArchivo) { %>
                                             <option value="<%= tipo %>"><%= tipo %></option>
@@ -134,7 +149,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="titulo" class="form-label fw-bold">Título del Recurso *</label>
+                                    <label for="titulo" class="form-label fw-bold">Título del Recurso</label>
                                     <input type="text" class="form-control" id="titulo" name="titulo" 
                                            placeholder="Ej: Parcial 2023 - Tema A" required>
                                 </div>
@@ -160,11 +175,12 @@
 
                             <!-- Botones -->
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-secondary me-md-2" onclick="limpiarFormulario()">
-                                    <i class="fas fa-eraser me-1"></i>Limpiar
+                                <button type="button" class="btn btn-danger me-md-2" onclick="limpiarFormulario()">
+                                    <ion-icon name="trash-outline"></ion-icon> Limpiar
                                 </button>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-upload me-1"></i>Subir Recurso
+                                <button type="submit" class="btn btn-primary d-flex align-items-center">
+                                    <span class="me-2"><ion-icon name="cloud-upload-outline"></ion-icon></span>
+                                    <span>Subir material</span>
                                 </button>
                             </div>
                         </form>
@@ -175,6 +191,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
     <script>
         let tags = [];
 
@@ -314,5 +332,20 @@
             }
         });
     </script>
+    
+    <script>
+    // Se ejecuta cuando el documento ha cargado completamente
+    document.addEventListener('DOMContentLoaded', function() {
+        const successAlert = document.querySelector('.alert-success');
+        
+        // Verifica si el mensaje de éxito existe en la página
+        if (successAlert) {
+            // Establece un temporizador para ocultar el mensaje después de 4000 milisegundos (4 segundos)
+            setTimeout(function() {
+                successAlert.style.display = 'none';
+            }, 4000); // 4000 milisegundos = 4 segundos
+        }
+    });
+</script>
 </body>
 </html>

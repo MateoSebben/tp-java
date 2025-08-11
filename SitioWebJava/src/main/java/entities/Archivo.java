@@ -1,6 +1,7 @@
 package entities;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+
 
 public class Archivo {
 	
