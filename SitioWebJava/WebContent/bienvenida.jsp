@@ -67,7 +67,7 @@
                         <span class="nav-text">Búsqueda</span>
                     </button>
                     <div class="nav-subsection collapsed" id="busqueda-section">
-                        <a href="search.jsp" class="nav-subitem">
+                        <a href="ListaArchivos" class="nav-subitem">
                             <ion-icon name="search-circle-outline"></ion-icon>
                             <span class="nav-text">Buscar Material</span>
                         </a>

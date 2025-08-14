@@ -37,6 +37,18 @@ public class Archivo {
 	public void setIdMateria(int idMateria) {
 		this.idMateria = idMateria;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public Materia getMateria() {
+		return materia;
+	}
+	public void setMateria(Materia materia) {
+		this.materia = materia;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -80,6 +92,8 @@ public class Archivo {
 				+ descripcion + ", peso=" + peso + ", tipoArchivo=" + tipoArchivo + ", esFisico=" + esFisico
 				+ ", fechaSubida=" + fechaSubida + "]";
 	}
+
+	
 
 	
 	

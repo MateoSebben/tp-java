@@ -4,7 +4,7 @@ public class Materia {
 	
 	private int idMateria;
 	private String nombreMateria;
-	
+	private Carrera carrera;
 	
 	public int getIdMateria() {
 		return idMateria;
@@ -17,6 +17,12 @@ public class Materia {
 	}
 	public void setNombreMateria(String nombreMateria) {
 		this.nombreMateria = nombreMateria;
+	}
+	public Carrera getCarrera() {
+		return carrera;
+	}
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
 	}
 	
 	@Override
