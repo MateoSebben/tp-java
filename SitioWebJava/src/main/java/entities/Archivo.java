@@ -11,6 +11,7 @@ public class Archivo {
 	private Usuario usuario;
 	private Materia materia;
 	private String nombre;
+	private String extension;
 	private String descripcion;
 	private double peso;
 	private String tipoArchivo;
@@ -54,6 +55,14 @@ public class Archivo {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public String getExtension() {
+		return extension;
+	}
+	
+	public void setExtension(String extension) {
+		this.extension = extension;
 	}
 	public String getDescripcion() {
 		return descripcion;

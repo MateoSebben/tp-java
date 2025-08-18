@@ -52,10 +52,7 @@
                         <%
                         if (archivos != null && !archivos.isEmpty()) {
                             for (Archivo archivo : archivos) {
-                                String extension = "";
-                                if (archivo.getNombre() != null && archivo.getNombre().contains(".")) {
-                                    extension = archivo.getNombre().substring(archivo.getNombre().lastIndexOf('.') + 1).toLowerCase();
-                                }
+                                String extension = archivo.getExtension() != null ? archivo.getExtension().toLowerCase() : "";
                                 
                                 String iconClass = "fas fa-file";
                                 if ("pdf".equals(extension)) iconClass = "fas fa-file-pdf";
@@ -70,7 +67,7 @@
                                 </div>
                                 <div class="file-details">
                                     <span class="file-name"><%= archivo.getNombre() %></span>
-                                    <span class="file-extension">.<%= extension %></span>
+                                    <span class="file-extension">.<%= archivo.getExtension() %></span>
                                 </div>
                             </td>
                             <td>

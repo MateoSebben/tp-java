@@ -109,6 +109,7 @@ public class Upload extends HttpServlet {
                 Archivo nuevoArchivo = new Archivo();
                 nuevoArchivo.setIdUsuario(usuario.getId());
                 nuevoArchivo.setNombre(titulo);
+                nuevoArchivo.setExtension(fileExt);
                 nuevoArchivo.setDescripcion(descripcion);
                 nuevoArchivo.setPeso(fileSize / 1024.0 / 1024.0); //en Mb
                 nuevoArchivo.setTipoArchivo(tipoMaterial);

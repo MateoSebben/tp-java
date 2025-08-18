@@ -53,18 +53,19 @@ public class DataArchivo {
             //Insertar el archivo con el idMateria obtenido
             stmt = conn.prepareStatement(
                 "INSERT INTO archivo " +
-                "(idUsuario, idMateria, nombre, descripcion, peso, tipoArchivo, esFisico, fechaSubida) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+                "(idUsuario, idMateria, nombre, extension, descripcion, peso, tipoArchivo, esFisico, fechaSubida) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
 
             stmt.setInt(1, arc.getIdUsuario());
             stmt.setInt(2, idMateria);
             stmt.setString(3, arc.getNombre());
-            stmt.setString(4, arc.getDescripcion());
-            stmt.setDouble(5, arc.getPeso());
-            stmt.setString(6, arc.getTipoArchivo());
-            stmt.setBoolean(7, arc.isEsFisico());
-            stmt.setTimestamp(8, arc.getFechaSubida());
+            stmt.setString(4, arc.getExtension());
+            stmt.setString(5, arc.getDescripcion());
+            stmt.setDouble(6, arc.getPeso());
+            stmt.setString(7, arc.getTipoArchivo());
+            stmt.setBoolean(8, arc.isEsFisico());
+            stmt.setTimestamp(9, arc.getFechaSubida());
 
             stmt.executeUpdate();
 
@@ -89,7 +90,7 @@ public LinkedList<Archivo> getAllArchivos() {
     try {
         Connection conn = DbConnector.getInstancia().getConn();
         String sql = 
-        	    "SELECT a.idArchivo, a.nombre, a.descripcion, a.peso, a.tipoArchivo, a.esFisico, a.fechaSubida, " +
+        	    "SELECT a.idArchivo, a.nombre, a.extension, a.descripcion, a.peso, a.tipoArchivo, a.esFisico, a.fechaSubida, " +
         	    "       u.id AS idUsuario, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, " +
         	    "       m.idMateria, m.nombre AS nombreMateria, " +
         	    "       c.idCarrera, c.nombre AS nombreCarrera " +
@@ -107,6 +108,7 @@ public LinkedList<Archivo> getAllArchivos() {
 
             archivo.setIdArchivo(rs.getInt("idArchivo"));
             archivo.setNombre(rs.getString("nombre"));
+            archivo.setExtension(rs.getString("extension"));
             archivo.setDescripcion(rs.getString("descripcion"));
             archivo.setPeso(rs.getDouble("peso"));
             archivo.setTipoArchivo(rs.getString("tipoArchivo"));
