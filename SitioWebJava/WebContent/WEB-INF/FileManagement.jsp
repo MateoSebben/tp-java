@@ -59,6 +59,7 @@
                                 else if ("doc".equals(extension) || "docx".equals(extension)) iconClass = "fas fa-file-word";
                                 else if ("xls".equals(extension) || "xlsx".equals(extension)) iconClass = "fas fa-file-excel";
                                 else if ("ppt".equals(extension) || "pptx".equals(extension)) iconClass = "fas fa-file-powerpoint";
+                                
                         %>
                         <tr>
                             <td class="file-info">
@@ -84,8 +85,30 @@
                             <td class="subject-info">
                                 <div class="subject-name"><%= archivo.getMateria().getNombreMateria() %></div>
                                 <div class="subject-details">
-                                    <%= archivo.getMateria().getCarrera().getNombreCarrera() %>
-                                </div>
+    <%
+        if (archivo.getMateria() != null && archivo.getMateria().getCarreras() != null
+                && !archivo.getMateria().getCarreras().isEmpty()) {
+    %>
+        <ul class="carreras-list">
+            <%
+                for (Carrera c : archivo.getMateria().getCarreras()) {
+                    if (c != null && c.getNombreCarrera() != null) {
+            %>
+                        <li><%= c.getNombreCarrera() %></li>
+            <%
+                    }
+                }
+            %>
+        </ul>
+    <%
+        } else {
+    %>
+        <span>-</span>
+    <%
+        }
+    %>
+</div>
+
                             </td>
                             <td class="actions">
                                 <a href="DescargarArchivoServlet?id=<%= archivo.getIdArchivo() %>" 

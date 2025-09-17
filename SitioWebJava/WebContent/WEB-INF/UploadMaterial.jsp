@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <%@ page import="java.util.*" %>
+<%@ page import="entities.*" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -122,10 +123,22 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="materia" class="form-label fw-bold">Materia</label>
-                                    <input type="text" class="form-control" id="materia" name="materia" 
-                                           placeholder="Ej: Algoritmos y Estructuras de Datos" required>
-                                </div>
+    <label for="materia" class="form-label fw-bold">Materia</label>
+    <select class="form-select" id="materia" name="idMateria" required>
+        <option value="">Selecciona una materia</option>
+        <%
+            LinkedList<Materia> materias = (LinkedList<Materia>) request.getAttribute("materias");
+            if (materias != null) {
+                for (Materia m : materias) {
+        %>
+            <option value="<%= m.getIdMateria() %>"><%= m.getNombreMateria() %></option>
+        <%
+                }
+            }
+        %>
+    </select>
+</div>
+
                                 <div class="col-md-6">
                                     <label for="año" class="form-label fw-bold">Año de Cursada</label>
                                     <select class="form-select" id="año" name="año" required>

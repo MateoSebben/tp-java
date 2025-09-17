@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import data.DataArchivo;
+import data.DataMateria;
 import entities.*;
 //import logic.UploadHandler; POSIBLEMENTE DataArchivo
 /**
@@ -45,6 +47,9 @@ public class Upload extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
     	// Redirige a la página JSP del formulario de subida
+    	DataMateria dm = new DataMateria();
+    	LinkedList<Materia> materias = dm.getMateriasForDropdown();
+    	request.setAttribute("materias", materias);
         request.getRequestDispatcher("/WEB-INF/UploadMaterial.jsp").forward(request, response);
     }
 
@@ -53,7 +58,11 @@ public class Upload extends HttpServlet {
 	 */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   
+    		
+    		DataMateria dm = new DataMateria();
+    		LinkedList<Materia> materias = dm.getMateriasForDropdown();
+    		request.setAttribute("materias", materias);
+    		
             try {
 				//Verificacion si el usuario esta logueado
             	HttpSession session = request.getSession(false);
@@ -68,7 +77,7 @@ public class Upload extends HttpServlet {
             	//Obtener parametros del formulario
                 String facultad = request.getParameter("facultad");
                 String carrera = request.getParameter("carrera");
-                String materia = request.getParameter("materia");
+                int idMateria = Integer.parseInt(request.getParameter("idMateria")); 
                 String añoCursada = request.getParameter("año");
                 String tipoMaterial = request.getParameter("tipoMaterial");
                 String titulo = request.getParameter("titulo");
@@ -93,7 +102,7 @@ public class Upload extends HttpServlet {
                 System.out.println("===== DATOS RECIBIDOS DEL FORMULARIO =====");
                 System.out.println("Facultad: " + facultad);
                 System.out.println("Carrera: " + carrera);
-                System.out.println("Materia: " + materia);
+                System.out.println("Materia: " + idMateria);
                 System.out.println("Año de cursada: " + añoCursada);
                 System.out.println("Tipo de material: " + tipoMaterial);
                 System.out.println("Título: " + titulo);
@@ -121,7 +130,7 @@ public class Upload extends HttpServlet {
                 
                 //Guardamos en la BD 
                 DataArchivo da = new DataArchivo();
-                da.agregarArchivo(nuevoArchivo, materia);
+                da.agregarArchivo(nuevoArchivo, idMateria);
                 
                 //Mensajes de exito
                 request.setAttribute("success", "Archivo subido correctamente.");
