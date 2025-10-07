@@ -146,19 +146,6 @@ body {
   transform: translateY(-2px);
 }
 
-.btn-download {
-  background: #28a745;
-  color: white;
-  padding: 0.5rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-}
-
-.btn-download:hover {
-  background: #218838;
-  transform: scale(1.05);
-}
-
 /* Sección de archivos */
 .files-section {
   background: white;
@@ -189,37 +176,52 @@ body {
 
 /* Tabla */
 .table-container {
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 .files-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 8px;
   table-layout: fixed;
   margin-top: 1rem;
+  font-size: 0.95rem;
 }
 
 .files-table th {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 1rem;
-  text-align: left;
+  background: #f5f7fa;
   font-weight: 600;
-  color: #495057;
-  border-bottom: 2px solid #dee2e6;
+  text-align: left;
+  padding: 14px;
+  color: #34495e;
+  border-bottom: 2px solid #e0e6ed;
   position: sticky;
   top: 0;
 }
 
 .files-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
+  padding: 14px;
   vertical-align: middle;
+  color: #2c3e50;
+  border: none;
+}
+
+.files-table tr {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .files-table tr:hover {
-  background-color: #f8f9fa;
   transform: scale(1.01);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #fdfdfd;
+}
+
+.table td, 
+.table th {
+    vertical-align: middle !important; /* Alinea al centro vertical */
 }
 
 /* Información del archivo */
@@ -235,21 +237,14 @@ body {
   text-align: center;
 }
 
-.file-icon .fa-file-pdf {
-  color: #dc3545;
+.file-icon .bi-file-earmark-pdf::before {
+  content: "\f63e";
+  color: #e74c3c;
 }
-.file-icon .fa-file-word {
-  color: #2b579a;
-}
-.file-icon .fa-file-excel {
-  color: #217346;
-}
-.file-icon .fa-file-powerpoint {
-  color: #d24726;
-}
-.file-icon .fa-file {
-  color: #6c757d;
-}
+.file-icon .fa-file-word { color: #2b579a; }
+.file-icon .fa-file-excel { color: #217346; }
+.file-icon .fa-file-powerpoint { color: #d24726; }
+.file-icon .fa-file { color: #6c757d; }
 
 .file-details {
   display: flex;
@@ -277,26 +272,11 @@ body {
   letter-spacing: 0.5px;
 }
 
-.badge-apuntes {
-  background: #e3f2fd;
-  color: #1976d2;
-}
-.badge-parcial {
-  background: #fff3e0;
-  color: #f57c00;
-}
-.badge-final {
-  background: #ffebee;
-  color: #d32f2f;
-}
-.badge-ejercicios {
-  background: #e8f5e8;
-  color: #388e3c;
-}
-.badge-bibliografia {
-  background: #f3e5f5;
-  color: #7b1fa2;
-}
+.badge-apuntes { background: #e3f2fd; color: #1976d2; }
+.badge-parcial { background: #fff3e0; color: #f57c00; }
+.badge-final { background: #ffebee; color: #d32f2f; }
+.badge-ejercicios { background: #e8f5e8; color: #388e3c; }
+.badge-bibliografia { background: #f3e5f5; color: #7b1fa2; }
 
 /* Información del usuario */
 .user-info {
@@ -326,22 +306,22 @@ body {
   color: #6c757d;
 }
 
-/* Descargas */
-.downloads {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #495057;
-  font-weight: 600;
-}
-
-.downloads i {
-  color: #28a745;
-}
-
 /* Acciones */
 .actions {
   text-align: center;
+}
+
+.actions .btn {
+  background-color: #27ae60;
+  border-radius: 12px;
+  color: white;
+  padding: 8px 14px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.actions .btn:hover {
+  background-color: #219150;
+  transform: translateY(-2px);
 }
 
 /* Sin resultados */
@@ -374,48 +354,16 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .filter-row {
-    flex-direction: column;
-  }
-
-  .filter-group {
-    min-width: 100%;
-  }
-
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .files-table {
-    font-size: 0.9rem;
-  }
-
-  .files-table th,
-  .files-table td {
-    padding: 0.75rem 0.5rem;
-  }
-
-  .file-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
+  .filter-row { flex-direction: column; }
+  .filter-group { min-width: 100%; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .files-table { font-size: 0.9rem; }
+  .files-table th, .files-table td { padding: 0.75rem 0.5rem; }
+  .file-info { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
 
 @media (max-width: 480px) {
-  .header h1 {
-    font-size: 1.8rem;
-  }
-
-  .filters-section,
-  .files-section {
-    padding: 1rem;
-  }
-
-  .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
+  .header h1 { font-size: 1.8rem; }
+  .filters-section, .files-section { padding: 1rem; }
+  .btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
 }

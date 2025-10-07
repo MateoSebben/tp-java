@@ -25,19 +25,20 @@ public class DataArchivo {
 	        // Insertar directamente el archivo, ya tenemos idMateria válido
 	        stmt = conn.prepareStatement(
 	            "INSERT INTO archivo " +
-	            "(idUsuario, idMateria, nombre, extension, descripcion, peso, tipoArchivo, esFisico, fechaSubida) " +
-	            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+	            "(idUsuario, idMateria, nombre, nombreFisico, extension, descripcion, peso, tipoArchivo, esFisico, fechaSubida) " +
+	            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 	        );
 
 	        stmt.setInt(1, arc.getIdUsuario());
 	        stmt.setInt(2, idMateria);
 	        stmt.setString(3, arc.getNombre());
-	        stmt.setString(4, arc.getExtension());
-	        stmt.setString(5, arc.getDescripcion());
-	        stmt.setDouble(6, arc.getPeso());
-	        stmt.setString(7, arc.getTipoArchivo());
-	        stmt.setBoolean(8, arc.isEsFisico());
-	        stmt.setTimestamp(9, arc.getFechaSubida());
+	        stmt.setString(4, arc.getNombreFisico());
+	        stmt.setString(5, arc.getExtension());
+	        stmt.setString(6, arc.getDescripcion());
+	        stmt.setDouble(7, arc.getPeso());
+	        stmt.setString(8, arc.getTipoArchivo());
+	        stmt.setBoolean(9, arc.isEsFisico());
+	        stmt.setTimestamp(10, arc.getFechaSubida());
 
 	        stmt.executeUpdate();
 
@@ -216,5 +217,48 @@ public class DataArchivo {
 
 	    return archivos;
 	}
+	
+	public Archivo getArchivoById(int idArchivo) {
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    Archivo archivo = null;
+
+	    try {
+	        Connection conn = DbConnector.getInstancia().getConn();
+	        String sql = "SELECT idArchivo, idUsuario, idMateria, nombre, nombreFisico, extension, descripcion, peso, tipoArchivo, esFisico, fechaSubida " +
+	                     "FROM archivo WHERE idArchivo = ?";
+	        stmt = conn.prepareStatement(sql);
+	        stmt.setInt(1, idArchivo);
+	        rs = stmt.executeQuery();
+
+	        if (rs.next()) {
+	            archivo = new Archivo();
+	            archivo.setIdArchivo(rs.getInt("idArchivo"));
+	            archivo.setIdUsuario(rs.getInt("idUsuario"));
+	            archivo.setNombre(rs.getString("nombre"));
+	            archivo.setNombreFisico(rs.getString("nombreFisico"));
+	            archivo.setExtension(rs.getString("extension"));
+	            archivo.setDescripcion(rs.getString("descripcion"));
+	            archivo.setPeso(rs.getDouble("peso"));
+	            archivo.setTipoArchivo(rs.getString("tipoArchivo"));
+	            archivo.setEsFisico(rs.getBoolean("esFisico"));
+	            archivo.setFechaSubida(rs.getTimestamp("fechaSubida"));
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (stmt != null) stmt.close();
+	            DbConnector.getInstancia().releaseConn();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return archivo;
+	}
+
 	
 }

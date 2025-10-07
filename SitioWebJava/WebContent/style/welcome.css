@@ -8,6 +8,10 @@ ion-icon {
 	color: black; 
 }
 
+.btn-primary ion-icon {
+    color: white;  
+}
+
 /* Estilos para el Toggle Section*/
 
 /* Estilos para las subsecciones del sidebar */

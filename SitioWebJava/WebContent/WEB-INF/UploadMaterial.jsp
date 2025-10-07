@@ -85,7 +85,9 @@
                                 <label class="form-label fw-bold">Archivo</label>
                                 <div class="upload-area" onclick="document.getElementById('archivo').click()">
                                     <input type="file" id="archivo" name="archivo" class="d-none" required
-                                           accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.xls,.xlsx,.ppt,.pptx">
+                                           accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.xls,.xlsx,.ppt,.pptx,
+                                           application/vnd.ms-powerpoint,
+               							   application/vnd.openxmlformats-officedocument.presentationml.presentation ">
                                     <div id="upload-content">
                                         <ion-icon name="cloud-upload" size="large"></ion-icon>
                                         <p class="text-muted">Haz clic para seleccionar un archivo</p>

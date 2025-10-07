@@ -17,6 +17,7 @@ public class Archivo {
 	private String tipoArchivo;
 	private boolean esFisico;
 	private Timestamp fechaSubida;
+	private String nombreFisico;
 	
 	
 	
@@ -93,6 +94,13 @@ public class Archivo {
 	}
 	public void setFechaSubida(Timestamp fechaSubida) {
 		this.fechaSubida = fechaSubida;
+	}
+	
+	public String getNombreFisico() {
+		return nombreFisico;
+	}
+	public void setNombreFisico(String nombreFisico) {
+		this.nombreFisico = nombreFisico;
 	}
 	@Override
 	public String toString() {

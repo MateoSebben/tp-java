@@ -124,6 +124,7 @@ public class Upload extends HttpServlet {
                 nuevoArchivo.setTipoArchivo(tipoMaterial);
                 nuevoArchivo.setEsFisico(true);
                 nuevoArchivo.setFechaSubida(new Timestamp(System.currentTimeMillis()));
+                nuevoArchivo.setNombreFisico(storedFileName);
                 //nuevoArchivo.setRutaArchivo("uploads/" + storedFileName);
                 //nuevoArchivo.setNombreOriginal(fileName);
                 //nuevoArchivo.setTags(tags);
