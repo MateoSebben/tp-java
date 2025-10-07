@@ -128,9 +128,10 @@ public class DataUsuario {
 package data;
 
 import entities.Usuario;
+
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.LinkedList;
-
 public class DataUsuario {
 
     public LinkedList<Usuario> getAll() {
@@ -214,7 +215,8 @@ public class DataUsuario {
                 u.setNombre(rs.getString("nombre"));
                 u.setApellido(rs.getString("apellido"));
                 u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password")); // ¡NO DEVOLVER PASSWORD EN UN OBJETO USUARIO REAL EN PRODUCCIÓN!
+                u.setPassword(rs.getString("password")); // guarda el hash de la BD
+                u.setSalt(rs.getString("salt"));         // guarda el salt de la BD
                 u.setRol(rs.getString("rol")); // Asigna el rol directamente de la tabla 'usuario'.
 
                 //dr.setRoles(p); // Lógica para roles externos, si aplica.
@@ -237,7 +239,8 @@ public class DataUsuario {
         }
         return u;
     }
-
+    
+    /*
     public void add(Usuario u) {
         PreparedStatement stmt = null;
         ResultSet keyResultSet = null;
@@ -284,7 +287,53 @@ public class DataUsuario {
           
         }
     }
+    */
     
+    public void add(Usuario u) throws NoSuchAlgorithmException {
+        PreparedStatement stmt = null;
+        ResultSet keyResultSet = null;
+        Connection conn = null;
+
+        try {
+            conn = DbConnector.getInstancia().getConn();
+
+            // Generar salt y hash con la contraseña que viene en el Usuario
+         // Ya viene hasheada desde el servlet Signup
+            System.out.println("Contraseña (hash) recibida: " + u.getPassword());
+            System.out.println("Salt recibido: " + u.getSalt());
+
+            
+            stmt = conn.prepareStatement(
+                "INSERT INTO usuario(nombre, apellido, email, password, salt, rol) VALUES(?,?,?,?,?,?)",
+                PreparedStatement.RETURN_GENERATED_KEYS
+            );
+            stmt.setString(1, u.getNombre());
+            stmt.setString(2, u.getApellido());
+            stmt.setString(3, u.getEmail());
+            stmt.setString(4, u.getPassword()); // guardás el hash
+            stmt.setString(5, u.getSalt());     // guardás el salt
+            stmt.setString(6, u.getRol());
+
+            stmt.executeUpdate();
+
+            keyResultSet = stmt.getGeneratedKeys();
+            if (keyResultSet != null && keyResultSet.next()) {
+                u.setId(keyResultSet.getInt(1));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (keyResultSet != null) keyResultSet.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public boolean existeEmail(String email) {
     	PreparedStatement stmt = null;
     	ResultSet rs = null;
@@ -314,5 +363,44 @@ public class DataUsuario {
 		}
     	return existe;
     }
+    
+    public Usuario getByEmail(String email) {
+        Usuario u = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection conn = null;
+
+        try {
+            conn = DbConnector.getInstancia().getConn();
+            stmt = conn.prepareStatement(
+                "SELECT id, nombre, apellido, email, password, salt, rol FROM usuario WHERE email=?"
+            );
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+
+            if (rs != null && rs.next()) {
+                u = new Usuario();
+                u.setId(rs.getInt("id"));
+                u.setNombre(rs.getString("nombre"));
+                u.setApellido(rs.getString("apellido"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password").trim()); // hash de BD
+                u.setSalt(rs.getString("salt").trim());         // salt de BD
+                u.setRol(rs.getString("rol"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return u;
+    }
+
     
 }
