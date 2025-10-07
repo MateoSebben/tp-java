@@ -45,7 +45,7 @@ public class Signin extends HttpServlet {
         if (email == null || email.trim().isEmpty() || 
             password == null || password.trim().isEmpty()) {
             request.setAttribute("error", "Email y contraseña son requeridos");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Signin.jsp").forward(request, response);
             return;
         }
         
@@ -69,7 +69,7 @@ public class Signin extends HttpServlet {
             // Login inválido
             request.setAttribute("error", "Email o contraseña incorrectos");
             request.setAttribute("email", email); // Mantener el email en el formulario
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Signin.jsp").forward(request, response);
         }
     }
 }

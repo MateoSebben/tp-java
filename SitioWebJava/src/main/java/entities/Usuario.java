@@ -8,6 +8,14 @@ public class Usuario {
     private String email;
     private String password;
     private String rol;
+    private String salt;
+    
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	public int getId() {
 		return id;
 	}
