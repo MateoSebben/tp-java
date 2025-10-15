@@ -8,12 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/welcome.css">
 </head>
 <body>
     <div class="app-container">
     
-        <!-- Sidebar estilo Notion -->
+        <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
         
             <!-- Header del sidebar -->
@@ -27,88 +26,46 @@
                 </button>
             </div>
 
-            <!-- Navegación -->
+            <!-- Navegación principal -->
             <nav class="sidebar-nav">
-            
+
                 <!-- Inicio -->
-                <a href="index.jsp" class="nav-item active">
+                <a href="index.jsp" class="nav-item active" title="Inicio">
                     <ion-icon name="home-outline"></ion-icon>
                     <span class="nav-text">Inicio</span>
                 </a>
 
-                <!-- Sección Recursos -->
-                <div class="nav-section">
-                    <button class="nav-section-header" onclick="toggleSection('recursos')">
-                        <ion-icon name="chevron-down-outline" id="recursos-arrow"></ion-icon>
-                       <ion-icon name="book-outline"></ion-icon>
-                        <span class="nav-text">Recursos</span>
-                    </button>
-                    <div class="nav-subsection" id="recursos-section">
-                        <a href="upload" class="nav-subitem">
-                            <ion-icon name="cloud-upload-outline"></ion-icon>
-                            <span class="nav-text">Subir Material</span>
-                        </a>
-                        <a href="my-resources.jsp" class="nav-subitem">
-                            <ion-icon name="document-text-outline"></ion-icon>
-                            <span class="nav-text">Mis Recursos</span>
-                        </a>
-                        <a href="shared.jsp" class="nav-subitem">
-                            <ion-icon name="share-social-outline"></ion-icon>
-                            <span class="nav-text">Compartidos</span>
-                        </a>
-                    </div>
-                </div>
+                <!-- Subir material -->
+                <a href="upload" class="nav-item" title="Subir Material">
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                    <span class="nav-text">Subir Material</span>
+                </a>
 
-                <!-- Sección Búsqueda -->
-                <div class="nav-section">
-                    <button class="nav-section-header" onclick="toggleSection('busqueda')">
-                        <ion-icon name="chevron-forward-outline" id="busqueda-arrow"></ion-icon>
-                        <ion-icon name="search-outline"></ion-icon>
-                        <span class="nav-text">Búsqueda</span>
-                    </button>
-                    <div class="nav-subsection collapsed" id="busqueda-section">
-                        <a href="ListaArchivos" class="nav-subitem">
-                            <ion-icon name="search-circle-outline"></ion-icon>
-                            <span class="nav-text">Buscar Material</span>
-                        </a>
-                        <a href="filters.jsp" class="nav-subitem">
-                            <ion-icon name="filter-outline"></ion-icon>
-                            <span class="nav-text">Filtros Avanzados</span>
-                        </a>
-                    </div>
-                </div>
+                <!-- Mis recursos -->
+                <a href="my-resources.jsp" class="nav-item" title="Mis Recursos">
+                    <ion-icon name="document-text-outline"></ion-icon>
+                    <span class="nav-text">Mis Recursos</span>
+                </a>
 
-                <!-- Sección Perfil -->
-                <div class="nav-section">
-                    <button class="nav-section-header" onclick="toggleSection('perfil')">
-                        <ion-icon name="chevron-forward-outline" id="perfil-arrow"></ion-icon>
-                        <ion-icon name="person-outline"></ion-icon>
-                        <span class="nav-text">Perfil</span>
-                    </button>
-                    <div class="nav-subsection collapsed" id="perfil-section">
-                        <a href="profile.jsp" class="nav-subitem">
-                            <ion-icon name="person-circle-outline"></ion-icon>
-                            <span class="nav-text">Mi Perfil</span>
-                        </a>
-                        <a href="notifications.jsp" class="nav-subitem">
-                            <ion-icon name="notifications-outline"></ion-icon>
-                            <span class="nav-text">Notificaciones</span>
-                        </a>
-                    </div>
-                </div>
+                <!-- Buscar material -->
+                <a href="ListaArchivos" class="nav-item" title="Buscar Material">
+                    <ion-icon name="search-outline"></ion-icon>
+                    <span class="nav-text">Buscar Material</span>
+                </a>
 
                 <!-- Configuración -->
-                <a href="settings.jsp" class="nav-item">
+                <a href="settings.jsp" class="nav-item" title="Configuración">
                     <ion-icon name="settings-outline"></ion-icon>
                     <span class="nav-text">Configuración</span>
                 </a>
-                
-                <!-- Cerrar Sesion -->
-                	<a href="#" class="nav-item" data-bs-toggle="modal" data-bs-target="#modalCerrarSesion">
-    				<ion-icon name="log-out-outline"></ion-icon>
-    				<span class="nav-text-so">Cerrar Sesión</span>
-					</a>
+
+                <!-- Cerrar sesión -->
+                <a href="#" class="nav-item" data-bs-toggle="modal" data-bs-target="#modalCerrarSesion" title="Cerrar Sesión">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <span class="nav-text">Cerrar Sesión</span>
+                </a>
             </nav>
+
         </div>
 
         <!-- Contenido principal -->
@@ -120,13 +77,13 @@
                 <div class="header-actions">
                     <button class="btn btn-outline">
                         <ion-icon name="notifications-outline"></ion-icon>
-                        <span>Notificaciones</span>
+                        <span>Solicitudes pendientes</span>
                     </button>
                     <a href="upload">
-                    <button class="btn btn-primary" >
-                        <ion-icon name="cloud-upload-outline"></ion-icon>
-                       	<span>Subir Material</span>                  
-                    </button>
+                        <button class="btn btn-primary">
+                            <ion-icon name="cloud-upload-outline"></ion-icon>
+                            <span>Subir Material</span>                  
+                        </button>
                     </a>
                 </div>
             </header>
@@ -150,38 +107,44 @@
 
                     <!-- Características principales -->
                     <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-header">
-                                <ion-icon name="cloud-upload-outline" size="large"></ion-icon>
-                                <h3>Sube y Organiza</h3>
+                        <a href="upload" class="feature-card-link">
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <ion-icon name="cloud-upload-outline" size="large"></ion-icon>
+                                    <h3>Sube y Organiza</h3>
+                                </div>
+                                <p>
+                                    Carga apuntes, exámenes, ejercicios resueltos y otros materiales de estudio. 
+                                    Organízalos por facultad, materia y año de cursada.
+                                </p>
                             </div>
-                            <p>
-                                Carga apuntes, exámenes, ejercicios resueltos y otros materiales de estudio. 
-                                Organízalos por facultad, materia y año de cursada.
-                            </p>
-                        </div>
+                        </a>
 
-                        <div class="feature-card">
-                            <div class="feature-header">
-                                <ion-icon name="search-outline" size="large"></ion-icon>
-                                <h3>Búsqueda Avanzada</h3>
+                        <a href="ListaArchivos" class="feature-card-link">
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <ion-icon name="search-outline" size="large"></ion-icon>
+                                    <h3>Búsqueda Avanzada</h3>
+                                </div>
+                                <p>
+                                    Encuentra rápidamente los recursos que necesitas con filtros por facultad, 
+                                    materia, tipo de material y palabras clave específicas.
+                                </p>
                             </div>
-                            <p>
-                                Encuentra rápidamente los recursos que necesitas con filtros por facultad, 
-                                materia, tipo de material y palabras clave específicas.
-                            </p>
-                        </div>
+                        </a>
 
-                        <div class="feature-card">
-                            <div class="feature-header">
-                                <ion-icon name="share-social-outline" size="large"></ion-icon>
-                                <h3>Colaboración</h3>
+                        <a href="" class="feature-card-link">
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <ion-icon name="share-social-outline" size="large"></ion-icon>
+                                    <h3>Colaboración</h3>
+                                </div>
+                                <p>
+                                    Comparte tus materiales con la comunidad estudiantil y accede a recursos 
+                                    compartidos por otros compañeros de diferentes facultades.
+                                </p>
                             </div>
-                            <p>
-                                Comparte tus materiales con la comunidad estudiantil y accede a recursos 
-                                compartidos por otros compañeros de diferentes facultades.
-                            </p>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Información del sistema -->
@@ -218,15 +181,17 @@
                         </p>
                         <div class="cta-buttons">
                             <a href="upload">
-                            <button class="btn btn-primary btn-large">
-                                <ion-icon name="cloud-upload-outline"></ion-icon>
-                                <span>Subir mi primer material</span>
-                            </button>
+                                <button class="btn btn-primary btn-large">
+                                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                                    <span>Subir mi primer material</span>
+                                </button>
                             </a>
+                            <a href="ListaArchivos">
                             <button class="btn btn-outline btn-large">
                                 <ion-icon name="search-outline"></ion-icon>
                                 <span>Explorar recursos</span>
                             </button>
+                             </a>
                         </div>
                     </div>
                 </div>
@@ -234,61 +199,42 @@
         </div>
     </div>
 
-    <!-- ACA -->
-    
     <!-- Modal de confirmación de cierre de sesión -->
-<div class="modal fade" id="modalCerrarSesion" tabindex="-1" aria-labelledby="modalCerrarSesionLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content rounded-3 shadow">
+    <div class="modal fade" id="modalCerrarSesion" tabindex="-1" aria-labelledby="modalCerrarSesionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-3 shadow">
 
-      <div class="modal-header bg-primary text-white border-0">
-        <h5 class="modal-title" id="modalCerrarSesionLabel">¿Estás seguro de que deseas cerrar sesión?</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
+                <div class="modal-header bg-primary text-white border-0">
+                    <h5 class="modal-title" id="modalCerrarSesionLabel">¿Estás seguro de que deseas cerrar sesión?</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
 
-      <div class="modal-body text-dark">
-      </div>
+                <div class="modal-body text-dark">
+                </div>
 
-      <div class="modal-footer border-0">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <a href="Logout" class="btn btn-danger">Cerrar Sesión</a>
-      </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <a href="Logout" class="btn btn-danger">Cerrar Sesión</a>
+                </div>
 
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>    
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
-<script>
-// Función para alternar las secciones del sidebar
-function toggleSection(sectionName) {
-    const section = document.getElementById(sectionName + '-section');
-    const arrow = document.getElementById(sectionName + '-arrow');
-    
-    if (section.classList.contains('collapsed')) {
-        // Expandir sección
-        section.classList.remove('collapsed');
-        arrow.setAttribute('name', 'chevron-down-outline');
-    } else {
-        // Colapsar sección
-        section.classList.add('collapsed');
-        arrow.setAttribute('name', 'chevron-forward-outline');
-    }
-}
-
-// Event listener para el botón de toggle del sidebar
-document.addEventListener('DOMContentLoaded', function() {
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
+    <script>
+        // Event listener para el botón de toggle del sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function() {
+                    const sidebar = document.getElementById('sidebar');
+                    sidebar.classList.toggle('collapsed');
+                });
+            }
         });
-    }
-});
-</script>
+    </script>
 </body>
 </html>
