@@ -32,5 +32,37 @@ public class DataMateria {
 
         return materias;
     }
+	
+	/* Metodo para obtener las materias que pertenecen a una carrera especifica */
+	
+	public LinkedList<Materia> getMateriasByCarrera(int idCarrera) {
+        LinkedList<Materia> materias = new LinkedList<>();
+        
+        String sql = "SELECT m.idMateria, m.nombre " +
+                     "FROM materia m " +
+                     "INNER JOIN carrera_materia cm ON m.idMateria = cm.idMateria " +
+                     "WHERE cm.idCarrera = ?";
+        
+        try (PreparedStatement stmt = DbConnector.getInstancia().getConn().prepareStatement(sql)) {
+            stmt.setInt(1, idCarrera);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setIdMateria(rs.getInt("idMateria"));
+                m.setNombreMateria(rs.getString("nombre"));
+                materias.add(m);
+            }
+            
+            rs.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbConnector.getInstancia().releaseConn();
+        }
+        
+        return materias;
+    }
 
 }

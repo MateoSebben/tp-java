@@ -30,7 +30,7 @@
             <nav class="sidebar-nav">
 
                 <!-- Inicio -->
-                <a href="index.jsp" class="nav-item active" title="Inicio">
+                <a href="bienvenida.jsp" class="nav-item active" title="Inicio">
                     <ion-icon name="home-outline"></ion-icon>
                     <span class="nav-text">Inicio</span>
                 </a>
@@ -54,9 +54,9 @@
                 </a>
 
                 <!-- Configuración -->
-                <a href="settings.jsp" class="nav-item" title="Configuración">
-                    <ion-icon name="settings-outline"></ion-icon>
-                    <span class="nav-text">Configuración</span>
+                <a href="ListaFacultades" class="nav-item" title="Configuración">
+                    <ion-icon name="duplicate-outline"></ion-icon>
+                    <span class="nav-text">Alta Facultades</span>
                 </a>
 
                 <!-- Cerrar sesión -->
@@ -75,10 +75,12 @@
             <header class="main-header">
                 <h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
                 <div class="header-actions">
+                <a href="GestionarSolicitudes">
                     <button class="btn btn-outline">
                         <ion-icon name="notifications-outline"></ion-icon>
                         <span>Solicitudes pendientes</span>
                     </button>
+                     </a>
                     <a href="upload">
                         <button class="btn btn-primary">
                             <ion-icon name="cloud-upload-outline"></ion-icon>
@@ -136,12 +138,12 @@
                         <a href="" class="feature-card-link">
                             <div class="feature-card">
                                 <div class="feature-header">
-                                    <ion-icon name="share-social-outline" size="large"></ion-icon>
-                                    <h3>Colaboración</h3>
+                                    <ion-icon name="document-text-outline" size="large"></ion-icon>
+                                    <h3>Mis Aportes Académicos</h3>
                                 </div>
                                 <p>
-                                    Comparte tus materiales con la comunidad estudiantil y accede a recursos 
-                                    compartidos por otros compañeros de diferentes facultades.
+                                    Revisa tu historial de subidas. Tienes control total para modificar 
+                                    la información o dar de baja cualquier recurso.
                                 </p>
                             </div>
                         </a>
@@ -200,26 +202,43 @@
     </div>
 
     <!-- Modal de confirmación de cierre de sesión -->
-    <div class="modal fade" id="modalCerrarSesion" tabindex="-1" aria-labelledby="modalCerrarSesionLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-3 shadow">
-
-                <div class="modal-header bg-primary text-white border-0">
-                    <h5 class="modal-title" id="modalCerrarSesionLabel">¿Estás seguro de que deseas cerrar sesión?</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+<div class="modal fade" id="modalCerrarSesion" tabindex="-1" aria-labelledby="modalCerrarSesionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <div class="logout-icon">
+                    <ion-icon class="logout" name="log-out-outline"></ion-icon>
                 </div>
+                <h5 class="modal-title" id="modalCerrarSesionLabel">
+                    ¿Estás seguro de que deseas<br>cerrar sesión?
+                </h5>
+            </div>
 
-                <div class="modal-body text-dark">
+            <div class="modal-body">
+                <p class="logout-message">
+                    Tu sesión actual se cerrará y tendrás que iniciar sesión nuevamente para acceder.
+                </p>
+                
+                <div class="logout-warning">
+                    <ion-icon class="info-lo" name="information-circle-outline"></ion-icon>
+                    <span>Asegúrate de haber guardado todos tus cambios antes de continuar.</span>
                 </div>
+            </div>
 
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <a href="Logout" class="btn btn-danger">Cerrar Sesión</a>
-                </div>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <ion-icon class="close-ol" name="close-outline"></ion-icon>
+                    Cancelar
+                </button>
+                <a href="Logout" class="btn btn-danger">
+                    <ion-icon class="signout" name="log-out-outline"></ion-icon>
+                    Cerrar Sesión
+                </a>
             </div>
         </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

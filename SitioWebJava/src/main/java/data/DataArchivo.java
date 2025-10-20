@@ -140,7 +140,7 @@ public class DataArchivo {
 	            "SELECT a.idArchivo, a.nombre, a.extension, a.descripcion, a.peso, a.tipoArchivo, a.esFisico, a.fechaSubida, " +
 	            "       u.id AS idUsuario, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, " +
 	            "       m.idMateria, m.nombre AS nombreMateria, " +
-	            "       c.idCarrera, c.nombre AS nombreCarrera " +
+	            "       c.idCarrera, c.nombreCarrera AS nombreCarrera " +
 	            "FROM archivo a " +
 	            "INNER JOIN usuario u ON a.idUsuario = u.id " +
 	            "INNER JOIN materia m ON a.idMateria = m.idMateria " +

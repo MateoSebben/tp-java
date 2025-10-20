@@ -1,0 +1,612 @@
+/* Body y fondo */
+body {
+    background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Breadcrumb personalizado */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item a {
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb-item a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: #6b7280;
+}
+
+/* Header Card */
+.card.shadow-sm {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body h2 {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.card-body p.text-muted {
+    font-size: 0.95rem;
+}
+
+/* Iconos */
+
+.reader {
+	color:blue;
+}
+
+.book {
+	font-size: 20px;
+}
+
+.sp-icon {
+	color: blue;
+	font-size: 18px;
+}
+
+.mail {
+	font-size:15px;
+}
+
+.text-muted{
+	color:grey !important;
+}
+
+.school {
+	font-size: 80px !important;
+	color: green;
+}
+
+.checkmark {
+	font-size: 80px;
+	color:green;
+}
+
+
+/* Badge pendientes */
+.badge-pending {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #78350f;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
+}
+
+/* Cards de solicitudes */
+.solicitud-card {
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    background: white;
+}
+
+.solicitud-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.solicitud-card .card-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-bottom: none;
+    padding: 1.25rem;
+}
+
+.solicitud-card .card-header h5 {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.solicitud-card .card-header .badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    font-weight: 600;
+}
+
+/* Contenido de la card */
+.solicitud-card .card-body {
+    padding: 1.5rem;
+}
+
+.solicitud-card .card-body > div {
+    margin-bottom: 1rem;
+}
+
+.solicitud-card .card-body strong {
+    color: #374151;
+    font-weight: 600;
+}
+
+.solicitud-card .card-body .text-primary {
+    color: #2563eb !important;
+}
+
+/* Justificación */
+.solicitud-card .bg-light {
+    background-color: #f8fafc !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* Footer de la card */
+.solicitud-card .card-footer {
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    padding: 1rem 1.5rem;
+}
+
+/* Botones */
+.btn {
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+/* Estado vacío */
+.card-body.text-center i.fa-check-circle {
+    color: #10b981;
+    animation: fadeInScale 0.5s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Modal mejorado */
+.modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+/* Header del modal con diseño premium */
+.modal-header.bg-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    border-bottom: none;
+    padding: 1.5rem 2rem;
+    position: relative;
+}
+
+.modal-header.bg-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    border-bottom: none;
+    padding: 1.5rem 2rem;
+    position: relative;
+}
+
+.modal-header.bg-danger::before, .modal-header.bg-success::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+}
+
+.modal-header .modal-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.modal-header .modal-title i {
+    font-size: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.modal-header .btn-close {
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s;
+}
+
+.modal-header .btn-close:hover {
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* Body del modal */
+.modal-body {
+    padding: 2rem;
+    background: #ffffff;
+}
+
+.modal-body > p {
+    font-size: 1rem;
+    color: #374151;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.modal-body > p strong {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+/* Label del textarea */
+.modal-body .form-label {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-body .form-label::before {
+    content: '✦';
+    color: #ef4444;
+    font-size: 1.2rem;
+}
+
+/* Textarea mejorado */
+#motivoRechazo {
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    padding: 1rem;
+    resize: vertical;
+    min-height: 100px;
+}
+
+#motivoRechazo:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+    outline: none;
+}
+
+#motivoRechazo::placeholder {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+/* Footer del modal */
+.modal-footer {
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    padding: 1.25rem 2rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Botones del modal mejorados */
+.modal-footer .btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.modal-footer .btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+    border: 2px solid #e5e7eb;
+}
+
+.modal-footer .btn-secondary:hover {
+    background: #e5e7eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-footer .btn-danger, .modal-footer .btn-success {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-footer .btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.modal-footer .btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
+}
+
+.modal-footer .btn-danger::before, .modal-footer .btn-success::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.modal-footer .btn-danger:hover::before, .modal-footer .btn-success:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.modal-footer .btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(239, 68, 68, 0.4);
+}
+
+.modal-footer .btn-success:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.4);
+}
+
+.modal-footer .btn-danger i, .modal-footer .btn-success i  {
+    position: relative;
+    z-index: 1;
+}
+
+.modal-footer .btn-danger span, .modal-footer .btn-success span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Animación de entrada del modal */
+.modal.fade .modal-dialog {
+    transform: scale(0.8) translateY(-50px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+/* Backdrop personalizado */
+.modal-backdrop.show {
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Mensajes de alerta */
+.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 1rem 1.25rem;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+    border-left: 4px solid #10b981;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+    border-left: 4px solid #ef4444;
+}
+
+/* Estilos especiales para modal de aprobar */
+.modal-body .fa-graduation-cap {
+    animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.modal-body .alert-info {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #1e40af;
+    border-left: 4px solid #3b82f6;
+    border-radius: 10px;
+}
+
+.modal-body .alert-info strong {
+    color: #10b981;
+    font-size: 1.05rem;
+}
+
+/* Mejora del icono check en modal aprobar */
+.modal-body .text-success {
+    color: #10b981 !important;
+}
+
+/* Iconos */
+ion-icon {
+    vertical-align: middle;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .solicitud-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-body h2 {
+        font-size: 1.5rem;
+    }
+    
+    .badge-pending {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-footer .d-flex {
+        flex-direction: column !important;
+    }
+}
+
+/* Mejoras de accesibilidad */
+.btn:focus,
+.form-control:focus,
+.btn-close:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Animación de carga */
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Mejora del textarea */
+#motivoRechazo {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    transition: border-color 0.2s;
+}
+
+#motivoRechazo:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Spacing mejorado */
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.gap-2 {
+    gap: 0.75rem !important;
+}
+
+/* Hover en links del breadcrumb */
+.breadcrumb-item a ion-icon {
+    transition: transform 0.2s;
+}
+
+.breadcrumb-item a:hover ion-icon {
+    transform: translateX(-2px);
+}

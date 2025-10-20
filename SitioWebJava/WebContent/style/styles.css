@@ -552,37 +552,233 @@ body {
   }
 }
 
-/* Modal styles */
-.modal-content {
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+/* Modal de cierre de sesión */
+#modalCerrarSesion .modal-content {
+	border: none;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+	animation: modalSlideIn 0.4s ease-out;
 }
 
-.modal-header {
-    background-color: #004080;
-    color: white;
-    border-bottom: none;
+@keyframes modalSlideIn {
+	from {
+			opacity: 0;
+			transform: translateY(-50px) scale(0.9);
+		}
+			to {
+					opacity: 1;
+					transform: translateY(0) scale(1);
+				}
 }
 
-.modal-header.bg-primary {
-    background-color: #004080 !important;
+/* Header con advertencia */
+#modalCerrarSesion .modal-header {
+	background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+	padding: 2rem;
+	border: none;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
 }
 
-.modal-body {
-    font-size: 16px;
+#modalCerrarSesion .modal-header::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	right: -20%;
+	width: 200px;
+	height: 200px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 50%;
 }
 
-.modal-footer {
-    border-top: none;
+/* Icono de advertencia */
+.logout-icon {
+	width: 70px;
+	height: 70px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 1;
+	animation: pulse 2s ease-in-out infinite;
 }
 
-.modal-footer .btn {
-    min-width: 120px;
+@keyframes pulse {
+	0%, 100% {
+	transform: scale(1);
+	box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+}
+	50% {
+	transform: scale(1.05);
+	box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+}
+}
+
+.logout-icon i {
+	font-size: 2rem;
+	color: white;
+}
+
+#modalCerrarSesion .modal-title {
+	font-weight: 600;
+	font-size: 1.4rem;
+	font-family: serif;
+	color: white;
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	line-height: 1.4;
+}
+
+#modalCerrarSesion .btn-close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	filter: brightness(0) invert(1);
+	opacity: 0.8;
+	transition: all 0.3s ease;
+	z-index: 2;
+}
+
+#modalCerrarSesion .btn-close:hover {
+	opacity: 1;
+	transform: rotate(90deg);
+}
+
+/* Body del modal */
+#modalCerrarSesion .modal-body {
+	padding: 2rem;
+	background: #ffffff;
+	text-align: center;
+}
+
+.logout-message {
+	color: #64748b;
+	font-size: 1rem;
+	line-height: 1.6;
+	margin-bottom: 0;
+	font-family: math;
+}
+
+.logout-warning {
+	background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+	border-left: 4px solid #ffc107;
+	border-radius: 12px;
+	padding: 1rem 1.25rem;
+	margin-top: 1.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+			opacity: 0;
+			transform: translateY(-10px);
+}
+	to {
+			opacity: 1;
+			transform: translateY(0);
+}
+}
+
+.logout-warning i {
+	color: #f59e0b;
+	font-size: 1.2rem;
+	flex-shrink: 0;
+}
+
+.logout-warning span {
+	color: #92400e;
+	font-size: 0.9rem;
+	text-align: left;
+	font-family: cursive;
+}
+
+/* Footer mejorado */
+#modalCerrarSesion .modal-footer {
+	border: none;
+	padding: 1.5rem 2rem 2rem;
+	background: #f8fafc;
+	gap: 0.75rem;
+	justify-content: center;
+}
+
+/* Botones mejorados */
+#modalCerrarSesion .btn {
+	padding: 0.75rem 2rem;
+	border-radius: 12px;
+	font-weight: 600;
+	transition: all 0.3s ease;
+	border: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-width: 140px;
+	justify-content: center;
+}
+
+#modalCerrarSesion .btn-secondary {
+	background: #e2e8f0;
+	color: #475569;
+}
+
+#modalCerrarSesion .btn-secondary:hover {
+	background: #cbd5e1;
+	color: #334155;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#modalCerrarSesion .btn-danger {
+	background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+	color: white;
+	box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+#modalCerrarSesion .btn-danger:hover {
+	background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
+/* Backdrop personalizado */
+.modal-backdrop.show {
+	opacity: 0.7;
+	backdrop-filter: blur(8px);
 }
 
 /* Iconos */
 ion-icon {
    color: black;
+}
+
+.logout {
+	font-size: 50px;
+	color: white;
+}
+
+.close-ol {
+	font-size: 18px;
+}
+
+.info-lo {
+	color: orange;
+	font-size: 30px;
+}
+
+.signout {
+	color:white;
+	font-size: 18px;
 }
 
 .btn-primary ion-icon {

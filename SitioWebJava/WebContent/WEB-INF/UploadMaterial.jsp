@@ -11,18 +11,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/upload.css">
 </head>
-<body style=" background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);">
+<body style="background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);">
     <%  
-    // Se podria hacer un método para que se vayan actualizando las facultades
-           String[] facultades = {
-            "Universidad Tecnologica Nacional",
-            "Universidad Nacional de Rosario",
-            "Universidad Abierta Interamericana",
-            "Universidad Nacional de La Plata",
-            "Universidad de Buenos Aires",
-            "Universidad del Gran Rosario"
-        };
-        
         String[] tiposArchivo = {
             "Apuntes de Clase",
             "Examen Parcial",
@@ -34,10 +24,10 @@
             "Presentación",
             "Otro"
         };
-        
-        String[] años = {"2020", "2021", "2022", "2023", "2024", "2025"};
-    %>
     
+        int añoActual = Calendar.getInstance().get(Calendar.YEAR);
+        int añoInicio = 1950;
+    %>
 
     <div class="container-fluid mt-4">
         <!-- Breadcrumb -->
@@ -85,71 +75,92 @@
                                 <label class="form-label fw-bold">Archivo</label>
                                 <div class="upload-area" onclick="document.getElementById('archivo').click()">
                                     <input type="file" id="archivo" name="archivo" class="d-none" required
-                                           accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.xls,.xlsx,.ppt,.pptx,
-                                           application/vnd.ms-powerpoint,
-               							   application/vnd.openxmlformats-officedocument.presentationml.presentation ">
+                                           accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.xls,.xlsx,.ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation">
                                     <div id="upload-content">
                                         <ion-icon name="cloud-upload" size="large"></ion-icon>
                                         <p class="text-muted">Haz clic para seleccionar un archivo</p>
                                         <small class="text-muted">PDF, DOC, TXT, PNG, JPG, Excel, PowerPoint (máx. 50MB)</small>
                                     </div>
                                 </div>
-                                <div id="file-info" class="mt-2 d-none">
-                                    <div class="d-flex align-items-center">
-                                        <i id="file-icon" class="fas fa-file fa-2x me-3"></i>
-                                        <div>
-                                            <div id="file-name" class="fw-bold"></div>
-                                            <div id="file-size" class="text-muted small"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                              <div id="file-info" class="mt-2 d-none">
+    								<button type="button" class="btn-change-file" onclick="cambiarArchivo()">
+       							    <ion-icon name="sync-outline"></ion-icon>
+       								 Cambiar
+    								</button>
+    									<div class="d-flex align-items-center">
+        								<i id="file-icon" class="fas fa-file fa-2x"></i>
+        									<div style="flex: 1;">
+            								<div id="file-name" class="fw-bold"></div>
+           								 <div id="file-size" class="text-muted small"></div>
+        									</div>
+    									</div>
+							 </div>
                             </div>
 
                             <!-- Información académica -->
                             <div class="row mb-3">
+                                <!-- Dropdown de Facultad -->
                                 <div class="col-md-6">
                                     <label for="facultad" class="form-label fw-bold">Facultad</label>
-                                    <select class="form-select" id="facultad" name="facultad" required>
+                                    <select class="form-select" id="facultad" name="idFacultad" required>
                                         <option value="">Selecciona una facultad</option>
-                                        <% for (String facultad : facultades) { %>
-                                            <option value="<%= facultad %>"><%= facultad %></option>
-                                        <% } %>
+                                        <%
+                                            LinkedList<Facultad> facultades = (LinkedList<Facultad>) request.getAttribute("facultades");
+                                            if (facultades != null) {
+                                                for (Facultad f : facultades) {
+                                        %>
+                                            <option value="<%= f.getId() %>"><%= f.getNombre() %></option>
+                                        <%
+                                                }
+                                            }
+                                        %>
                                     </select>
                                 </div>
+                                
+                                <!-- Dropdown de Carrera -->
                                 <div class="col-md-6">
                                     <label for="carrera" class="form-label fw-bold">Carrera</label>
-                                    <input type="text" class="form-control" id="carrera" name="carrera" 
-                                           placeholder="Ej: Ingeniería en Sistemas" required>
+                                    <select class="form-select" id="carrera" name="idCarrera" required disabled>
+                                        <option value="">Primero selecciona una facultad</option>
+                                    </select>
+                                    <small class="text-muted">
+                                        <i class="fas fa-spinner fa-spin d-none" id="carrera-loading"></i>
+                                    </small>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
+                                <!-- Dropdown de Materia CON BOTÓN + -->
                                 <div class="col-md-6">
-    <label for="materia" class="form-label fw-bold">Materia</label>
-    <select class="form-select" id="materia" name="idMateria" required>
-        <option value="">Selecciona una materia</option>
-        <%
-            LinkedList<Materia> materias = (LinkedList<Materia>) request.getAttribute("materias");
-            if (materias != null) {
-                for (Materia m : materias) {
-        %>
-            <option value="<%= m.getIdMateria() %>"><%= m.getNombreMateria() %></option>
-        <%
-                }
-            }
-        %>
-    </select>
-</div>
+                                    <label for="materia" class="form-label fw-bold">Materia</label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="materia" name="idMateria" required disabled>
+                                            <option value="">Primero selecciona una carrera</option>
+                                        </select>
+                                        <button class="btn btn-outline-primary" type="button" id="btnSolicitarMateria" 
+                                                data-bs-toggle="modal" data-bs-target="#modalSolicitarMateria" 
+                                                title="Solicitar nueva materia" disabled>
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <small class="text-muted">
+                                        <i class="fas fa-spinner fa-spin d-none" id="materia-loading"></i>
+                                    </small>
+                                </div>
 
                                 <div class="col-md-6">
-                                    <label for="año" class="form-label fw-bold">Año de Cursada</label>
-                                    <select class="form-select" id="año" name="año" required>
-                                        <option value="">Selecciona el año</option>
-                                        <% for (String año : años) { %>
-                                            <option value="<%= año %>"><%= año %></option>
-                                        <% } %>
-                                    </select>
-                                </div>
+    								<label for="año" class="form-label fw-bold">Año de Cursada</label>
+    								<select class="form-select" id="año" name="año" required>
+        								<option value="">Selecciona el año</option>
+        								<% 
+            								for (int a = añoActual; a >= añoInicio; a--) { 
+        								%>
+            								<option value="<%= a %>"><%= a %></option>
+        								<% 
+            								} 
+        								%>
+    								</select>
+								</div>
                             </div>
 
                             <!-- Tipo de archivo y título -->
@@ -175,18 +186,7 @@
                                 <label for="descripcion" class="form-label fw-bold">Descripción</label>
                                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3"
                                           placeholder="Describe brevemente el contenido del archivo..."></textarea>
-                            </div>
-
-                            <!-- Tags -->
-                            <div class="mb-4">
-                                <label class="form-label fw-bold">Palabras Clave</label>
-                                <div class="tag-input" id="tagContainer">
-                                    <input type="text" id="tagInput" placeholder="Agregar palabra clave..." 
-                                           style="border: none; outline: none; flex: 1; min-width: 150px;">
-                                </div>
-                                <input type="hidden" id="tags" name="tags">
-                                <small class="text-muted">Presiona Enter para agregar una palabra clave</small>
-                            </div>
+                            </div>          
 
                             <!-- Botones -->
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -205,13 +205,256 @@
         </div>
     </div>
 
+    <!-- Modal para solicitar nueva materia -->
+    <div class="modal fade" id="modalSolicitarMateria" tabindex="-1" aria-labelledby="modalSolicitarMateriaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalSolicitarMateriaLabel">
+                        <i class="fas fa-plus-circle me-2"></i>Solicitar Nueva Materia
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info d-flex">
+                        <ion-icon  class="info-circle" name="information-circle-outline"></ion-icon>
+                        <small>Tu solicitud será revisada por los administradores. Te notificaremos cuando sea aprobada.</small>
+                    </div>
+                    
+                    <div id="formSolicitarMateria">
+                        <div class="mb-3">
+                            <label for="nombreMateriaSolicitud" class="form-label fw-bold">Nombre de la Materia </label>
+                            <input type="text" class="form-control" id="nombreMateriaSolicitud" 
+                                   placeholder="Ej: Análisis Matemático II">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="descripcionSolicitud" class="form-label fw-bold">¿Por qué necesitas esta materia? </label>
+                            <textarea class="form-control" id="descripcionSolicitud" rows="3" 
+                                      placeholder="Explica brevemente por qué necesitas agregar esta materia..."></textarea>
+                            <small class="text-muted">Ej: Es una materia nueva del plan 2024</small>
+                        </div>
+                        
+                        <input type="hidden" id="idCarreraSolicitud">
+                    </div>
+                    
+                    <div id="mensajeSolicitud" class="alert d-none"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnEnviarSolicitud" onclick="enviarSolicitudMateria()">
+                        <ion-icon class="paper-plane" name="paper-plane-outline"></ion-icon> Enviar Solicitud
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
+    
     <script>
         let tags = [];
 
-        // Manejo de archivo
+        // ==========================================
+        // DROPDOWNS EN CASCADA - AJAX
+        // ==========================================
+        
+        // Cuando cambia la FACULTAD, cargar CARRERAS
+        document.getElementById('facultad').addEventListener('change', function() {
+            const idFacultad = this.value;
+            const carreraSelect = document.getElementById('carrera');
+            const materiaSelect = document.getElementById('materia');
+            const carreraLoading = document.getElementById('carrera-loading');
+            const btnSolicitar = document.getElementById('btnSolicitarMateria');
+            
+            // Reset
+            carreraSelect.innerHTML = '<option value="">Cargando carreras...</option>';
+            carreraSelect.disabled = true;
+            materiaSelect.innerHTML = '<option value="">Primero selecciona una carrera</option>';
+            materiaSelect.disabled = true;
+            btnSolicitar.disabled = true;
+            
+            if (!idFacultad) {
+                carreraSelect.innerHTML = '<option value="">Primero selecciona una facultad</option>';
+                return;
+            }
+            
+            carreraLoading.classList.remove('d-none');
+            
+            fetch('ObtenerCarrerasPorFacultad?idFacultad=' + idFacultad)
+                .then(response => response.json())
+                .then(carreras => {
+                    carreraSelect.innerHTML = '<option value="">Selecciona una carrera</option>';
+                    
+                    if (carreras.length === 0) {
+                        carreraSelect.innerHTML = '<option value="">No hay carreras disponibles</option>';
+                    } else {
+                        carreras.forEach(carrera => {
+                            const option = document.createElement('option');
+                            option.value = carrera.idCarrera;
+                            option.textContent = carrera.nombreCarrera;
+                            carreraSelect.appendChild(option);
+                        });
+                        carreraSelect.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar carreras:', error);
+                    carreraSelect.innerHTML = '<option value="">Error al cargar carreras</option>';
+                })
+                .finally(() => {
+                    carreraLoading.classList.add('d-none');
+                });
+        });
+        
+        // Cuando cambia la CARRERA, cargar MATERIAS
+        document.getElementById('carrera').addEventListener('change', function() {
+            const idCarrera = this.value;
+            const materiaSelect = document.getElementById('materia');
+            const materiaLoading = document.getElementById('materia-loading');
+            const btnSolicitar = document.getElementById('btnSolicitarMateria');
+            
+            materiaSelect.innerHTML = '<option value="">Cargando materias...</option>';
+            materiaSelect.disabled = true;
+            btnSolicitar.disabled = true;
+            
+            if (!idCarrera) {
+                materiaSelect.innerHTML = '<option value="">Primero selecciona una carrera</option>';
+                return;
+            }
+            
+            // Guardar ID de carrera para la solicitud
+            document.getElementById('idCarreraSolicitud').value = idCarrera;
+            
+            materiaLoading.classList.remove('d-none');
+            
+            fetch('ObtenerMateriasPorCarrera?idCarrera=' + idCarrera)
+                .then(response => response.json())
+                .then(materias => {
+                    materiaSelect.innerHTML = '<option value="">Selecciona una materia</option>';
+                    
+                    if (materias.length === 0) {
+                        materiaSelect.innerHTML = '<option value="">No hay materias disponibles</option>';
+                    } else {
+                        materias.forEach(materia => {
+                            const option = document.createElement('option');
+                            option.value = materia.idMateria;
+                            option.textContent = materia.nombreMateria;
+                            materiaSelect.appendChild(option);
+                        });
+                        materiaSelect.disabled = false;
+                    }
+                    
+                    // Habilitar botón +
+                    btnSolicitar.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error al cargar materias:', error);
+                    materiaSelect.innerHTML = '<option value="">Error al cargar materias</option>';
+                    btnSolicitar.disabled = false;
+                })
+                .finally(() => {
+                    materiaLoading.classList.add('d-none');
+                });
+        });
+
+        // ==========================================
+        // SOLICITUD DE MATERIA
+        // ==========================================
+        function enviarSolicitudMateria() {
+            const nombreMateria = document.getElementById('nombreMateriaSolicitud').value.trim();
+            const descripcion = document.getElementById('descripcionSolicitud').value.trim();
+            const idCarrera = document.getElementById('idCarreraSolicitud').value;
+            
+            console.log('=== DEBUG SOLICITUD ===');
+            console.log('Nombre:', nombreMateria);
+            console.log('Descripción:', descripcion);
+            console.log('ID Carrera:', idCarrera);
+            console.log('=====================');
+            
+            if (!nombreMateria) {
+                mostrarMensajeSolicitud('Por favor ingresa el nombre de la materia', 'danger');
+                return;
+            }
+            
+            if (!descripcion) {
+                mostrarMensajeSolicitud('Por favor explica por qué necesitas esta materia', 'danger');
+                return;
+            }
+            
+            if (!idCarrera) {
+                mostrarMensajeSolicitud('Error: No se detectó la carrera seleccionada', 'danger');
+                return;
+            }
+            
+            const btnEnviar = document.getElementById('btnEnviarSolicitud');
+            btnEnviar.disabled = true;
+            btnEnviar.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Enviando...';
+            
+            // CAMBIAR FormData por URLSearchParams
+            const params = new URLSearchParams();
+            params.append('nombreMateria', nombreMateria);
+            params.append('descripcion', descripcion);
+            params.append('idCarrera', idCarrera);
+            
+            fetch('CrearSolicitudMateria', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                body: params
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                if (data.success) {
+                    mostrarMensajeSolicitud(data.message, 'success');
+                    document.getElementById('nombreMateriaSolicitud').value = '';
+                    document.getElementById('descripcionSolicitud').value = '';
+                    
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('modalSolicitarMateria'));
+                        modal.hide();
+                    }, 2000);
+                } else {
+                    mostrarMensajeSolicitud(data.message, 'danger');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                mostrarMensajeSolicitud('Error al enviar la solicitud. Intenta de nuevo.', 'danger');
+            })
+            .finally(() => {
+                btnEnviar.disabled = false;
+                btnEnviar.innerHTML = '<i class="fas fa-paper-plane me-1"></i>Enviar Solicitud';
+            });
+        }
+        
+        function mostrarMensajeSolicitud(mensaje, tipo) {
+            const mensajeDiv = document.getElementById('mensajeSolicitud');
+            mensajeDiv.className = `alert alert-${tipo}`;
+            mensajeDiv.textContent = mensaje;
+            mensajeDiv.classList.remove('d-none');
+            
+            setTimeout(() => {
+                mensajeDiv.classList.add('d-none');
+            }, 5000);
+        }
+
+        document.getElementById('modalSolicitarMateria').addEventListener('hidden.bs.modal', function () {
+            document.getElementById('nombreMateriaSolicitud').value = '';
+            document.getElementById('descripcionSolicitud').value = '';
+            document.getElementById('mensajeSolicitud').classList.add('d-none');
+        });
+
+        // ==========================================
+        // MANEJO DE ARCHIVO
+        // ==========================================
         document.getElementById('archivo').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -221,7 +464,6 @@
                 document.getElementById('file-name').textContent = file.name;
                 document.getElementById('file-size').textContent = formatFileSize(file.size);
                 
-                // Cambiar icono según tipo de archivo
                 const extension = file.name.split('.').pop().toLowerCase();
                 const iconElement = document.getElementById('file-icon');
                 iconElement.className = 'fas fa-2x me-3 ';
@@ -252,14 +494,15 @@
                         iconElement.className += 'fa-file text-secondary';
                 }
                 
-                // Auto-llenar título si está vacío
                 if (!document.getElementById('titulo').value) {
                     document.getElementById('titulo').value = file.name.split('.')[0];
                 }
             }
         });
 
-        // Manejo de tags
+        // ==========================================
+        // MANEJO DE TAGS
+        // ==========================================
         document.getElementById('tagInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -289,11 +532,9 @@
             const container = document.getElementById('tagContainer');
             const input = document.getElementById('tagInput');
             
-            // Limpiar tags existentes
             const existingTags = container.querySelectorAll('.tag');
             existingTags.forEach(tag => tag.remove());
             
-            // Agregar tags actuales
             tags.forEach(tag => {
                 const tagElement = document.createElement('span');
                 tagElement.className = 'tag';
@@ -318,6 +559,13 @@
             document.getElementById('uploadForm').reset();
             document.getElementById('upload-content').classList.remove('d-none');
             document.getElementById('file-info').classList.add('d-none');
+            
+            document.getElementById('carrera').innerHTML = '<option value="">Primero selecciona una facultad</option>';
+            document.getElementById('carrera').disabled = true;
+            document.getElementById('materia').innerHTML = '<option value="">Primero selecciona una carrera</option>';
+            document.getElementById('materia').disabled = true;
+            document.getElementById('btnSolicitarMateria').disabled = true;
+            
             tags = [];
             updateTagDisplay();
             updateTagsInput();
@@ -346,21 +594,20 @@
                 document.getElementById('archivo').dispatchEvent(new Event('change'));
             }
         });
-    </script>
-    
-    <script>
-    // Se ejecuta cuando el documento ha cargado completamente
-    document.addEventListener('DOMContentLoaded', function() {
-        const successAlert = document.querySelector('.alert-success');
         
-        // Verifica si el mensaje de éxito existe en la página
-        if (successAlert) {
-            // Establece un temporizador para ocultar el mensaje después de 4000 milisegundos (4 segundos)
-            setTimeout(function() {
-                successAlert.style.display = 'none';
-            }, 4000); // 4000 milisegundos = 4 segundos
+        // Ocultar mensaje de éxito después de 4 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+            const successAlert = document.querySelector('.alert-success');
+            if (successAlert) {
+                setTimeout(function() {
+                    successAlert.style.display = 'none';
+                }, 4000);
+            }
+        });
+        
+        function cambiarArchivo() {
+            document.getElementById('archivo').click();
         }
-    });
-</script>
+    </script>
 </body>
 </html>
