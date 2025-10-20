@@ -42,7 +42,7 @@
                 </a>
 
                 <!-- Mis recursos -->
-                <a href="my-resources.jsp" class="nav-item" title="Mis Recursos">
+                <a href="ListarMisRecursos" class="nav-item" title="Mis Recursos">
                     <ion-icon name="document-text-outline"></ion-icon>
                     <span class="nav-text">Mis Recursos</span>
                 </a>

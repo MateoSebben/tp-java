@@ -89,11 +89,6 @@ private DataFacultad df;
 	        throws NoSuchAlgorithmException  {
 	    String newHash = hashPassword(enteredPassword, storedSalt);
 
-	    // Debug para ver qué pasa
-	    System.out.println("Ingresada: " + enteredPassword);
-	    System.out.println("Salt guardado: " + storedSalt);
-	    System.out.println("Hash nuevo: " + newHash);
-	    System.out.println("Hash guardado: " + storedHash);
 
 	    return newHash.equals(storedHash);
 	}

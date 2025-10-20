@@ -1,0 +1,503 @@
+@charset "UTF-8";
+
+/* ========================================
+   RESET Y BASE
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* ========================================
+   CONTENEDORES PRINCIPALES
+   ======================================== */
+
+.main-content {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.container {
+    width: 100%;
+}
+
+/* ========================================
+   BREADCRUMB
+   ======================================== */
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: #6c757d;
+    font-weight: bold;
+    margin: 0 0.5rem;
+}
+
+.breadcrumb-item a {
+    color: #0d6efd;
+    transition: color 0.2s ease;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.breadcrumb-item a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: #495057;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* ========================================
+   SECCIÓN DE ARCHIVOS
+   ======================================== */
+
+.files-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f1f3f4;
+}
+
+.section-header h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.results-info {
+    color: #6c757d;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* ========================================
+   TABLA
+   ======================================== */
+
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.files-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.files-table thead th {
+    background: #f5f7fa;
+    font-weight: 600;
+    text-align: left;
+    padding: 16px;
+    color: #34495e;
+    border-bottom: 2px solid #e0e6ed;
+    position: sticky;
+    top: 0;
+    white-space: nowrap;
+}
+
+.files-table tbody tr {
+    background: #ffffff;
+    border-bottom: 1px solid #f1f3f4;
+    transition: background-color 0.2s ease;
+}
+
+.files-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.files-table tbody td {
+    padding: 16px;
+    vertical-align: middle;
+    color: #2c3e50;
+}
+
+/* ========================================
+   COLUMNA ARCHIVO
+   ======================================== */
+
+td.file-info {
+    display: table-cell;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file-icon {
+    font-size: 2rem;
+    width: 40px;
+    text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.file-name {
+    font-weight: 600;
+    color: #2c3e50;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.95rem;
+}
+
+.file-extension {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* ========================================
+   BADGES (TIPO DE ARCHIVO)
+   ======================================== */
+
+.badge {
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.badge-TRABAJO,
+.badge-trabajo { 
+    background: #fff8e1; 
+    color: #f57f17; 
+}
+
+.badge-PRÁCTICO,
+.badge-practico { 
+    background: #e0f2f1; 
+    color: #00695c; 
+}
+
+.badge-apuntes { 
+    background: #e3f2fd; 
+    color: #1976d2; 
+}
+
+.badge-parcial { 
+    background: #fff3e0; 
+    color: #f57c00; 
+}
+
+.badge-final { 
+    background: #ffebee; 
+    color: #d32f2f; 
+}
+
+.badge-ejercicios { 
+    background: #e8f5e9; 
+    color: #388e3c; 
+}
+
+.badge-bibliografia { 
+    background: #f3e5f5; 
+    color: #7b1fa2; 
+}
+
+/* ========================================
+   COLUMNA MATERIA
+   ======================================== */
+
+td .subject-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.subject-name {
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.3;
+    font-size: 0.95rem;
+}
+
+.subject-details {
+    font-size: 0.85rem;
+    color: #6c757d;
+    line-height: 1.4;
+}
+
+.carreras-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.2rem 0 0 0;
+}
+
+.carreras-list li {
+    padding: 0.1rem 0;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.carreras-list li::before {
+    content: "• ";
+    color: #0d6efd;
+    font-weight: bold;
+    margin-right: 0.3rem;
+}
+
+/* ========================================
+   COLUMNA ACCIONES (BOTONES)
+   ======================================== */
+
+td .actions {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+/* Botón de editar */
+.btn-edit {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: white;
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-edit ion-icon {
+    font-size: 1.1rem;
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #0a58ca, #084298);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+.btn-edit:active {
+    transform: translateY(0);
+}
+
+/* Botón de eliminar */
+.btn-delete {
+    background: linear-gradient(135deg, #dc3545, #bb2d3b);
+    color: white;
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-delete ion-icon {
+    font-size: 1.1rem;
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #bb2d3b, #a02834);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-delete:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   ESTADO VACÍO (SIN ARCHIVOS)
+   ======================================== */
+
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.no-results-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: #6c757d;
+}
+
+.no-results-content i {
+    font-size: 4rem;
+    opacity: 0.3;
+    color: #6c757d;
+}
+
+.no-results-content p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1200px) {
+    .main-content {
+        padding: 1.5rem;
+    }
+    
+    .files-section {
+        padding: 1.5rem;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .files-table {
+        font-size: 0.9rem;
+    }
+    
+    .files-table thead th,
+    .files-table tbody td {
+        padding: 12px;
+    }
+    
+    .btn-edit,
+    .btn-delete {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .files-section {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .files-table {
+        min-width: 800px;
+    }
+    
+    .file-info {
+        gap: 0.5rem;
+    }
+    
+    .file-icon {
+        font-size: 1.5rem;
+        width: 30px;
+    }
+    
+    .actions {
+        gap: 0.4rem;
+    }
+    
+    .btn-edit,
+    .btn-delete {
+        padding: 0.5rem;
+        border-radius: 6px;
+    }
+    
+    .btn-edit ion-icon,
+    .btn-delete ion-icon {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .results-info {
+        font-size: 0.85rem;
+    }
+    
+    .breadcrumb {
+        font-size: 0.85rem;
+    }
+}
