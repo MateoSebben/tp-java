@@ -18,195 +18,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Archivo - SGRAC</title>
 
-    <!-- Estilos -->
-    <link rel="stylesheet" href="style/filelist.css">  
-    <link rel="stylesheet" href="style/listaArchivos.css">
+    <!-- Estilos -->  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    
-    <style>
-        .edit-form-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: white;
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .form-header {
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #f1f3f4;
-        }
-        
-        .form-header h2 {
-            color: #2c3e50;
-            font-size: 1.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #555;
-            font-size: 0.95rem;
-        }
-        
-        .form-group label .required {
-            color: #dc3545;
-            margin-left: 0.2rem;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e1e8ed;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        textarea.form-control {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .form-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e1e8ed;
-        }
-        
-        .btn-save {
-            background: linear-gradient(135deg, #28a745, #218838);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-save:hover {
-            background: linear-gradient(135deg, #218838, #1e7e34);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-        }
-        
-        .btn-cancel {
-            background: #6c757d;
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-cancel:hover {
-            background: #5a6268;
-            transform: translateY(-2px);
-        }
-        
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .alert-danger {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .file-info-display {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .file-info-display .file-icon {
-            font-size: 2.5rem;
-        }
-        
-        .file-info-display .file-details {
-            flex: 1;
-        }
-        
-        .file-info-display .file-name {
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 1.1rem;
-        }
-        
-        .file-info-display .file-meta {
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-top: 0.3rem;
-        }
-    </style>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
+    <link rel="stylesheet" href="style/editarFacultad.css">
 </head>
 <body>
 <main class="main-content">
 
 <!-- Breadcrumb -->
-<nav aria-label="breadcrumb" class="mb-4">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="bienvenida.jsp" class="text-decoration-none">
-                <ion-icon name="home-outline"></ion-icon> Inicio
-            </a>
-        </li>
-        <li class="breadcrumb-item">
-            <a href="ListarMisRecursos" class="text-decoration-none">
-                <ion-icon name="document-text-outline"></ion-icon> Mis Recursos
-            </a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">
-            <ion-icon name="create-outline"></ion-icon> Editar Archivo
-        </li>
-    </ol>
-</nav>
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="bienvenida.jsp">
+                        <ion-icon name="home-outline"></ion-icon> Inicio
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="listaFacultades">
+                        <ion-icon name="business-outline"></ion-icon> Mis Recursos
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <ion-icon name="create-outline"></ion-icon> Editar Archivo
+                </li>
+            </ol>
+        </nav>
 
 <div class="container">
     <div class="edit-form-container">
@@ -262,7 +100,7 @@
             
             <div class="form-group">
                 <label for="nombre">
-                    Nombre del archivo <span class="required">*</span>
+                    Nombre del archivo <span class="required"></span>
                 </label>
                 <input 
                     type="text" 
@@ -290,7 +128,7 @@
             
             <div class="form-group">
                 <label for="tipoArchivo">
-                    Tipo de archivo <span class="required">*</span>
+                    Tipo de archivo <span class="required"></span>
                 </label>
                 <select class="form-control" id="tipoArchivo" name="tipoArchivo" required>
                     <option value="">Seleccione un tipo</option>
@@ -305,7 +143,7 @@
             
             <div class="form-group">
                 <label for="idMateria">
-                    Materia <span class="required">*</span>
+                    Materia <span class="required"></span>
                 </label>
                 <select class="form-control" id="idMateria" name="idMateria" required>
                     <option value="">Seleccione una materia</option>

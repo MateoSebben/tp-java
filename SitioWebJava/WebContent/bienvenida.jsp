@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="entities.Usuario" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGRAC - Sistema de Gestión de Recursos Académicos Compartidos</title>
+    <title>NoteLift</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
     <link rel="stylesheet" href="style/styles.css">
 </head>
 <body>
@@ -19,7 +21,7 @@
             <div class="sidebar-header">
                 <div class="logo">
                     <ion-icon name="school-outline" size="large"></ion-icon>
-                    <span class="logo-text">SGRAC</span>
+                    <span class="logo-text">NoteLift</span>
                 </div>
                 <button class="sidebar-toggle" id="sidebarToggle">
                     <ion-icon name="menu-outline" size="large"></ion-icon>
@@ -53,11 +55,21 @@
                     <span class="nav-text">Buscar Material</span>
                 </a>
 
-                <!-- Configuración -->
-                <a href="ListaFacultades" class="nav-item" title="Configuración">
-                    <ion-icon name="duplicate-outline"></ion-icon>
-                    <span class="nav-text">Alta Facultades</span>
-                </a>
+                <!-- Alta Facultades -->
+                <%
+    			Usuario usuarioMenu = (Usuario) session.getAttribute("usuario");
+    			boolean esAdmin = usuarioMenu != null && "administrador".equalsIgnoreCase(usuarioMenu.getRol());
+				%>
+
+
+				<!-- Alta Facultades - Solo para administradores -->
+				<% if (esAdmin) { %>
+				<a href="ListaFacultades" class="nav-item" title="Alta facultades">
+    			<ion-icon name="duplicate-outline"></ion-icon>
+    			<span class="nav-text">Alta Facultades</span>
+				</a>
+				<% } %>
+
 
                 <!-- Cerrar sesión -->
                 <a href="#" class="nav-item" data-bs-toggle="modal" data-bs-target="#modalCerrarSesion" title="Cerrar Sesión">
@@ -71,24 +83,35 @@
         <!-- Contenido principal -->
         <div class="main-content">
         
+            
             <!-- Header -->
-            <header class="main-header">
-                <h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
-                <div class="header-actions">
-                <a href="GestionarSolicitudes">
-                    <button class="btn btn-outline">
-                        <ion-icon name="notifications-outline"></ion-icon>
-                        <span>Solicitudes pendientes</span>
-                    </button>
-                     </a>
-                    <a href="upload">
-                        <button class="btn btn-primary">
-                            <ion-icon name="cloud-upload-outline"></ion-icon>
-                            <span>Subir Material</span>                  
-                        </button>
-                    </a>
-                </div>
-            </header>
+			<header class="main-header">
+    			<h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
+    			<div class="header-actions">
+        		<%
+            		Usuario usuarioHeader = (Usuario) session.getAttribute("usuario");
+            		boolean esAdministrador = usuarioHeader != null && "administrador".equalsIgnoreCase(usuarioHeader.getRol());
+        		%>
+        
+        		<!-- Solicitudes pendientes - Solo para administradores -->
+        		<% if (esAdministrador) { %>
+        		<a href="GestionarSolicitudes">
+            		<button class="btn btn-outline">
+                		<ion-icon name="notifications-outline"></ion-icon>
+                		<span>Solicitudes pendientes</span>
+            		</button>
+        		</a>
+        		<% } %>
+        
+        		<!-- Subir material - Para todos -->
+        		<a href="upload">
+            		<button class="btn btn-primary">
+                		<ion-icon name="cloud-upload-outline"></ion-icon>
+                		<span>Subir Material</span>                  
+            		</button>
+        		</a>
+    			</div>
+			</header>
 
             <!-- Contenido de bienvenida -->
             <main class="content">
@@ -98,7 +121,7 @@
                     <div class="welcome-hero">
                         <div class="welcome-badge">
                             <ion-icon name="school-outline" size="large"></ion-icon>
-                            <span>Bienvenido al SGRAC</span>
+                            <span>Bienvenidos a NoteLift</span>
                         </div>
                         <h2>Comparte y Accede a Recursos Académicos</h2>
                         <p class="hero-description">
@@ -135,7 +158,7 @@
                             </div>
                         </a>
 
-                        <a href="" class="feature-card-link">
+                        <a href="listarMisRecursos" class="feature-card-link">
                             <div class="feature-card">
                                 <div class="feature-header">
                                     <ion-icon name="document-text-outline" size="large"></ion-icon>

@@ -19,6 +19,7 @@
     <!-- Íconos externos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
     
     <!-- Hoja de estilos única -->
     <link rel="stylesheet" href="style/misRecursos.css">
@@ -27,20 +28,18 @@
 <main class="main-content">
 
     <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="bienvenida.jsp">
-                    <ion-icon name="home-outline"></ion-icon>
-                    <span>Inicio</span>
-                </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                <ion-icon name="document-text-outline"></ion-icon>
-                <span>Mis Recursos</span>
-            </li>
-        </ol>
-    </nav>
+        <nav aria-label="breadcrumb" class="breadcrumb-nav container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="bienvenida.jsp">
+                        <ion-icon name="home-outline"></ion-icon> Inicio
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                        <ion-icon name="business-outline"></ion-icon> Mis Recursos
+                </li>
+            </ol>
+        </nav>
 
     <div class="container">
         <div class="files-section">
@@ -199,17 +198,20 @@
     </div>
 </main>
 
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 <!-- Script para confirmación de eliminación -->
 <script>
+
 function confirmarEliminacion(idArchivo) {
     if (confirm('¿Estás seguro de que deseas eliminar este archivo?\n\nEsta acción no se puede deshacer.')) {
         window.location.href = 'EliminarArchivo?id=' + idArchivo;
     }
 }
-</script>
 
-<!-- Ionicons -->
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</script>
 </body>
 </html>

@@ -95,5 +95,29 @@ public class DataCarrera {
         
         return c;
     }
+	
+	
+	 /* Método para obtener el idFacultad de una carrera */ 
+	 
+	public int getFacultadByCarrera(int idCarrera) {
+	    int idFacultad = 0;
+	    String sql = "SELECT idFacultad FROM carrera_facultad WHERE idCarrera = ? LIMIT 1";
+	    
+	    try (PreparedStatement stmt = DbConnector.getInstancia().getConn().prepareStatement(sql)) {
+	        stmt.setInt(1, idCarrera);
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            idFacultad = rs.getInt("idFacultad");
+	        }
+	        rs.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        DbConnector.getInstancia().releaseConn();
+	    }
+	    
+	    return idFacultad;
+	}
 
 }

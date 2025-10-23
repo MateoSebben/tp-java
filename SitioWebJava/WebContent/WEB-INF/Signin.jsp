@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
-
+	<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
     <title>Sitio Web Java</title>
 
 

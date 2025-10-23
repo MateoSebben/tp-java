@@ -8,6 +8,7 @@
 
     <!-- Custom styles for this template -->
     <link href="style/signup.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
     
 
     

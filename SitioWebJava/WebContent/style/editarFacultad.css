@@ -1,0 +1,623 @@
+@charset "UTF-8";
+
+/* ================================================
+   ESTILOS GLOBALES
+   ================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.main-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* ================================================
+   BREADCRUMB
+   ================================================ */
+
+.breadcrumb-nav {
+    margin-bottom: 1.5rem;
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.breadcrumb {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0;
+}
+
+.breadcrumb-item a {
+    color: #7296f7;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.breadcrumb-item a ion-icon {
+    font-size: 1.1rem;
+}
+
+.breadcrumb-item a:hover {
+    color: #5a7ad9;
+}
+
+.breadcrumb-item.active {
+    color: #64748b;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.breadcrumb-item.active ion-icon {
+    font-size: 1.1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: #cbd5e0;
+    font-size: 1.2rem;
+}
+
+/* ================================================
+   CARD PRINCIPAL
+   ================================================ */
+
+.form-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease-out;
+}
+
+.form-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================================================
+   HEADER DEL CARD
+   ================================================ */
+
+.card-header-custom {
+    background: linear-gradient(135deg, #7296f7 0%, #667eea 100%);
+    padding: 2.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header-custom::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.header-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.header-icon ion-icon {
+    font-size: 2.5rem;
+}
+
+.header-text {
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.header-text h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+}
+
+.header-text p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.05rem;
+}
+
+/* ================================================
+   ALERT INFO
+   ================================================ */
+
+.info-alert {
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    border-left: 4px solid #0ea5e9;
+    padding: 1.25rem;
+    margin: 2rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+}
+
+.info-alert ion-icon {
+    color: #0284c7;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.info-alert strong {
+    color: #0c4a6e;
+}
+
+.info-alert small {
+    color: #075985;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* ================================================
+   SECCIONES DEL FORMULARIO
+   ================================================ */
+
+.form-section {
+    padding: 2rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.section-title ion-icon {
+    color: #7296f7;
+    font-size: 1.5rem;
+}
+
+/* ================================================
+   FORM GROUPS
+   ================================================ */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.form-label ion-icon {
+    color: #7296f7;
+    font-size: 1.2rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #7296f7;
+    box-shadow: 0 0 0 4px rgba(114, 150, 247, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-control.has-value {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+.input-helper {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* ================================================
+   INFO BOX
+   ================================================ */
+
+.info-box {
+    padding: 2rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.info-box-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-box-item ion-icon {
+    font-size: 1.8rem;
+    color: #7296f7;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.info-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.info-value {
+    display: block;
+    font-size: 1rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* ================================================
+   BOTONES DE ACCIÓN
+   ================================================ */
+
+.form-actions {
+    padding: 2rem;
+    background: #f8fafc;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.875rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.btn ion-icon {
+    font-size: 1.3rem;
+}
+
+.btn-cancel {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.btn-cancel:hover {
+    background: #cbd5e1;
+    color: #334155;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #7296f7 0%, #667eea 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(114, 150, 247, 0.4);
+}
+
+.btn-save:hover {
+    background: linear-gradient(135deg, #5a7ad9 0%, #5568d3 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(114, 150, 247, 0.5);
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0;
+    }
+
+    .card-header-custom {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
+
+    .header-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-section {
+        padding: 1.5rem;
+    }
+
+    .info-alert {
+        margin: 1.5rem;
+        padding: 1rem;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        padding: 1.5rem;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .info-box {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .header-icon ion-icon {
+        font-size: 2rem;
+    }
+
+    .header-text h1 {
+        font-size: 1.35rem;
+    }
+
+    .header-text p {
+        font-size: 0.95rem;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+    }
+
+    .form-control {
+        padding: 0.75rem 1rem;
+    }
+}
+
+.edit-form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f3f4;
+        }
+        
+        .form-header h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        .form-group label .required {
+            color: #dc3545;
+            margin-left: 0.2rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e1e8ed;
+        }
+        
+        .btn-save {
+            background: linear-gradient(135deg, #28a745, #218838);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-save:hover {
+            background: linear-gradient(135deg, #218838, #1e7e34);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-cancel:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .file-info-display {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .file-info-display .file-icon {
+            font-size: 2.5rem;
+        }
+        
+        .file-info-display .file-details {
+            flex: 1;
+        }
+        
+        .file-info-display .file-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .file-info-display .file-meta {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }

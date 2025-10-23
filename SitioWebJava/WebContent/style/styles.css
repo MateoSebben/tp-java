@@ -306,6 +306,10 @@ body {
   margin: 0 auto;
 }
 
+.welcome-hero span {
+	color:black;
+}
+
 /* Grid de características */
 .features-grid {
   display: grid;

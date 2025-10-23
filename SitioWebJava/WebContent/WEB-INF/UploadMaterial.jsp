@@ -9,6 +9,7 @@
     <title>Subir Recurso Académico</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
     <link rel="stylesheet" href="style/upload.css">
 </head>
 <body style="background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);">
@@ -30,19 +31,20 @@
     %>
 
     <div class="container-fluid mt-4">
+    
         <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb" class="mb-3">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="bienvenida.jsp" class="text-decoration-none">
-                        <ion-icon name="home-outline"></ion-icon> Inicio
-                    </a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    <ion-icon name="cloud-upload-outline"></ion-icon> Subir Material
-                </li>
-            </ol>
-        </nav>
+    <nav aria-label="breadcrumb" class="breadcrumb-nav col-md-8 container-fluid mt-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="bienvenida.jsp">
+                    <ion-icon name="home-outline"></ion-icon> Inicio
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <ion-icon name="cloud-upload-outline"></ion-icon> Subir Material
+            </li>
+        </ol>
+    </nav>
         
         <div class="row justify-content-center">
             <div class="col-md-8">

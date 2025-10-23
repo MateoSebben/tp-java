@@ -104,7 +104,7 @@ public class DataArchivo {
                 "SELECT a.idArchivo, a.nombre, a.extension, a.descripcion, a.peso, a.tipoArchivo, a.esFisico, a.fechaSubida, " +
                 "       u.id AS idUsuario, u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, " +
                 "       m.idMateria, m.nombre AS nombreMateria, " +
-                "       c.idCarrera, c.nombre AS nombreCarrera " +
+                "       c.idCarrera, c.nombreCarrera AS nombreCarrera " +
                 "FROM archivo a " +
                 "INNER JOIN usuario u ON a.idUsuario = u.id " +
                 "INNER JOIN materia m ON a.idMateria = m.idMateria " +
@@ -413,5 +413,56 @@ public class DataArchivo {
 
 	    return archivos;
 	}
+    
+    /*
+    public Archivo getArchivoById(int idArchivo) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Archivo archivo = null;
 
+        try {
+            Connection conn = DbConnector.getInstancia().getConn();
+            String sql = "SELECT idArchivo, idUsuario, idMateria, nombre, nombreFisico, extension, descripcion, peso, tipoArchivo, esFisico, fechaSubida " +
+                         "FROM archivo WHERE idArchivo = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idArchivo);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                archivo = new Archivo();
+                archivo.setIdArchivo(rs.getInt("idArchivo"));
+                archivo.setIdUsuario(rs.getInt("idUsuario"));
+                archivo.setNombre(rs.getString("nombre"));
+                archivo.setNombreFisico(rs.getString("nombreFisico"));
+                archivo.setExtension(rs.getString("extension"));
+                archivo.setDescripcion(rs.getString("descripcion"));
+                archivo.setPeso(rs.getDouble("peso"));
+                archivo.setTipoArchivo(rs.getString("tipoArchivo"));
+                archivo.setEsFisico(rs.getBoolean("esFisico"));
+                archivo.setFechaSubida(rs.getTimestamp("fechaSubida"));
+                
+                // *** AGREGAR ESTO: Cargar la materia asociada ***
+                int idMateria = rs.getInt("idMateria");
+                if (idMateria > 0) {
+                    Materia materia = new Materia();
+                    materia.setIdMateria(idMateria);
+                    archivo.setMateria(materia);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return archivo;
+    }
+*/
 }
