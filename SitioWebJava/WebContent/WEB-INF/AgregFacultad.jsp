@@ -13,6 +13,7 @@
 </head>
 <body>
     <div class="main-container">
+    
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb">
@@ -33,6 +34,7 @@
         </nav>
 
         <div class="content-wrapper">
+            
             <!-- Sidebar Info -->
             <aside class="info-sidebar">
                 <div class="sidebar-card">
@@ -86,7 +88,8 @@
                 </div>
 
                 <form action="agregarFacultad" method="post" id="formAgregarFacultad">
-                    <!-- Paso 1: Información Básica -->
+                    
+                    <!-- Información Básica -->
                     <div class="form-step">
                         <div class="step-header">
                             <div class="step-number">1</div>
@@ -129,7 +132,7 @@
                         </div>
                     </div>
 
-                    <!-- Paso 2: Datos de Contacto -->
+                    <!-- Datos de Contacto -->
                     <div class="form-step">
                         <div class="step-header">
                             <div class="step-number">2</div>

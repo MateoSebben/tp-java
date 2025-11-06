@@ -45,7 +45,7 @@ public class GestionarSolicitudes extends HttpServlet {
         System.out.println("Rol del usuario: " + usuario.getRol());
 
         
-        // Verificar que sea ADMINISTRADOR
+        // Verificar que sea Administrador
         if (!"administrador".equalsIgnoreCase(usuario.getRol())) {
             request.setAttribute("error", "No tienes permisos para acceder a esta página");
             request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request, response);

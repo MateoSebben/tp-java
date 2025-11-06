@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
-/* ========================================
-   RESET Y BASE
-   ======================================== */
+/* ================================================
+   ESTILOS GLOBALES
+   ================================================ */
 
 * {
     margin: 0;
@@ -11,29 +11,21 @@
 }
 
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);
+    min-height: 100vh;
+    color: #1e293b;
 }
 
-/* ========================================
-   CONTENEDORES PRINCIPALES
-   ======================================== */
-
-.main-content {
-    padding: 2rem;
+.main-container {
     max-width: 1400px;
     margin: 0 auto;
+    padding: 2rem 1rem;
 }
 
-.container {
-    width: 100%;
-}
-
-/* ========================================
+/* ================================================
    BREADCRUMB
-   ======================================== */
+   ================================================ */
 
 .breadcrumb-nav {
     margin-bottom: 2rem;
@@ -57,6 +49,15 @@ body {
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .breadcrumb-item a {
@@ -92,92 +93,154 @@ body {
     content: "›";
     color: #cbd5e0;
     font-size: 1.2rem;
+    margin: 0 0.75rem;
 }
 
-/* ========================================
-   SECCIÓN DE ARCHIVOS
-   ======================================== */
+/* ================================================
+   HEADER DE PÁGINA
+   ================================================ */
 
-.files-section {
+.page-header {
     background: white;
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 2rem;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-}
-
-.section-header {
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #f1f3f4;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    animation: fadeInUp 0.5s ease-out 0.1s both;
 }
 
-.section-header h2 {
-    color: #2c3e50;
-    font-size: 1.8rem;
-    font-weight: 600;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-content-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #7296f7 0%, #667eea 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.header-icon ion-icon {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.header-text h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+}
+
+.header-text p {
+    color: #64748b;
     margin: 0;
+    font-size: 1.05rem;
 }
 
-.results-info {
-    color: #6c757d;
-    font-weight: 500;
-    font-size: 0.95rem;
+.results-badge {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 2px solid #bae6fd;
 }
 
-/* ========================================
-   TABLA
-   ======================================== */
+.results-badge ion-icon {
+    font-size: 1.5rem;
+    color: #0284c7;
+}
 
-.table-container {
+.results-badge span {
+    color: #0c4a6e;
+    font-size: 1rem;
+}
+
+.results-badge strong {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* ================================================
+   SECCIÓN DE ARCHIVOS (TABLA)
+   ================================================ */
+
+.files-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+.table-responsive {
     overflow-x: auto;
-    width: 100%;
 }
 
 .files-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 0.95rem;
+}
+
+.files-table thead {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
 .files-table thead th {
-    background: #f5f7fa;
-    font-weight: 600;
+    padding: 1.25rem 1rem;
     text-align: left;
-    padding: 16px;
-    color: #34495e;
-    border-bottom: 2px solid #e0e6ed;
-    position: sticky;
-    top: 0;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e2e8f0;
     white-space: nowrap;
 }
 
 .files-table tbody tr {
-    background: #ffffff;
-    border-bottom: 1px solid #f1f3f4;
-    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
 }
 
 .files-table tbody tr:hover {
-    background-color: #f8f9fa;
+    background: #f8fafc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .files-table tbody td {
-    padding: 16px;
+    padding: 1.25rem 1rem;
     vertical-align: middle;
-    color: #2c3e50;
+    color: #334155;
 }
 
-/* ========================================
+/* ================================================
    COLUMNA ARCHIVO
-   ======================================== */
-
-td.file-info {
-    display: table-cell;
-}
+   ================================================ */
 
 .file-info {
     display: flex;
@@ -186,13 +249,18 @@ td.file-info {
 }
 
 .file-icon {
-    font-size: 2rem;
-    width: 40px;
-    text-align: center;
-    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.file-icon i {
+    font-size: 2rem;
 }
 
 .file-details {
@@ -203,315 +271,527 @@ td.file-info {
 
 .file-name {
     font-weight: 600;
-    color: #2c3e50;
+    color: #1e293b;
+    font-size: 0.95rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 0.95rem;
+    max-width: 250px;
 }
 
 .file-extension {
-    font-size: 0.8rem;
-    color: #6c757d;
-    text-transform: uppercase;
-    font-weight: 500;
-}
-
-/* ========================================
-   BADGES (TIPO DE ARCHIVO)
-   ======================================== */
-
-.badge {
-    padding: 0.35rem 0.85rem;
-    border-radius: 20px;
     font-size: 0.75rem;
+    color: #64748b;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    white-space: nowrap;
+    margin-top: 0.15rem;
+}
+
+/* ================================================
+   BADGES (TIPO)
+   ================================================ */
+
+.badge {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     display: inline-block;
+    white-space: nowrap;
 }
 
-.badge-TRABAJO,
-.badge-trabajo { 
-    background: #fff8e1; 
-    color: #f57f17; 
+.badge-apuntes-de-clase { background: #e3f2fd; color: #1976d2; }
+.badge-examen-parcial { background: #fff3e0; color: #f57c00; }
+.badge-examen-final { background: #ffebee; color: #d32f2f; }
+.badge-ejercicios-resueltos { background: #e8f5e8; color: #388e3c; }
+.badge-trabajo-práctico { background: #f3e5f5; color: #7b1fa2; }
+.badge-resumen { background: #fff9c4; color: #f57f17; }
+.badge-libro/manual { background: #fce4ec; color: #c2185b; }
+.badge-libro\/manual { background: #fce4ec; color: #c2185b; }
+.badge-presentación { background: #e1f5fe; color: #0277bd; }
+.badge-otro { background: #f5f5f5; color: #616161; }
+.badge-apuntes { background: #e3f2fd; color: #1976d2; }
+.badge-parcial { background: #fff3e0; color: #f57c00; }
+.badge-final { background: #ffebee; color: #d32f2f; }
+.badge-ejercicios { background: #e8f5e8; color: #388e3c; }
+.badge-trabajo { background: #f3e5f5; color: #7b1fa2; }
+.badge-bibliografia { background: #fff9c4; color: #f57f17; }
+
+/* ================================================
+   COLUMNA TAMAÑO
+   ================================================ */
+
+.file-size {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
-.badge-PRÁCTICO,
-.badge-practico { 
-    background: #e0f2f1; 
-    color: #00695c; 
+.file-size ion-icon {
+    font-size: 1.1rem;
 }
 
-.badge-apuntes { 
-    background: #e3f2fd; 
-    color: #1976d2; 
+.text-center {
+    text-align: center;
 }
 
-.badge-parcial { 
-    background: #fff3e0; 
-    color: #f57c00; 
+/* ================================================
+   COLUMNA DESCRIPCIÓN
+   ================================================ */
+
+.description-cell {
+    color: #475569;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
-.badge-final { 
-    background: #ffebee; 
-    color: #d32f2f; 
-}
-
-.badge-ejercicios { 
-    background: #e8f5e9; 
-    color: #388e3c; 
-}
-
-.badge-bibliografia { 
-    background: #f3e5f5; 
-    color: #7b1fa2; 
-}
-
-/* ========================================
+/* ================================================
    COLUMNA MATERIA
-   ======================================== */
+   ================================================ */
 
-td .subject-info {
+.subject-cell {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.5rem;
 }
 
 .subject-name {
     font-weight: 600;
-    color: #2c3e50;
-    line-height: 1.3;
-    font-size: 0.95rem;
-}
-
-.subject-details {
-    font-size: 0.85rem;
-    color: #6c757d;
-    line-height: 1.4;
-}
-
-.carreras-list {
-    list-style: none;
-    padding: 0;
-    margin: 0.2rem 0 0 0;
-}
-
-.carreras-list li {
-    padding: 0.1rem 0;
-    font-size: 0.85rem;
-    color: #6c757d;
-}
-
-.carreras-list li::before {
-    content: "• ";
-    color: #0d6efd;
-    font-weight: bold;
-    margin-right: 0.3rem;
-}
-
-/* ========================================
-   COLUMNA ACCIONES (BOTONES)
-   ======================================== */
-
-td .actions {
+    color: #1e293b;
+    font-size: 0.9rem;
     display: flex;
-    gap: 0.6rem;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-/* Botón de editar */
-.btn-edit {
-    background: linear-gradient(135deg, #0d6efd, #0a58ca);
-    color: white;
-    padding: 0.6rem 1.1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
-    border: none;
-    cursor: pointer;
+}
+
+.subject-name ion-icon {
+    font-size: 1.2rem;
+    color: #7296f7;
+    flex-shrink: 0;
+}
+
+.carreras-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.carrera-tag {
+    background: #f0f9ff;
+    color: #0369a1;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: 1px solid #bae6fd;
     white-space: nowrap;
 }
 
-.btn-edit ion-icon {
-    font-size: 1.1rem;
-}
+/* ================================================
+   COLUMNA FECHA
+   ================================================ */
 
-.btn-edit:hover {
-    background: linear-gradient(135deg, #0a58ca, #084298);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
-}
-
-.btn-edit:active {
-    transform: translateY(0);
-}
-
-/* Botón de eliminar */
-.btn-delete {
-    background: linear-gradient(135deg, #dc3545, #bb2d3b);
-    color: white;
-    padding: 0.6rem 1.1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.btn-delete ion-icon {
-    font-size: 1.1rem;
-}
-
-.btn-delete:hover {
-    background: linear-gradient(135deg, #bb2d3b, #a02834);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
-}
-
-.btn-delete:active {
-    transform: translateY(0);
-}
-
-/* ========================================
-   ESTADO VACÍO (SIN ARCHIVOS)
-   ======================================== */
-
-.no-results {
-    text-align: center;
-    padding: 4rem 2rem;
-}
-
-.no-results-content {
+.date-cell {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    color: #6c757d;
+    gap: 0.3rem;
+    color: #64748b;
+    font-size: 0.85rem;
 }
 
-.no-results-content i {
-    font-size: 4rem;
-    opacity: 0.3;
-    color: #6c757d;
+.date-cell ion-icon {
+    font-size: 1.2rem;
+    color: #7296f7;
 }
 
-.no-results-content p {
+/* ================================================
+   COLUMNA ACCIONES
+   ================================================ */
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.btn-action {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-action ion-icon {
+    font-size: 1.3rem;
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #1e40af;
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #b91c1c;
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ================================================
+   ESTADO VACÍO
+   ================================================ */
+
+.empty-state {
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.empty-state ion-icon {
+    font-size: 5rem;
+    color: #cbd5e1;
+    margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    color: #334155;
+    margin-bottom: 0.75rem;
+}
+
+.empty-state p {
+    color: #64748b;
     font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #7296f7 0%, #667eea 100%);
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(114, 150, 247, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(114, 150, 247, 0.5);
+}
+
+.btn-primary ion-icon {
+    font-size: 1.3rem;
+}
+
+/* ================================================
+   MODAL DE ELIMINACIÓN
+   ================================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.4s ease-out;
+    overflow: hidden;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.modal-header ion-icon {
+    font-size: 3.5rem;
+    color: white;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.modal-header h2 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
     margin: 0;
 }
 
-/* ========================================
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-body p {
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.modal-body .archivo-nombre {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #7296f7;
+    margin: 1.5rem 0;
+}
+
+.modal-body .archivo-nombre strong {
+    color: #1e293b;
+    font-size: 1.05rem;
+}
+
+.modal-body .warning-text {
+    color: #dc2626;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fef2f2;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border-left: 3px solid #dc2626;
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem;
+    background: #f8fafc;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-secondary,
+.btn-danger {
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 140px;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e1;
+    color: #334155;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
+/* ================================================
    RESPONSIVE
-   ======================================== */
+   ================================================ */
 
 @media (max-width: 1200px) {
-    .main-content {
-        padding: 1.5rem;
+    .files-table thead th,
+    .files-table tbody td {
+        padding: 1rem 0.75rem;
     }
     
-    .files-section {
-        padding: 1.5rem;
+    .file-name {
+        max-width: 200px;
     }
     
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+    .description-cell {
+        max-width: 200px;
     }
 }
 
 @media (max-width: 992px) {
+    .main-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .results-badge {
+        justify-content: center;
+    }
+    
     .files-table {
         font-size: 0.9rem;
     }
     
     .files-table thead th,
     .files-table tbody td {
-        padding: 12px;
+        padding: 0.75rem 0.5rem;
     }
     
-    .btn-edit,
-    .btn-delete {
-        padding: 0.5rem 0.9rem;
-        font-size: 0.85rem;
+    .file-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+    
+    .file-icon i {
+        font-size: 1.75rem;
     }
 }
 
 @media (max-width: 768px) {
-    .main-content {
+    .main-container {
         padding: 1rem;
     }
     
-    .files-section {
-        padding: 1rem;
-        border-radius: 8px;
+    .header-content-left {
+        flex-direction: column;
+        text-align: center;
     }
     
-    .section-header h2 {
+    .header-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .header-icon ion-icon {
+        font-size: 2rem;
+    }
+    
+    .header-text h1 {
         font-size: 1.5rem;
     }
     
-    .table-container {
+    .table-responsive {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
     
     .files-table {
-        min-width: 800px;
+        min-width: 1000px;
     }
     
-    .file-info {
-        gap: 0.5rem;
+    .btn-action {
+        width: 35px;
+        height: 35px;
     }
     
-    .file-icon {
-        font-size: 1.5rem;
-        width: 30px;
+    .btn-action ion-icon {
+        font-size: 1.1rem;
     }
     
-    .actions {
-        gap: 0.4rem;
+    .modal-content {
+        width: 95%;
     }
     
-    .btn-edit,
-    .btn-delete {
-        padding: 0.5rem;
-        border-radius: 6px;
+    .modal-footer {
+        flex-direction: column;
     }
     
-    .btn-edit ion-icon,
-    .btn-delete ion-icon {
-        font-size: 1rem;
+    .btn-secondary,
+    .btn-danger {
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    .section-header h2 {
-        font-size: 1.3rem;
-    }
-    
-    .results-info {
-        font-size: 0.85rem;
-    }
-    
     .breadcrumb {
         font-size: 0.85rem;
     }
+    
+    .page-header {
+        padding: 1.5rem;
+    }
+    
+    .header-text h1 {
+        font-size: 1.35rem;
+    }
+    
+    .files-section {
+        border-radius: 16px;
+    }
+    
 }
+

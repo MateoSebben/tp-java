@@ -58,12 +58,6 @@ public class DescargarArchivo extends HttpServlet {
                     "attachment; filename=\"" + archivo.getNombre() + "." + archivo.getExtension() + "\"");
             response.setContentLengthLong(file.length());
             
-            //aca
-            System.out.println("Ruta buscada: " + filePath);
-            System.out.println("Existe? " + file.exists());
-
-
-
             try (FileInputStream in = new FileInputStream(file);
                  var out = response.getOutputStream()) {
                 byte[] buffer = new byte[4096];
@@ -83,7 +77,6 @@ public class DescargarArchivo extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

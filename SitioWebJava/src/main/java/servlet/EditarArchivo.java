@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,31 +9,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.DataArchivo;
+import data.DataFacultad;
 import data.DataMateria;
 import entities.Archivo;
 import entities.Usuario;
-import java.util.LinkedList;
 import entities.Materia;
+import java.util.LinkedList;
+import entities.Facultad;
 
-/**
- * Servlet implementation class EditarArchivo
- */
 @WebServlet({ "/EditarArchivo", "/editarArchivo", "/editararchivo", "/EDITARARCHIVO" })
 public class EditarArchivo extends HttpServlet {
     private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public EditarArchivo() {
         super();
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        
+        // Configurar encoding
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         
         // Verificar sesión
         HttpSession session = request.getSession(false);
@@ -67,13 +63,19 @@ public class EditarArchivo extends HttpServlet {
                 return;
             }
             
-            // Obtener lista de materias para el formulario
+            // Obtener lista de facultades para los dropdowns
+            DataFacultad df = new DataFacultad();
+            LinkedList<Facultad> facultades = df.getAllFacultades();
+            
+            // Obtener facultad y carrera actual del archivo usando el DAO
             DataMateria dm = new DataMateria();
-            LinkedList<Materia> materias = dm.getMateriasForDropdown();
+            int[] facultadYCarrera = dm.getFacultadYCarreraPorMateria(archivo.getMateria().getIdMateria());
             
             // Pasar datos al JSP
             request.setAttribute("archivo", archivo);
-            request.setAttribute("materias", materias);
+            request.setAttribute("facultades", facultades);
+            request.setAttribute("idFacultadActual", facultadYCarrera[0]);
+            request.setAttribute("idCarreraActual", facultadYCarrera[1]);
             
             // Forward al JSP de edición
             request.getRequestDispatcher("/WEB-INF/EditarArchivo.jsp").forward(request, response);
@@ -83,11 +85,12 @@ public class EditarArchivo extends HttpServlet {
         }
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        
+        // Configurar encoding
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         
         // Verificar sesión
         HttpSession session = request.getSession(false);
@@ -120,8 +123,10 @@ public class EditarArchivo extends HttpServlet {
                 return;
             }
             
+            // Actualizar datos del archivo
             archivo.setNombre(nombre);
             archivo.setDescripcion(descripcion);
+            archivo.setTipoArchivo(tipoArchivo);
             
             // Crear objeto Materia con el ID seleccionado
             Materia materia = new Materia();

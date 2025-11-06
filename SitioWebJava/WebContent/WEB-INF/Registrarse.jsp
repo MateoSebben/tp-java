@@ -6,12 +6,9 @@
 <meta charset="UTF-8">
 <title>Sitio Web Java </title>
 
-    <!-- Custom styles for this template -->
+    <!-- Estilos -->
     <link href="style/signup.css" rel="stylesheet">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
-    
-
-    
     
 </head>
 <body  style="font-family: sans-serif;">

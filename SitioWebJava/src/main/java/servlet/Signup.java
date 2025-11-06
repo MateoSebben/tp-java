@@ -78,7 +78,7 @@ public class Signup extends HttpServlet {
 	    	du.add(nuevo);
 
 
-	        // Redirigir a Welcome
+	        // Redirigir a Inicio
 	        response.sendRedirect("bienvenida.jsp");
 
 	    } catch (Exception e) {

@@ -1,4 +1,4 @@
-/* Reset y estilos base */
+/* Contenido Principal */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@ body {
   line-height: 1.6;
 }
 
-/* Contenedor principal */
+/* Container principal */
 .app-container {
   display: flex;
   height: 100vh;

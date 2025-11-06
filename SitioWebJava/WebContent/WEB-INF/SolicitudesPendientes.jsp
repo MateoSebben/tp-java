@@ -23,6 +23,7 @@
     %>
 
     <div class="container-fluid mt-4">
+        
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="mb-3">
             <ol class="breadcrumb">
@@ -36,7 +37,8 @@
                 </li>
             </ol>
         </nav>
-
+        
+                
         <!-- Header -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
@@ -168,7 +170,6 @@
     </div>
     
     <!-- Modal para aprobar -->
-    
     <div class="modal fade" id="modalAprobar" tabindex="-1" aria-labelledby="modalAprobarLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -203,7 +204,8 @@
             </div>
         </div>
     </div>
-
+	
+	<!-- Iconos -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	

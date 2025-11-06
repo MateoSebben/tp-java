@@ -38,7 +38,7 @@ public class Listafacultades extends HttpServlet {
             return;
         }
         
-        // Si es administrador, continuar normalmente
+        // Si es administrador, continua normalmente
         List<Facultad> lista = new DataFacultad().getAllFacultades();
         request.setAttribute("listaFacultades", lista);
         request.getRequestDispatcher("/WEB-INF/UniversityManagement.jsp").forward(request, response);

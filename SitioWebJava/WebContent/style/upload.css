@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body{
+	background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);
+}
+
 .upload-area {
     border: 3px dashed #d1d5db;
     border-radius: 16px;

@@ -7,12 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Recurso Académico</title>
+    
+    <!-- Estilos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
     <link rel="stylesheet" href="style/upload.css">
 </head>
-<body style="background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);">
+<body>
     <%  
         String[] tiposArchivo = {
             "Apuntes de Clase",
@@ -23,6 +25,7 @@
             "Resumen",
             "Libro/Manual",
             "Presentación",
+            "Notas de Clase",
             "Otro"
         };
     
@@ -32,7 +35,7 @@
 
     <div class="container-fluid mt-4">
     
-        <!-- Breadcrumb -->
+    <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav col-md-8 container-fluid mt-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -101,6 +104,7 @@
 
                             <!-- Información académica -->
                             <div class="row mb-3">
+                                
                                 <!-- Dropdown de Facultad -->
                                 <div class="col-md-6">
                                     <label for="facultad" class="form-label fw-bold">Facultad</label>
@@ -132,7 +136,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <!-- Dropdown de Materia CON BOTÓN + -->
+                                
+                                <!-- Dropdown de Materia con boton + -->
                                 <div class="col-md-6">
                                     <label for="materia" class="form-label fw-bold">Materia</label>
                                     <div class="input-group">
@@ -252,6 +257,7 @@
         </div>
     </div>
 
+	<!-- Iconos -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
@@ -259,11 +265,9 @@
     <script>
         let tags = [];
 
-        // ==========================================
         // DROPDOWNS EN CASCADA - AJAX
-        // ==========================================
-        
-        // Cuando cambia la FACULTAD, cargar CARRERAS
+
+        // Cuando cambia la Facultad, cargar Carreras
         document.getElementById('facultad').addEventListener('change', function() {
             const idFacultad = this.value;
             const carreraSelect = document.getElementById('carrera');
@@ -311,7 +315,7 @@
                 });
         });
         
-        // Cuando cambia la CARRERA, cargar MATERIAS
+        // Cuando cambia la Carrera, cargar Materias
         document.getElementById('carrera').addEventListener('change', function() {
             const idCarrera = this.value;
             const materiaSelect = document.getElementById('materia');
@@ -362,19 +366,11 @@
                 });
         });
 
-        // ==========================================
-        // SOLICITUD DE MATERIA
-        // ==========================================
+        // Solicitud de Materia
         function enviarSolicitudMateria() {
             const nombreMateria = document.getElementById('nombreMateriaSolicitud').value.trim();
             const descripcion = document.getElementById('descripcionSolicitud').value.trim();
             const idCarrera = document.getElementById('idCarreraSolicitud').value;
-            
-            console.log('=== DEBUG SOLICITUD ===');
-            console.log('Nombre:', nombreMateria);
-            console.log('Descripción:', descripcion);
-            console.log('ID Carrera:', idCarrera);
-            console.log('=====================');
             
             if (!nombreMateria) {
                 mostrarMensajeSolicitud('Por favor ingresa el nombre de la materia', 'danger');
@@ -454,9 +450,7 @@
             document.getElementById('mensajeSolicitud').classList.add('d-none');
         });
 
-        // ==========================================
-        // MANEJO DE ARCHIVO
-        // ==========================================
+        // Manejo de Archivo
         document.getElementById('archivo').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -502,9 +496,7 @@
             }
         });
 
-        // ==========================================
-        // MANEJO DE TAGS
-        // ==========================================
+        // Manejo de tags
         document.getElementById('tagInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();

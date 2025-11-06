@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-/* ================================================
-   ESTILOS GLOBALES
-   ================================================ */
-
 * {
     margin: 0;
     padding: 0;
@@ -507,6 +503,7 @@ body {
 
 #modalEliminar .modal-title {
     font-weight: 600;
+    font-family: serif;
     font-size: 1.4rem;
     color: white;
     position: relative;
@@ -649,6 +646,7 @@ body {
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
+    font-family: serif;
 }
 
 .delete-message strong {
@@ -675,6 +673,7 @@ body {
     color: #92400e;
     font-size: 0.9rem;
     text-align: left;
+    font-family: cursive;
 }
 
 #modalEliminar .modal-footer {
@@ -723,11 +722,29 @@ body {
 	color: #b91c1c
 }
 
+.warning {
+	color:white;
+	font-size: 45px;
+}
+
 .icono-fac{
 	color: #7296f7;
 	font-size: 1.4rem;
 }
 
+.info-circle{
+	color: rgb(245, 158, 11);
+    font-size: 36px;
+}
+
+.close{
+	color: rgb(71, 85, 105);
+	font-size: 21px;
+}
+
+.trash{
+	font-size: 21px;
+}
 /* ================================================
    BREADCRUMB
    ================================================ */

@@ -103,7 +103,7 @@
         		</a>
         		<% } %>
         
-        		<!-- Subir material - Para todos -->
+        		<!-- Subir material -->
         		<a href="upload">
             		<button class="btn btn-primary">
                 		<ion-icon name="cloud-upload-outline"></ion-icon>
@@ -174,7 +174,7 @@
 
                     <!-- Información del sistema -->
                     <div class="info-card">
-                        <h3>¿Qué puedes hacer en SGRAC?</h3>
+                        <h3>¿Qué puedes hacer en NoteLift?</h3>
                         <div class="info-grid">
                             <div class="info-section">
                                 <h4>Gestión de Recursos:</h4>

@@ -20,7 +20,8 @@ public class AgregarFacultad extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Verificar sesión
+        
+    	// Verificar sesión
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("usuario") == null) {
             response.sendRedirect("Signin");
@@ -38,7 +39,8 @@ public class AgregarFacultad extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Verificar sesión y permisos también en POST
+        
+    	// Verificar sesión y permisos también en POST
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("usuario") == null) {
             response.sendRedirect("Signin");
@@ -50,6 +52,8 @@ public class AgregarFacultad extends HttpServlet {
             response.sendRedirect("bienvenida.jsp");
             return;
         }
+        
+        request.setCharacterEncoding("UTF-8");
         
         // Recibir parámetros del formulario
         String nombre = request.getParameter("nombre");

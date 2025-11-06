@@ -48,14 +48,13 @@ public class Upload extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/Signin"); 
             return;
         }
-        // ==========================================================
         
         // Cargar facultades para el dropdown
         DataFacultad df = new DataFacultad();
         LinkedList<Facultad> facultades = df.getAllFacultades();
         request.setAttribute("facultades", facultades);
         
-        // Ahora cargamos la JSP SOLAMENTE si el usuario está logueado
+        // Cargamos JSP si el usuario esta logueado
         request.getRequestDispatcher("/WEB-INF/UploadMaterial.jsp").forward(request, response);
     }
 
@@ -63,7 +62,7 @@ public class Upload extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)      
             throws ServletException, IOException {
         
-        // Recargar facultades para el formulario (si el POST falla)
+        // Recargar facultades para el formulario
         DataFacultad df = new DataFacultad();
         LinkedList<Facultad> facultades = df.getAllFacultades();
         request.setAttribute("facultades", facultades);
@@ -78,6 +77,8 @@ public class Upload extends HttpServlet {
         }
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         // ==========================================================
+        
+        request.setCharacterEncoding("UTF-8");
         
         try {
             // Obtener parámetros del formulario

@@ -12,7 +12,7 @@
     <title>Sitio Web Java</title>
 
 
-    <!-- Custom styles for this template -->
+    <!-- Estilos -->
     <link href="style/login.css" rel="stylesheet">
 </head>
 
@@ -28,10 +28,10 @@
             <span>Email</span>
         </label> 
         
-        <label class="password-label"> <%-- Clase nueva para posicionamiento --%>
+        <label class="password-label"> 
             <input id="password-input" name="password" required placeholder="" type="password" class="input">
             <span>Contraseña</span>
-            <span class="toggle-password" id="togglePassword">👁️</span> <%-- Ícono para mostrar/ocultar --%>
+            <span class="toggle-password" id="togglePassword">👁️</span> 
         </label>
 
         <button class="submit" type="submit">Sign in</button>

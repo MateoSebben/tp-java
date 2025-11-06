@@ -23,7 +23,6 @@ public class CrearSolicitudMateria extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // AGREGAR ESTAS DOS LÍNEAS AL INICIO
         request.setCharacterEncoding("UTF-8");
         
         // Configurar respuesta JSON
@@ -45,7 +44,7 @@ public class CrearSolicitudMateria extends HttpServlet {
             String descripcion = request.getParameter("descripcion");
             String idCarreraStr = request.getParameter("idCarrera");
             
-            // DEBUG - AGREGAR ESTOS PRINTS
+            // Debug
             System.out.println("===== DEBUG SERVLET =====");
             System.out.println("nombreMateria recibido: [" + nombreMateria + "]");
             System.out.println("descripcion recibida: [" + descripcion + "]");

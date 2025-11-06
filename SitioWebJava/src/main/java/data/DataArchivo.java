@@ -50,7 +50,7 @@ public class DataArchivo {
 	        }
 	    }
 	}
-
+/*
     public Archivo getArchivoById(int idArchivo) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -91,7 +91,7 @@ public class DataArchivo {
         }
 
         return archivo;
-    }
+    } */
 
     public LinkedList<Archivo> getArchivosPorUsuario(int idUsuario) {
         LinkedList<Archivo> archivos = new LinkedList<>();
@@ -191,13 +191,14 @@ public class DataArchivo {
         try {
             conn = DbConnector.getInstancia().getConn();
             stmt = conn.prepareStatement(
-                "UPDATE archivo SET nombre = ?, descripcion = ?, idMateria = ? WHERE idArchivo = ?"
+                "UPDATE archivo SET nombre = ?, descripcion = ?, tipoArchivo = ?, idMateria = ? WHERE idArchivo = ?"
             );
 
             stmt.setString(1, archivo.getNombre());
             stmt.setString(2, archivo.getDescripcion());
-            stmt.setInt(3, archivo.getMateria().getIdMateria());
-            stmt.setInt(4, archivo.getIdArchivo());
+            stmt.setString(3, archivo.getTipoArchivo());
+            stmt.setInt(4, archivo.getMateria().getIdMateria());
+            stmt.setInt(5, archivo.getIdArchivo());
 
             stmt.executeUpdate();
 
@@ -414,7 +415,6 @@ public class DataArchivo {
 	    return archivos;
 	}
     
-    /*
     public Archivo getArchivoById(int idArchivo) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -441,7 +441,7 @@ public class DataArchivo {
                 archivo.setEsFisico(rs.getBoolean("esFisico"));
                 archivo.setFechaSubida(rs.getTimestamp("fechaSubida"));
                 
-                // *** AGREGAR ESTO: Cargar la materia asociada ***
+                // IMPORTANTE: Cargar la materia asociada
                 int idMateria = rs.getInt("idMateria");
                 if (idMateria > 0) {
                     Materia materia = new Materia();
@@ -464,5 +464,4 @@ public class DataArchivo {
 
         return archivo;
     }
-*/
 }

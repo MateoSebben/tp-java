@@ -2,6 +2,7 @@
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="entities.Archivo" %>
 <%@ page import="entities.Carrera" %>
+<%@ page import="entities.Usuario" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -14,94 +15,110 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Recursos</title>
+    <title>Mis Recursos - SGRAC</title>
 
-    <!-- Íconos externos -->
+    <!-- Estilos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
-    
-    <!-- Hoja de estilos única -->
     <link rel="stylesheet" href="style/misRecursos.css">
 </head>
 <body>
-<main class="main-content">
+<div class="main-container">
 
     <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb" class="breadcrumb-nav container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="bienvenida.jsp">
-                        <ion-icon name="home-outline"></ion-icon> Inicio
-                    </a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                        <ion-icon name="business-outline"></ion-icon> Mis Recursos
-                </li>
-            </ol>
-        </nav>
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="bienvenida.jsp">
+                    <ion-icon name="home-outline"></ion-icon> Inicio
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <ion-icon name="folder-open-outline"></ion-icon> Mis Recursos
+            </li>
+        </ol>
+    </nav>
 
-    <div class="container">
-        <div class="files-section">
-            <!-- Header de la sección -->
-            <div class="section-header">
-                <h2>Mis Recursos</h2>
-                <div class="results-info">
-                    <%
-                        LinkedList<Archivo> archivos = (LinkedList<Archivo>) request.getAttribute("archivos");
-                        int totalArchivos = (archivos != null) ? archivos.size() : 0;
-                    %>
-                    <span>Mostrando <%= totalArchivos %> archivo(s)</span>
-                </div>
+    <!-- Contenedor principal -->
+    <div class="page-header">
+        <div class="header-content-left">
+            <div class="header-icon">
+                <ion-icon name="document-text-outline"></ion-icon>
             </div>
+            <div class="header-text">
+                <h1>Mis Recursos</h1>
+                <p>Administra tus materiales académicos compartidos</p>
+            </div>
+        </div>
+        
+        <%
+            LinkedList<Archivo> archivos = (LinkedList<Archivo>) request.getAttribute("archivos");
+            int totalArchivos = (archivos != null) ? archivos.size() : 0;
+        %>
+        
+        <div class="results-badge">
+            <ion-icon name="documents-outline"></ion-icon>
+            <span><strong><%= totalArchivos %></strong> archivo<%= totalArchivos != 1 ? "s" : "" %></span>
+        </div>
+    </div>
 
-            <!-- Tabla de archivos -->
-            <div class="table-container">
-                <table class="files-table">
-                    <thead>
-                        <tr>
-                            <th>Archivo</th>
-                            <th>Tipo</th>
-                            <th>Tamaño</th>
-                            <th>Fecha</th>
-                            <th>Materia</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                        if (archivos != null && !archivos.isEmpty()) {
-                            for (Archivo archivo : archivos) {
-                                String extension = archivo.getExtension() != null ? archivo.getExtension().toLowerCase() : "";
-                                
-                                // Determinar ícono según extensión
-                                String iconClass = "bi bi-file-earmark"; 
-                                String iconStyle = "color: #6c757d;";
+    <!-- Tabla de recursos -->
+    <div class="files-section">
+        <% if (archivos != null && !archivos.isEmpty()) { %>
+        
+        <div class="table-responsive">
+            <table class="files-table">
+                <thead>
+                    <tr>
+                        <th width="25%">Archivo</th>
+                        <th width="8%">Tipo</th>
+                        <th width="7%">Tamaño</th>
+                        <th width="20%">Descripción</th>
+                        <th width="15%">Materia/Carrera</th>
+                        <th width="10%">Fecha</th>
+                        <th width="15%">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                    for (Archivo archivo : archivos) {
+                        String extension = archivo.getExtension() != null ? archivo.getExtension().toLowerCase() : "";
+                        
+                        // Determinar ícono según extensión
+                        String iconClass = "bi bi-file-earmark"; 
+                        String iconStyle = "color: #6c757d;";
 
-                                if ("pdf".equals(extension)) {
-                                    iconClass = "bi bi-file-earmark-pdf";
-                                    iconStyle = "color: #dc3545;";
-                                } else if ("doc".equals(extension) || "docx".equals(extension)) {
-                                    iconClass = "bi bi-file-earmark-word";
-                                    iconStyle = "color: #0d6efd;";
-                                } else if ("xls".equals(extension) || "xlsx".equals(extension)) {
-                                    iconClass = "bi bi-file-earmark-excel";
-                                    iconStyle = "color: #198754;";
-                                } else if ("ppt".equals(extension) || "pptx".equals(extension)) {
-                                    iconClass = "bi bi-file-earmark-ppt";
-                                    iconStyle = "color: #ffc107;";
-                                } else if ("txt".equals(extension)) {
-                                    iconClass = "bi bi-file-earmark-text";
-                                    iconStyle = "color: #6c757d;";
-                                } else if ("jpg".equals(extension) || "jpeg".equals(extension) || 
-                                           "png".equals(extension) || "gif".equals(extension)) {
-                                    iconClass = "bi bi-file-earmark-image";
-                                    iconStyle = "color: #0dcaf0;";
-                                }
-                        %>
-                        <tr>
-                            <!-- Columna: Archivo -->
-                            <td class="file-info">
+                        if ("pdf".equals(extension)) {
+                            iconClass = "bi bi-file-earmark-pdf";
+                            iconStyle = "color: #dc3545;";
+                        } else if ("doc".equals(extension) || "docx".equals(extension)) {
+                            iconClass = "bi bi-file-earmark-word";
+                            iconStyle = "color: #0d6efd;";
+                        } else if ("xls".equals(extension) || "xlsx".equals(extension)) {
+                            iconClass = "bi bi-file-earmark-excel";
+                            iconStyle = "color: #198754;";
+                        } else if ("ppt".equals(extension) || "pptx".equals(extension)) {
+                            iconClass = "bi bi-file-earmark-ppt";
+                            iconStyle = "color: #ffc107;";
+                        } else if ("txt".equals(extension)) {
+                            iconClass = "bi bi-file-earmark-text";
+                            iconStyle = "color: #6c757d;";
+                        } else if ("jpg".equals(extension) || "jpeg".equals(extension) || 
+                                   "png".equals(extension) || "gif".equals(extension)) {
+                            iconClass = "bi bi-file-earmark-image";
+                            iconStyle = "color: #0dcaf0;";
+                        }
+                        
+                        String descripcion = archivo.getDescripcion() != null && !archivo.getDescripcion().trim().isEmpty() 
+                            ? archivo.getDescripcion() 
+                            : "Sin descripción";
+                    %>
+                    <tr>
+                        <!-- Columna: Archivo -->
+                        <td>
+                            <div class="file-info">
                                 <div class="file-icon">
                                     <i class="<%= iconClass %>" style="<%= iconStyle %>"></i>
                                 </div>
@@ -111,107 +128,160 @@
                                     </span>
                                     <span class="file-extension">.<%= archivo.getExtension() %></span>
                                 </div>
-                            </td>
-                            
-                            <!-- Columna: Tipo -->
-                            <td>
-                                <span class="badge badge-<%= archivo.getTipoArchivo() %>">
-                                    <%= archivo.getTipoArchivo() %>
-                                </span>
-                            </td>
-                            
-                            <!-- Columna: Tamaño -->
-                            <td><%= String.format("%.2f", archivo.getPeso()) %> MB</td>
-                            
-                            <!-- Columna: Fecha -->
-                            <td><%= archivo.getFechaSubida() != null ? sdf.format(archivo.getFechaSubida()) : "-" %></td>
-                            
-                            <!-- Columna: Materia -->
-                            <td>
-                                <div class="subject-info">
-                                    <div class="subject-name">
-                                        <%= archivo.getMateria().getNombreMateria() %>
-                                    </div>
-                                    <div class="subject-details">
-                                        <%
-                                            if (archivo.getMateria() != null && 
-                                                archivo.getMateria().getCarreras() != null &&
-                                                !archivo.getMateria().getCarreras().isEmpty()) {
-                                        %>
-                                            <ul class="carreras-list">
-                                                <%
-                                                    for (Carrera c : archivo.getMateria().getCarreras()) {
-                                                        if (c != null && c.getNombreCarrera() != null) {
-                                                %>
-                                                            <li><%= c.getNombreCarrera() %></li>
-                                                <%
-                                                        }
-                                                    }
-                                                %>
-                                            </ul>
-                                        <%
-                                            } else {
-                                        %>
-                                            <span>-</span>
-                                        <%
+                            </div>
+                        </td>
+                        
+                        <!-- Columna: Tipo -->
+                        <td>
+                            <span class="badge badge-<%= archivo.getTipoArchivo().toLowerCase().replace(" ", "-") %>">
+                                <%= archivo.getTipoArchivo() %>
+                            </span>
+                        </td>
+                        
+                        <!-- Columna: Tamaño -->
+                        <td class="text-center">
+                            <span class="file-size">
+                                <ion-icon name="cloud-outline"></ion-icon>
+                                <%= String.format("%.2f", archivo.getPeso()) %> MB
+                            </span>
+                        </td>
+                        
+                        <!-- Columna: Descripción -->
+                        <td>
+                            <div class="description-cell" title="<%= descripcion %>">
+                                <%= descripcion %>
+                            </div>
+                        </td>
+                        
+                        <!-- Columna: Materia -->
+                        <td>
+                            <div class="subject-cell">
+                                <div class="subject-name">
+                                    <ion-icon name="book-outline"></ion-icon>
+                                    <%= archivo.getMateria().getNombreMateria() %>
+                                </div>
+                                <%
+                                    if (archivo.getMateria() != null && 
+                                        archivo.getMateria().getCarreras() != null &&
+                                        !archivo.getMateria().getCarreras().isEmpty()) {
+                                %>
+                                <div class="carreras-tags">
+                                    <%
+                                        for (Carrera c : archivo.getMateria().getCarreras()) {
+                                            if (c != null && c.getNombreCarrera() != null) {
+                                    %>
+                                    <span class="carrera-tag"><%= c.getNombreCarrera() %></span>
+                                    <%
                                             }
-                                        %>
-                                    </div>
+                                        }
+                                    %>
                                 </div>
-                            </td>
-                            
-                            <!-- Columna: Acciones -->
-                            <td>
-                                <div class="actions">
-                                    <a href="EditarArchivo?id=<%= archivo.getIdArchivo() %>" 
-                                       class="btn-edit" 
-                                       title="Editar archivo">
-                                        <ion-icon name="create-outline"></ion-icon>
-                                        <span>Editar</span>
-                                    </a>
-                                    <button onclick="confirmarEliminacion(<%= archivo.getIdArchivo() %>)" 
-                                            class="btn-delete" 
-                                            title="Eliminar archivo">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                        <span>Eliminar</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <% 
-                            }
-                        } else { 
-                        %>
-                        <tr>
-                            <td colspan="6" class="no-results">
-                                <div class="no-results-content">
-                                    <i class="fas fa-folder-open"></i>
-                                    <p>No has subido archivos todavía</p>
-                                </div>
-                            </td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
-            </div>
+                                <% } %>
+                            </div>
+                        </td>
+                        
+                        <!-- Columna: Fecha -->
+                        <td class="text-center">
+                            <div class="date-cell">
+                                <ion-icon name="calendar-outline"></ion-icon>
+                                <span><%= archivo.getFechaSubida() != null ? sdf.format(archivo.getFechaSubida()) : "-" %></span>
+                            </div>
+                        </td>
+                        
+                        <!-- Columna: Acciones -->
+                        <td>
+                            <div class="actions">
+                                <a href="EditarArchivo?id=<%= archivo.getIdArchivo() %>" 
+                                   class="btn-action btn-edit" 
+                                   title="Editar archivo">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </a>
+                                <button class="btn-action btn-delete" 
+                                        data-id="<%= archivo.getIdArchivo() %>"
+                                        data-nombre="<%= archivo.getNombre() %>"
+                                        title="Eliminar archivo">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        
+        <% } else { %>
+        
+        <!-- Mensaje para cuando no hay archivos -->
+        <div class="empty-state">
+            <ion-icon name="folder-open-outline"></ion-icon>
+            <h3>No tienes recursos cargados</h3>
+            <p>Comienza a compartir materiales académicos con la comunidad</p>
+            <a href="Upload" class="btn-primary">
+                Subir Archivo
+            </a>
+        </div>
+        <% } %>
+    </div>
+</div>
+
+<!-- Modal de confirmación de eliminación -->
+<div id="modalEliminar" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <ion-icon name="warning-outline"></ion-icon>
+            <h2>Confirmar Eliminación</h2>
+        </div>
+        <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar el archivo?</p>
+            <p class="archivo-nombre"><strong id="nombreArchivo"></strong></p>
+            <p class="warning-text">Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+            <button onclick="cerrarModal()" class="btn-secondary">Cancelar</button>
+            <button id="btnConfirmarEliminar" class="btn-danger">Eliminar</button>
         </div>
     </div>
-</main>
+</div>
 
-<!-- Ionicons -->
+<!-- Iconos -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-<!-- Script para confirmación de eliminación -->
 <script>
+    let idArchivoEliminar = null;
 
-function confirmarEliminacion(idArchivo) {
-    if (confirm('¿Estás seguro de que deseas eliminar este archivo?\n\nEsta acción no se puede deshacer.')) {
-        window.location.href = 'EliminarArchivo?id=' + idArchivo;
+    // Usar delegación de eventos para los botones de eliminar
+    document.addEventListener('click', function(e) {
+        const btnDelete = e.target.closest('.btn-delete');
+        if (btnDelete) {
+            const id = btnDelete.getAttribute('data-id');
+            const nombre = btnDelete.getAttribute('data-nombre');
+            confirmarEliminacion(id, nombre);
+        }
+    });
+
+    function confirmarEliminacion(id, nombre) {
+        idArchivoEliminar = id;
+        document.getElementById('nombreArchivo').textContent = nombre;
+        document.getElementById('modalEliminar').classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
-}
 
+    function cerrarModal() {
+        document.getElementById('modalEliminar').classList.remove('active');
+        document.body.style.overflow = 'auto';
+        idArchivoEliminar = null;
+    }
 
+    document.getElementById('btnConfirmarEliminar').addEventListener('click', function() {
+        if (idArchivoEliminar) {
+            window.location.href = 'EliminarArchivo?id=' + idArchivoEliminar;
+        }
+    });
+
+    
 </script>
+
 </body>
 </html>

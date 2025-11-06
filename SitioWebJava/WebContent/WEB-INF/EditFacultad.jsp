@@ -18,6 +18,7 @@
 </head>
 <body>
     <div class="main-container">
+        
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb">
@@ -173,7 +174,8 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     
     <script>
-        // Validación en tiempo real
+        
+    	// Validación en tiempo real
         const inputs = document.querySelectorAll('.form-control');
         
         inputs.forEach(input => {

@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <!-- Vista Toggle (opcional para futuro) -->
+        <!-- Vista Toggle  -->
         <div class="view-controls">
             <div class="search-box">
                 <ion-icon name="search-outline"></ion-icon>
@@ -120,6 +120,7 @@
             %>
             
             <div class="file-card" data-accent="<%= cardAccent %>">
+                
                 <!-- Card Header con icono y acciones -->
                 <div class="card-header">
                     <div class="file-icon-large">
@@ -218,11 +219,12 @@
     </div>
 </main>
 
-<!-- Scripts -->
+<!-- Iconos -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <script>
+    
     // Búsqueda en tiempo real
     document.getElementById('searchFiles').addEventListener('input', function(e) {
         const searchTerm = e.target.value.toLowerCase();

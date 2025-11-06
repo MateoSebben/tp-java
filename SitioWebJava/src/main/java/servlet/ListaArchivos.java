@@ -35,7 +35,6 @@ public class ListaArchivos extends HttpServlet {
             // Instancia de la capa de datos
             DataArchivo da = new DataArchivo();
 
-            // Si tenés filtros en SQL, podés adaptarlo, por ahora uso getAll
             List<Archivo> archivos = da.getAllArchivos();
 
             // Pasar lista al JSP

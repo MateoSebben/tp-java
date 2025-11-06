@@ -64,5 +64,35 @@ public class DataMateria {
         
         return materias;
     }
+	
+	/* Obtener Facultad y Carrera por Materia */
+	
+	public int[] getFacultadYCarreraPorMateria(int idMateria) {
+	    int[] resultado = new int[2]; // [0] = idFacultad, [1] = idCarrera
+	    
+	    String sql = "SELECT cf.idFacultad, cm.idCarrera " +
+	                 "FROM carrera_materia cm " +
+	                 "INNER JOIN carrera_facultad cf ON cm.idCarrera = cf.idCarrera " +
+	                 "WHERE cm.idMateria = ? LIMIT 1";
+	    
+	    try (PreparedStatement stmt = DbConnector.getInstancia().getConn().prepareStatement(sql)) {
+	        stmt.setInt(1, idMateria);
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            resultado[0] = rs.getInt("idFacultad");
+	            resultado[1] = rs.getInt("idCarrera");
+	        }
+	        
+	        rs.close();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        DbConnector.getInstancia().releaseConn();
+	    }
+	    
+	    return resultado;
+	}
 
 }

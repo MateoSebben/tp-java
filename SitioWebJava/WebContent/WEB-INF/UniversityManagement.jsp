@@ -28,7 +28,7 @@
 <body>
     <div class="main-container">
     
-            <!-- Breadcrumb -->
+        <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -158,7 +158,7 @@
                 <div class="modal-header">
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     <div class="delete-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                        <ion-icon class="warning" name="warning"></ion-icon>
                     </div>
                     <h5 class="modal-title" id="modalEliminarLabel">
                         ¿Eliminar Facultad?
@@ -169,19 +169,19 @@
                         ¿Estás seguro de que deseas eliminar <strong id="nombreFacultad"></strong>?
                     </p>
                     <div class="delete-warning">
-                        <i class="fas fa-info-circle"></i>
+                        <ion-icon class="info-circle" name="information-circle"></ion-icon>
                         <span>Esta acción no se puede deshacer. Se eliminarán todos los datos asociados.</span>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times"></i>
+                        <ion-icon class="close" name="close"></ion-icon>
                         Cancelar
                     </button>
                     <form id="formEliminar" action="eliminarFacultad" method="post" style="display: inline; margin: 0;">
                         <input type="hidden" name="idFac" id="idFacultadEliminar" />
                         <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i>
+                            <ion-icon class="trash" name="trash"></ion-icon>
                             Eliminar
                         </button>
                     </form>
@@ -190,11 +190,13 @@
         </div>
     </div>
 
+	<!-- Iconos -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
     <script>
-        // Búsqueda en tiempo real
+        
+    	// Búsqueda en tiempo real
         document.getElementById('searchInput').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
             const cards = document.querySelectorAll('.facultad-card');
