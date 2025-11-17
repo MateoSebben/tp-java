@@ -126,82 +126,159 @@ public class DataSolicitudMateria {
         return sm;
     }
 	
+	/**
+	 * NUEVO: Verifica si una materia ya existe en una carrera específica
+	 * @param nombreMateria Nombre de la materia a verificar
+	 * @param idCarrera ID de la carrera
+	 * @return true si la materia ya existe, false en caso contrario
+	 */
+	private boolean existeMateriaEnCarrera(String nombreMateria, int idCarrera) {
+	    String sql = "SELECT COUNT(*) as total " +
+	                 "FROM materia m " +
+	                 "INNER JOIN carrera_materia cm ON m.idMateria = cm.idMateria " +
+	                 "WHERE LOWER(TRIM(m.nombre)) = LOWER(TRIM(?)) AND cm.idCarrera = ?";
+	    
+	    try (PreparedStatement stmt = DbConnector.getInstancia().getConn().prepareStatement(sql)) {
+	        stmt.setString(1, nombreMateria);
+	        stmt.setInt(2, idCarrera);
+	        
+	        ResultSet rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            boolean existe = rs.getInt("total") > 0;
+	            rs.close();
+	            return existe;
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        DbConnector.getInstancia().releaseConn();
+	    }
+	    
+	    return false;
+	}
+	
 	// Metodo para aprobar la solicitud, crear la materia y asociarla con la carrera 
+	// ACTUALIZADO: Ahora valida duplicados antes de crear
 	
 	public boolean aprobarSolicitud(int idSolicitud, int idAdministrador) {
-        Connection conn = null;
-        
-        try {
-            conn = DbConnector.getInstancia().getConn();
-            conn.setAutoCommit(false); // Iniciar transacción
-            
-            // 1. Obtener datos de la solicitud
-            SolicitudMateria solicitud = getById(idSolicitud);
-            
-            if (solicitud == null) {
-                return false;
-            }
-            
-            // 2. Crear la materia
-            String sqlMateria = "INSERT INTO materia (nombre) VALUES (?)";
-            PreparedStatement stmtMateria = conn.prepareStatement(sqlMateria, 
-                    Statement.RETURN_GENERATED_KEYS);
-            stmtMateria.setString(1, solicitud.getNombreMateria());
-            stmtMateria.executeUpdate();
-            
-            // Obtener ID de la materia creada
-            ResultSet rsMateria = stmtMateria.getGeneratedKeys();
-            int idMateria = 0;
-            if (rsMateria.next()) {
-                idMateria = rsMateria.getInt(1);
-            }
-            rsMateria.close();
-            stmtMateria.close();
-            
-            // 3. Asociar materia con carrera en tabla intermedia
-            String sqlCarreraMateria = "INSERT INTO carrera_materia (idCarrera, idMateria, fecha) VALUES (?, ?, ?)";
-            PreparedStatement stmtCarreraMateria = conn.prepareStatement(sqlCarreraMateria);
-            stmtCarreraMateria.setInt(1, solicitud.getIdCarrera());
-            stmtCarreraMateria.setInt(2, idMateria);
-            stmtCarreraMateria.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now())); // <-- fecha actual
-            stmtCarreraMateria.executeUpdate();
-            stmtCarreraMateria.close();
-            
-            // 4. Actualizar estado de la solicitud
-            String sqlUpdate = "UPDATE solicitud_materia SET estado = 'APROBADA', " +
-                             "idAdministrador = ?, fechaResolucion = ? WHERE idSolicitud = ?";
-            PreparedStatement stmtUpdate = conn.prepareStatement(sqlUpdate);
-            stmtUpdate.setInt(1, idAdministrador);
-            stmtUpdate.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
-            stmtUpdate.setInt(3, idSolicitud);
-            stmtUpdate.executeUpdate();
-            stmtUpdate.close();
-            
-            // Confirmar transacción
-            conn.commit();
-            return true;
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            if (conn != null) {
-                try {
-                    conn.rollback(); // Revertir cambios si hay error
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            return false;
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.setAutoCommit(true);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            DbConnector.getInstancia().releaseConn();
-        }
-    }
+	    Connection conn = null;
+	    
+	    try {
+	        conn = DbConnector.getInstancia().getConn();
+	        conn.setAutoCommit(false); // Iniciar transacción
+	        
+	        // 1. Obtener datos de la solicitud
+	        SolicitudMateria solicitud = getSolicitudById(idSolicitud);
+	        
+	        if (solicitud == null) {
+	            System.err.println("Error: Solicitud no encontrada (ID: " + idSolicitud + ")");
+	            return false;
+	        }
+	        
+	        // 2. Verificar si la materia ya existe en ESA MISMA carrera
+	        if (existeMateriaEnCarrera(solicitud.getNombreMateria(), solicitud.getIdCarrera())) {
+	            System.out.println("La materia '" + solicitud.getNombreMateria() + 
+	                             "' ya existe en " + solicitud.getNombreCarrera());
+	            
+	            // Rechazar automáticamente con motivo específico
+	            conn.rollback();
+	            conn.setAutoCommit(true);
+	            DbConnector.getInstancia().releaseConn();
+	            
+	            String motivoRechazo = "La materia '" + solicitud.getNombreMateria() + 
+	                                 "' ya existe en el sistema para la carrera de " + 
+	                                 solicitud.getNombreCarrera() + ".";
+	            
+	            boolean rechazada = rechazarSolicitud(idSolicitud, idAdministrador, motivoRechazo);
+	            
+	            if (rechazada) {
+	                System.out.println("Solicitud rechazada automáticamente por duplicado");
+	            }
+	            
+	            return rechazada;
+	        }
+	        
+	        // 3. NUEVO: Buscar si la materia existe en OTRA carrera
+	        Integer idMateriaExistente = buscarIdMateriaPorNombre(solicitud.getNombreMateria());
+	        int idMateria;
+	        
+	        if (idMateriaExistente != null) {
+	            // ✅ La materia existe en otra carrera - REUTILIZAR el ID
+	            idMateria = idMateriaExistente;
+	            System.out.println("Materia '" + solicitud.getNombreMateria() + 
+	                             "' ya existe (ID: " + idMateria + ") - Reutilizando para nueva carrera");
+	        } else {
+	            // ❌ La materia NO existe en ninguna carrera - CREAR NUEVA
+	            String sqlMateria = "INSERT INTO materia (nombre) VALUES (?)";
+	            PreparedStatement stmtMateria = conn.prepareStatement(sqlMateria, 
+	                    Statement.RETURN_GENERATED_KEYS);
+	            stmtMateria.setString(1, solicitud.getNombreMateria());
+	            stmtMateria.executeUpdate();
+	            
+	            // Obtener ID de la materia creada
+	            ResultSet rsMateria = stmtMateria.getGeneratedKeys();
+	            if (rsMateria.next()) {
+	                idMateria = rsMateria.getInt(1);
+	            } else {
+	                throw new SQLException("Error al crear materia: no se generó ID");
+	            }
+	            rsMateria.close();
+	            stmtMateria.close();
+	            
+	            System.out.println("Materia CREADA: '" + solicitud.getNombreMateria() + "' (ID: " + idMateria + ")");
+	        }
+	        
+	        // 4. Asociar materia con carrera en tabla intermedia
+	        String sqlCarreraMateria = "INSERT INTO carrera_materia (idCarrera, idMateria, fecha) VALUES (?, ?, ?)";
+	        PreparedStatement stmtCarreraMateria = conn.prepareStatement(sqlCarreraMateria);
+	        stmtCarreraMateria.setInt(1, solicitud.getIdCarrera());
+	        stmtCarreraMateria.setInt(2, idMateria);
+	        stmtCarreraMateria.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+	        stmtCarreraMateria.executeUpdate();
+	        stmtCarreraMateria.close();
+	        
+	        System.out.println("Materia (ID: " + idMateria + ") asociada a carrera: " + 
+	                         solicitud.getNombreCarrera() + " (ID: " + solicitud.getIdCarrera() + ")");
+	        
+	        // 5. Actualizar estado de la solicitud
+	        String sqlUpdate = "UPDATE solicitud_materia SET estado = 'APROBADA', " +
+	                         "idAdministrador = ?, fechaResolucion = ? WHERE idSolicitud = ?";
+	        PreparedStatement stmtUpdate = conn.prepareStatement(sqlUpdate);
+	        stmtUpdate.setInt(1, idAdministrador);
+	        stmtUpdate.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+	        stmtUpdate.setInt(3, idSolicitud);
+	        stmtUpdate.executeUpdate();
+	        stmtUpdate.close();
+	        
+	        // Confirmar transacción
+	        conn.commit();
+	        System.out.println("✓ Solicitud " + idSolicitud + " APROBADA correctamente");
+	        return true;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.err.println("Error al aprobar solicitud: " + e.getMessage());
+	        if (conn != null) {
+	            try {
+	                conn.rollback(); // Revertir cambios si hay error
+	                System.out.println("Transacción revertida");
+	            } catch (SQLException ex) {
+	                ex.printStackTrace();
+	            }
+	        }
+	        return false;
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.setAutoCommit(true);
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        DbConnector.getInstancia().releaseConn();
+	    }
+	}
 	
 	// Metodo para rechazar solicitud 
 	
@@ -248,6 +325,95 @@ public class DataSolicitudMateria {
         
         return total;
     }
+	
+	// Metodo para obtener una solicitud por su ID con toda la información necesaria incluyendo el email del usuario solicitante 
+	
+	public SolicitudMateria getSolicitudById(int idSolicitud) {
+	    SolicitudMateria solicitud = null;
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    
+	    String sql = "SELECT s.idSolicitud, s.nombreMateria, s.descripcion, s.idCarrera, " +
+	                 "       s.idUsuarioSolicitante, s.fechaSolicitud, s.estado, " +
+	                 "       s.motivoRechazo, s.idAdministrador, s.fechaResolucion, " +
+	                 "       c.nombreCarrera, " +
+	                 "       u.nombre AS nombreUsuario, u.apellido AS apellidoUsuario, u.email AS emailUsuario " +
+	                 "FROM solicitud_materia s " +
+	                 "INNER JOIN carrera c ON s.idCarrera = c.idCarrera " +
+	                 "INNER JOIN usuario u ON s.idUsuarioSolicitante = u.id " +
+	                 "WHERE s.idSolicitud = ?";
+	    
+	    try {
+	        stmt = DbConnector.getInstancia().getConn().prepareStatement(sql);
+	        stmt.setInt(1, idSolicitud);
+	        rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            solicitud = new SolicitudMateria();
+	            solicitud.setIdSolicitud(rs.getInt("idSolicitud"));
+	            solicitud.setNombreMateria(rs.getString("nombreMateria"));
+	            solicitud.setDescripcion(rs.getString("descripcion"));
+	            solicitud.setIdCarrera(rs.getInt("idCarrera"));
+	            solicitud.setIdUsuarioSolicitante(rs.getInt("idUsuarioSolicitante"));
+	            
+	            // Convertir Timestamp a LocalDateTime
+	            if (rs.getTimestamp("fechaSolicitud") != null) {
+	                solicitud.setFechaSolicitud(rs.getTimestamp("fechaSolicitud").toLocalDateTime());
+	            }
+	            
+	            solicitud.setEstado(rs.getString("estado"));
+	            solicitud.setMotivoRechazo(rs.getString("motivoRechazo"));
+	            solicitud.setIdAdministrador((Integer) rs.getObject("idAdministrador"));
+	            
+	            if (rs.getTimestamp("fechaResolucion") != null) {
+	                solicitud.setFechaResolucion(rs.getTimestamp("fechaResolucion").toLocalDateTime());
+	            }
+	            
+	            // Datos auxiliares
+	            solicitud.setNombreCarrera(rs.getString("nombreCarrera"));
+	            String nombreCompleto = rs.getString("nombreUsuario") + " " + rs.getString("apellidoUsuario");
+	            solicitud.setNombreUsuarioSolicitante(nombreCompleto);
+	            solicitud.setEmailUsuarioSolicitante(rs.getString("emailUsuario"));
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (stmt != null) stmt.close();
+	            DbConnector.getInstancia().releaseConn();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    return solicitud;
+	}
+	
 
-
+/* Metodo para buscar si una materia ya existe en el sistema (en cualquier carrera) y devuelve su ID si existe, o null si no existe */
+	
+	private Integer buscarIdMateriaPorNombre(String nombreMateria) {
+	    String sql = "SELECT idMateria FROM materia WHERE LOWER(TRIM(nombre)) = LOWER(TRIM(?))";
+	    
+	    try (PreparedStatement stmt = DbConnector.getInstancia().getConn().prepareStatement(sql)) {
+	        stmt.setString(1, nombreMateria);
+	        
+	        ResultSet rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            int idMateria = rs.getInt("idMateria");
+	            rs.close();
+	            return idMateria;
+	        }
+	        rs.close();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        DbConnector.getInstancia().releaseConn();
+	    }
+	    
+	    return null;
+	}
 }

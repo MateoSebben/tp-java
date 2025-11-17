@@ -85,33 +85,48 @@
         
             
             <!-- Header -->
-			<header class="main-header">
-    			<h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
-    			<div class="header-actions">
-        		<%
-            		Usuario usuarioHeader = (Usuario) session.getAttribute("usuario");
-            		boolean esAdministrador = usuarioHeader != null && "administrador".equalsIgnoreCase(usuarioHeader.getRol());
-        		%>
+<header class="main-header">
+    <h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
+    <div class="header-actions">
+        <%
+            Usuario usuarioHeader = (Usuario) session.getAttribute("usuario");
+            boolean esAdministrador = usuarioHeader != null && "administrador".equalsIgnoreCase(usuarioHeader.getRol());
+            
+            // Obtener solicitudes pendientes si es admin
+            int totalPendientes = 0;
+            if (esAdministrador) {
+                try {
+                    data.DataSolicitudMateria dataSolicitud = new data.DataSolicitudMateria();
+                    java.util.LinkedList<entities.SolicitudMateria> solicitudesPendientes = dataSolicitud.getSolicitudesPendientes();
+                    totalPendientes = solicitudesPendientes != null ? solicitudesPendientes.size() : 0;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        %>
         
-        		<!-- Solicitudes pendientes - Solo para administradores -->
-        		<% if (esAdministrador) { %>
-        		<a href="GestionarSolicitudes">
-            		<button class="btn btn-outline">
-                		<ion-icon name="notifications-outline"></ion-icon>
-                		<span>Solicitudes pendientes</span>
-            		</button>
-        		</a>
-        		<% } %>
+        <!-- Solicitudes pendientes - Solo para administradores -->
+        <% if (esAdministrador) { %>
+        <a href="GestionarSolicitudes">
+            <button class="btn btn-outline btn-solicitudes">
+                <ion-icon name="notifications-outline"></ion-icon>
+                <span>Solicitudes pendientes</span>
+                <% if (totalPendientes > 0) { %>
+                    <span class="badge-count"><%= totalPendientes %></span>
+                <% } %>
+            </button>
+        </a>
+        <% } %>
         
-        		<!-- Subir material -->
-        		<a href="upload">
-            		<button class="btn btn-primary">
-                		<ion-icon name="cloud-upload-outline"></ion-icon>
-                		<span>Subir Material</span>                  
-            		</button>
-        		</a>
-    			</div>
-			</header>
+        <!-- Subir material -->
+        <a href="upload">
+            <button class="btn btn-primary">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>Subir Material</span>                  
+            </button>
+        </a>
+    </div>
+</header>
 
             <!-- Contenido de bienvenida -->
             <main class="content">

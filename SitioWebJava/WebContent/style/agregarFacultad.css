@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-/* ================================================
-   ESTILOS GLOBALES
-   ================================================ */
+/* ESTILOS GLOBALES */
 
 * {
     margin: 0;
@@ -23,9 +21,7 @@ body {
     padding: 0 1rem;
 }
 
-/* ================================================
-   BREADCRUMB
-   ================================================ */
+/* BREADCRUMB */
 
 .breadcrumb-nav {
     margin-bottom: 2rem;
@@ -86,9 +82,7 @@ body {
     font-size: 1.2rem;
 }
 
-/* ================================================
-   LAYOUT PRINCIPAL CON SIDEBAR
-   ================================================ */
+/* LAYOUT PRINCIPAL CON SIDEBAR */
 
 .content-wrapper {
     display: grid;
@@ -97,9 +91,7 @@ body {
     align-items: start;
 }
 
-/* ================================================
-   SIDEBAR INFORMATIVA
-   ================================================ */
+/* SIDEBAR INFORMATIVA */
 
 .info-sidebar {
     opacity: 0;
@@ -208,9 +200,7 @@ body {
     opacity: 0.95;
 }
 
-/* ================================================
-   FORMULARIO PRINCIPAL
-   ================================================ */
+/* FORMULARIO PRINCIPAL */
 
 .form-container {
     background: white;
@@ -274,9 +264,7 @@ body {
     margin: 0;
 }
 
-/* ================================================
-   PASOS DEL FORMULARIO
-   ================================================ */
+/* PASOS DEL FORMULARIO */
 
 .form-step {
     padding: 2.5rem;
@@ -330,9 +318,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* ================================================
-   INPUT WRAPPERS
-   ================================================ */
+/* INPUT WRAPPERS */
 
 .input-wrapper {
     display: flex;
@@ -431,9 +417,7 @@ body {
     font-size: 0.8rem;
 }
 
-/* ================================================
-   BOTONES DE ACCIÓN
-   ================================================ */
+/* BOTONES DE ACCIÓN */
 
 .form-actions {
     padding: 2rem 2.5rem;
@@ -486,9 +470,7 @@ body {
     box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
 }
 
-/* ================================================
-   RESPONSIVE
-   ================================================ */
+/* RESPONSIVE */
 
 @media (max-width: 992px) {
     .content-wrapper {

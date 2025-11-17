@@ -210,7 +210,7 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
     
-    <script>
+  <script>
     function aprobarSolicitud(idSolicitud, nombreMateria) {
         // Mostrar modal de confirmación
         document.getElementById('idSolicitudAprobar').value = idSolicitud;
@@ -228,104 +228,158 @@
         procesarSolicitud(idSolicitud, 'aprobar', null);
     }
         
-        function mostrarModalRechazo(idSolicitud, nombreMateria) {
-            document.getElementById('idSolicitudRechazo').value = idSolicitud;
-            document.getElementById('materiaRechazo').textContent = nombreMateria;
-            document.getElementById('motivoRechazo').value = '';
-            document.getElementById('mensajeRechazo').classList.add('d-none');
-            
-            const modal = new bootstrap.Modal(document.getElementById('modalRechazo'));
-            modal.show();
+    function mostrarModalRechazo(idSolicitud, nombreMateria) {
+        document.getElementById('idSolicitudRechazo').value = idSolicitud;
+        document.getElementById('materiaRechazo').textContent = nombreMateria;
+        document.getElementById('motivoRechazo').value = '';
+        document.getElementById('mensajeRechazo').classList.add('d-none');
+        
+        const modal = new bootstrap.Modal(document.getElementById('modalRechazo'));
+        modal.show();
+    }
+    
+    function confirmarRechazo() {
+        const idSolicitud = document.getElementById('idSolicitudRechazo').value;
+        const motivo = document.getElementById('motivoRechazo').value.trim();
+        
+        if (!motivo) {
+            mostrarMensajeModal('Debes especificar el motivo del rechazo', 'danger');
+            return;
         }
         
-        function confirmarRechazo() {
-            const idSolicitud = document.getElementById('idSolicitudRechazo').value;
-            const motivo = document.getElementById('motivoRechazo').value.trim();
-            
-            if (!motivo) {
-                mostrarMensajeModal('Debes especificar el motivo del rechazo', 'danger');
-                return;
-            }
-            
-            procesarSolicitud(idSolicitud, 'rechazar', motivo);
+        procesarSolicitud(idSolicitud, 'rechazar', motivo);
+    }
+    
+    function procesarSolicitud(idSolicitud, accion, motivoRechazo) {
+        const params = new URLSearchParams();
+        params.append('idSolicitud', idSolicitud);
+        params.append('accion', accion);
+        if (motivoRechazo) {
+            params.append('motivoRechazo', motivoRechazo);
         }
         
-        function procesarSolicitud(idSolicitud, accion, motivoRechazo) {
-            const params = new URLSearchParams();
-            params.append('idSolicitud', idSolicitud);
-            params.append('accion', accion);
-            if (motivoRechazo) {
-                params.append('motivoRechazo', motivoRechazo);
-            }
-            
-            const btnConfirmar = document.getElementById('btnConfirmarRechazo');
-            if (btnConfirmar) {
-                btnConfirmar.disabled = true;
-                btnConfirmar.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Procesando...';
-            }
-            
-            fetch('ProcesarSolicitud', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                body: params
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    mostrarMensajeGlobal(data.message, 'success');
-                    
-                    // Cerrar modal si está abierto
-                    const modalElement = document.getElementById('modalRechazo');
-                    if (modalElement) {
-                        const modal = bootstrap.Modal.getInstance(modalElement);
-                        if (modal) modal.hide();
-                    }
-                    
-                    // Recargar página después de 1.5 segundos
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
+        const btnConfirmar = document.getElementById('btnConfirmarRechazo');
+        const btnAprobar = document.getElementById('btnConfirmarAprobar');
+        
+        // Deshabilitar el botón correspondiente
+        if (accion === 'rechazar' && btnConfirmar) {
+            btnConfirmar.disabled = true;
+            btnConfirmar.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Procesando...';
+        } else if (accion === 'aprobar' && btnAprobar) {
+            btnAprobar.disabled = true;
+            btnAprobar.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Procesando...';
+        }
+        
+        fetch('ProcesarSolicitud', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            body: params
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // NUEVO: Detectar si es un rechazo automático por duplicado
+                const esDuplicado = data.message.toLowerCase().includes('ya existe') || 
+                                  data.message.toLowerCase().includes('ya existía') ||
+                                  data.message.toLowerCase().includes('duplicado');
+                
+                if (esDuplicado && accion === 'aprobar') {
+                    // Mensaje especial para duplicados (amarillo/warning)
+                    mostrarMensajeGlobal(
+                        '<strong>⚠️ Materia Duplicada</strong><br>' + data.message, 
+                        'warning'
+                    );
+                    console.log('⚠️ Solicitud rechazada automáticamente por duplicado');
                 } else {
-                    if (accion === 'rechazar') {
-                        mostrarMensajeModal(data.message, 'danger');
-                    } else {
-                        mostrarMensajeGlobal(data.message, 'danger');
-                    }
+                    // Mensaje normal de éxito
+                    const icono = accion === 'aprobar' ? '✅' : '❌';
+                    mostrarMensajeGlobal(icono + ' ' + data.message, 'success');
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                mostrarMensajeGlobal('Error al procesar la solicitud', 'danger');
-            })
-            .finally(() => {
-                if (btnConfirmar) {
-                    btnConfirmar.disabled = false;
-                    btnConfirmar.innerHTML = '<i class="fas fa-times me-1"></i>Rechazar Solicitud';
+                
+                // Cerrar modal si está abierto
+                const modalRechazo = document.getElementById('modalRechazo');
+                const modalAprobar = document.getElementById('modalAprobar');
+                
+                if (modalRechazo) {
+                    const modal = bootstrap.Modal.getInstance(modalRechazo);
+                    if (modal) modal.hide();
                 }
-            });
-        }
+                if (modalAprobar) {
+                    const modal = bootstrap.Modal.getInstance(modalAprobar);
+                    if (modal) modal.hide();
+                }
+                
+                // Recargar página después de 2 segundos
+                setTimeout(() => {
+                    location.reload();
+                }, 5000);
+            } else {
+                // Error en la operación
+                if (accion === 'rechazar') {
+                    mostrarMensajeModal(data.message, 'danger');
+                } else {
+                    mostrarMensajeGlobal('❌ ' + data.message, 'danger');
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            mostrarMensajeGlobal('❌ Error al procesar la solicitud. Por favor, intenta nuevamente.', 'danger');
+        })
+        .finally(() => {
+            // Restaurar botones
+            if (btnConfirmar) {
+                btnConfirmar.disabled = false;
+                btnConfirmar.innerHTML = '<i class="fas fa-times me-1"></i>Rechazar Solicitud';
+            }
+            if (btnAprobar) {
+                btnAprobar.disabled = false;
+                btnAprobar.innerHTML = '<i class="fas fa-check me-1"></i>Confirmar Aprobación';
+            }
+        });
+    }
+    
+    function mostrarMensajeGlobal(mensaje, tipo) {
+        const div = document.getElementById('mensajeGlobal');
         
-        function mostrarMensajeGlobal(mensaje, tipo) {
-            const div = document.getElementById('mensajeGlobal');
-            div.className = `alert alert-${tipo}`;
-            div.innerHTML = `<i class="fas fa-${tipo == 'success' ? 'check' : 'exclamation'}-circle me-2"></i>${mensaje}`;
-            div.classList.remove('d-none');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            setTimeout(() => {
-                div.classList.add('d-none');
-            }, 5000);
-        }
+        // Determinar el icono según el tipo
+        let icono = 'info-circle';
+        if (tipo === 'success') icono = 'check-circle';
+        else if (tipo === 'danger') icono = 'exclamation-circle';
+        else if (tipo === 'warning') icono = 'exclamation-triangle';
         
-        function mostrarMensajeModal(mensaje, tipo) {
-            const div = document.getElementById('mensajeRechazo');
-            div.className = `alert alert-${tipo}`;
-            div.textContent = mensaje;
-            div.classList.remove('d-none');
-        }
+        div.className = 'alert alert-' + tipo + ' alert-dismissible fade show';
+        div.innerHTML = '<div class="d-flex align-items-start">' +
+                        '<i class="fas fa-' + icono + ' me-3 mt-1 fs-5"></i>' +
+                        '<div class="flex-grow-1">' + mensaje + '</div>' +
+                        '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                        '</div>';
+        div.classList.remove('d-none');
+        
+        // Scroll suave hacia arriba
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Auto-ocultar después de 5 segundos (excepto warnings que duran 7 segundos)
+        const timeout = tipo === 'warning' ? 7000 : 5000;
+        setTimeout(function() {
+            div.classList.add('d-none');
+        }, timeout);
+    }
+    
+    function mostrarMensajeModal(mensaje, tipo) {
+        const div = document.getElementById('mensajeRechazo');
+        const iconClass = tipo === 'danger' ? 'exclamation' : 'info';
+        div.className = 'alert alert-' + tipo;
+        div.innerHTML = '<i class="fas fa-' + iconClass + '-circle me-2"></i>' + mensaje;
+        div.classList.remove('d-none');
+        
+        // Auto-ocultar después de 5 segundos
+        setTimeout(function() {
+            div.classList.add('d-none');
+        }, 5000);
+    }
     </script>
 </body>
 </html>

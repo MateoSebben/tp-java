@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* ESTILOS GLOBALES */ 
+
 * {
     margin: 0;
     padding: 0;
@@ -19,9 +21,7 @@ body {
     padding: 0 1rem;
 }
 
-/* ================================================
-   HEADER SECTION
-   ================================================ */
+/* HEADER SECTION */
 
 .header-section {
     background: white;
@@ -99,9 +99,7 @@ body {
     font-size: 1.2rem;
 }
 
-/* ================================================
-   BARRA DE BÚSQUEDA Y CONTROLES
-   ================================================ */
+/* BARRA DE BÚSQUEDA Y CONTROLES */
 
 .controls-bar {
     display: flex;
@@ -173,9 +171,7 @@ body {
     color: #7296f7;
 }
 
-/* ================================================
-   STATS BAR
-   ================================================ */
+/* STATS BAR */
 
 .stats-bar {
     background: white;
@@ -228,9 +224,7 @@ body {
     font-weight: 500;
 }
 
-/* ================================================
-   GRID DE FACULTADES
-   ================================================ */
+/* GRID DE FACULTADES */
 
 .facultades-grid {
     display: grid;
@@ -301,9 +295,7 @@ body {
     line-height: 1.3;
 }
 
-/* ================================================
-   INFO ROWS
-   ================================================ */
+/* INFO ROWS */
 
 .info-row {
     display: flex;
@@ -353,9 +345,7 @@ body {
     word-break: break-word;
 }
 
-/* ================================================
-   BOTONES DE ACCIÓN
-   ================================================ */
+/* BOTONES DE ACCIÓN */
 
 .btn-action {
     border: none;
@@ -392,9 +382,7 @@ body {
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-/* ================================================
-   EMPTY STATE
-   ================================================ */
+/* EMPTY STATE */
 
 .empty-state {
     background: white;
@@ -425,9 +413,7 @@ body {
     font-size: 1.1rem;
 }
 
-/* ================================================
-   MODAL DE CONFIRMACIÓN DE ELIMINACIÓN
-   ================================================ */
+/* MODAL DE CONFIRMACIÓN DE ELIMINACIÓN */
 
 #modalEliminar .modal-content {
     border: none;
@@ -531,18 +517,14 @@ body {
     box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
 }
 
-/* ================================================
-   MODAL BACKDROP
-   ================================================ */
+/* MODAL BACKDROP */
 
 .modal-backdrop.show {
     opacity: 0.7;
     backdrop-filter: blur(8px);
 }
 
-/* ================================================
-   RESPONSIVE
-   ================================================ */
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .facultades-grid {
@@ -702,7 +684,8 @@ body {
     color: #475569;
 }
 
-/* Iconos */ 
+/* ICONOS */
+ 
 .business{
 	font-size: 38px;
 	color: #2d3748;
@@ -745,9 +728,8 @@ body {
 .trash{
 	font-size: 21px;
 }
-/* ================================================
-   BREADCRUMB
-   ================================================ */
+
+/* BREADCRUMB */
 
 .breadcrumb-nav {
     margin-bottom: 2rem;

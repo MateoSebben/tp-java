@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-/* ================================================
-   ESTILOS GLOBALES
-   ================================================ */
+/* ESTILOS GLOBALES */
 
 * {
     margin: 0;
@@ -23,9 +21,7 @@ body {
     padding: 2rem 1rem;
 }
 
-/* ================================================
-   BREADCRUMB
-   ================================================ */
+/* BREADCRUMB */
 
 .breadcrumb-nav {
     margin-bottom: 2rem;
@@ -96,9 +92,7 @@ body {
     margin: 0 0.75rem;
 }
 
-/* ================================================
-   HEADER DE PÁGINA
-   ================================================ */
+/* HEADER DE PAGINA */
 
 .page-header {
     background: white;
@@ -185,9 +179,7 @@ body {
     font-weight: 700;
 }
 
-/* ================================================
-   SECCIÓN DE ARCHIVOS (TABLA)
-   ================================================ */
+/* SECCIÓN DE ARCHIVOS (TABLA) */
 
 .files-section {
     background: white;
@@ -238,9 +230,7 @@ body {
     color: #334155;
 }
 
-/* ================================================
-   COLUMNA ARCHIVO
-   ================================================ */
+/* COLUMNA ARCHIVO */
 
 .file-info {
     display: flex;
@@ -288,9 +278,7 @@ body {
     margin-top: 0.15rem;
 }
 
-/* ================================================
-   BADGES (TIPO)
-   ================================================ */
+/* BADGES (TIPO) */
 
 .badge {
     padding: 0.4rem 0.9rem;
@@ -320,9 +308,7 @@ body {
 .badge-trabajo { background: #f3e5f5; color: #7b1fa2; }
 .badge-bibliografia { background: #fff9c4; color: #f57f17; }
 
-/* ================================================
-   COLUMNA TAMAÑO
-   ================================================ */
+/* COLUMNA TAMAÑO */
 
 .file-size {
     display: flex;
@@ -342,9 +328,7 @@ body {
     text-align: center;
 }
 
-/* ================================================
-   COLUMNA DESCRIPCIÓN
-   ================================================ */
+/* COLUMNA DESCRIPCIÓN */
 
 .description-cell {
     color: #475569;
@@ -358,9 +342,7 @@ body {
     -webkit-box-orient: vertical;
 }
 
-/* ================================================
-   COLUMNA MATERIA
-   ================================================ */
+/* COLUMNA MATERIA */
 
 .subject-cell {
     display: flex;
@@ -400,9 +382,7 @@ body {
     white-space: nowrap;
 }
 
-/* ================================================
-   COLUMNA FECHA
-   ================================================ */
+/* COLUMNA FECHA */
 
 .date-cell {
     display: flex;
@@ -418,9 +398,7 @@ body {
     color: #7296f7;
 }
 
-/* ================================================
-   COLUMNA ACCIONES
-   ================================================ */
+/* COLUMNA ACCIONES */
 
 .actions {
     display: flex;
@@ -467,9 +445,7 @@ body {
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-/* ================================================
-   ESTADO VACÍO
-   ================================================ */
+/* ESTADO VACÍO */
 
 .empty-state {
     padding: 5rem 2rem;
@@ -517,9 +493,7 @@ body {
     font-size: 1.3rem;
 }
 
-/* ================================================
-   MODAL DE ELIMINACIÓN
-   ================================================ */
+/* MODAL DE ELIMINACIÓN */
 
 .modal {
     display: none;
@@ -668,9 +642,7 @@ body {
     box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
 }
 
-/* ================================================
-   RESPONSIVE
-   ================================================ */
+/* RESPONSIVE */
 
 @media (max-width: 1200px) {
     .files-table thead th,
