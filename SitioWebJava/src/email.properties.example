@@ -1,0 +1,33 @@
+# ========================================
+# PLANTILLA DE CONFIGURACIÓN DE EMAIL
+# ========================================
+# 
+# INSTRUCCIONES:
+# 1. Copia este archivo y renómbralo a: email.properties
+# 2. Completa tus credenciales reales
+# 3. NO subas email.properties a Git (está en .gitignore)
+#
+# ========================================
+
+# Credenciales del email
+# Reemplaza con tu email de Gmail creado para la aplicación
+email.from=tu-email@gmail.com
+
+# Contraseña de aplicación generada en Gmail (16 caracteres)
+# NO uses tu contraseña normal de Gmail
+# Genera una en: https://myaccount.google.com/apppasswords
+email.password=abcd efgh ijkl mnop
+
+# Configuración SMTP de Gmail (no cambiar)
+email.smtp.host=smtp.gmail.com
+email.smtp.port=587
+
+# Información de la aplicación
+app.name=NoteLift
+app.support.email=tu-email@gmail.com
+
+# URL base de la aplicación
+# En desarrollo (local):
+app.base.url=http://localhost:8080/SitioWebJava
+# En producción, cambiar a tu dominio real:
+# app.base.url=https://tu-dominio.com

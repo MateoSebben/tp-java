@@ -1,6 +1,7 @@
-/* Estilos adicionales para login, upload y search */
+/* ESTILOS ADICIONALES PARA EL LOGIN, UPLOAD Y SEARCH */
 
-/* Login Styles */
+/* ESTILOS PARA EL LOGIN */
+
 .login-body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
@@ -146,7 +147,8 @@
   border: 1px solid #bbf7d0;
 }
 
-/* Upload Styles */
+/* ESTILOS PARA EL UPLOAD */
+
 .upload-container {
   max-width: 800px;
   margin: 0 auto;
@@ -232,7 +234,8 @@
   min-height: 80px;
 }
 
-/* File Upload Area */
+/* ESTILOS PARA EL FILE UPLOAD AREA */
+
 .file-upload-area {
   border: 2px dashed #d1d5db;
   border-radius: 8px;
@@ -296,7 +299,8 @@
   border-top: 1px solid #e5e7eb;
 }
 
-/* Search Styles */
+/* ESTILOS PARA EL SEARCH */
+
 .search-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -361,7 +365,8 @@
   font-size: 14px;
 }
 
-/* Results Styles */
+/* ESTILOS PARA LOS RESULTADOS */
+
 .results-section {
   background: white;
   border-radius: 8px;
@@ -487,14 +492,16 @@
   margin-bottom: 8px;
 }
 
-/* User Welcome */
+/* ESTILOS PARA EL USER WELCOME */
+
 .user-welcome {
   font-size: 14px;
   color: #6b7280;
   font-weight: 500;
 }
 
-/* Responsive adjustments */
+/* RESPONSIVE */
+
 @media (max-width: 768px) {
   .form-row {
     grid-template-columns: 1fr;

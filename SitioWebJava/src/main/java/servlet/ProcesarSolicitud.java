@@ -11,36 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.DataSolicitudMateria;
+import entities.SolicitudMateria;
 import entities.Usuario;
+import logic.EmailService;
 
 /**
  * Servlet implementation class ProcesarSolicitud
+ * Procesa la aprobación o rechazo de solicitudes de materia
+ * y envía notificaciones por email al usuario solicitante
  */
 @WebServlet({ "/ProcesarSolicitud", "/procesarSolicitud", "/procesarsolicitud", "/PROCESARSOLICITUD" })
 public class ProcesarSolicitud extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ProcesarSolicitud() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // No se usa GET
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// Configurar encoding y respuesta JSON
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        // Configurar encoding y respuesta JSON
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -82,19 +76,85 @@ public class ProcesarSolicitud extends HttpServlet {
             int idAdministrador = usuario.getId();
             
             DataSolicitudMateria dataSolicitud = new DataSolicitudMateria();
+            
+            // NUEVO: Obtener los datos de la solicitud ANTES de procesarla
+            SolicitudMateria solicitud = dataSolicitud.getSolicitudById(idSolicitud);
+            
+            if (solicitud == null) {
+                out.print("{\"success\": false, \"message\": \"Solicitud no encontrada\"}");
+                return;
+            }
+            
             boolean resultado = false;
             String mensaje = "";
+            boolean emailEnviado = false;
             
             if ("aprobar".equals(accion)) {
-                // APROBAR - Crea la materia y la asocia
+                // APROBAR - Crea la materia y la asocia (o rechaza si es duplicado)
                 resultado = dataSolicitud.aprobarSolicitud(idSolicitud, idAdministrador);
                 
                 if (resultado) {
-                    mensaje = "Materia aprobada y creada exitosamente";
-                    System.out.println("✅ Solicitud " + idSolicitud + " APROBADA por admin " + idAdministrador);
+                    // NUEVO: Verificar el estado final de la solicitud
+                    SolicitudMateria solicitudFinal = dataSolicitud.getSolicitudById(idSolicitud);
+                    
+                    if ("APROBADA".equals(solicitudFinal.getEstado())) {
+                        // La materia fue aprobada correctamente
+                        mensaje = "Materia aprobada y creada exitosamente";
+                        System.out.println("Solicitud " + idSolicitud + " APROBADA por admin " + idAdministrador);
+                        
+                        // Enviar email de aprobación
+                        try {
+                            emailEnviado = EmailService.enviarEmailAprobacion(
+                                solicitud.getEmailUsuarioSolicitante(),
+                                solicitud.getNombreUsuarioSolicitante(),
+                                solicitud.getNombreMateria(),
+                                solicitud.getNombreCarrera()
+                            );
+                            
+                            if (emailEnviado) {
+                                System.out.println("Email de aprobación enviado a: " + solicitud.getEmailUsuarioSolicitante());
+                            } else {
+                                System.out.println("No se pudo enviar el email de aprobación");
+                            }
+                        } catch (Exception e) {
+                            System.err.println("Error al enviar email de aprobación: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                        
+                    } else if ("RECHAZADA".equals(solicitudFinal.getEstado())) {
+                        // La materia fue rechazada automáticamente por duplicado
+                        mensaje = "La materia ya existía en el sistema y fue rechazada automáticamente";
+                        System.out.println("Solicitud " + idSolicitud + " rechazada automáticamente (duplicado)");
+                        
+                        // Enviar email de rechazo con el motivo del duplicado
+                        String motivoDuplicado = solicitudFinal.getMotivoRechazo();
+                        if (motivoDuplicado == null || motivoDuplicado.isEmpty()) {
+                            motivoDuplicado = "La materia ya existe en el sistema para esta carrera.";
+                        }
+                        
+                        try {
+                            emailEnviado = EmailService.enviarEmailRechazo(
+                                solicitud.getEmailUsuarioSolicitante(),
+                                solicitud.getNombreUsuarioSolicitante(),
+                                solicitud.getNombreMateria(),
+                                solicitud.getNombreCarrera(),
+                                motivoDuplicado
+                            );
+                            
+                            if (emailEnviado) {
+                                System.out.println("Email de rechazo enviado a: " + solicitud.getEmailUsuarioSolicitante());
+                            } else {
+                                System.out.println("No se pudo enviar el email de rechazo");
+                            }
+                        } catch (Exception e) {
+                            System.err.println("Error al enviar email de rechazo: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+                    
                 } else {
-                    mensaje = "Error al aprobar la solicitud";
-                    System.out.println("❌ Error al aprobar solicitud " + idSolicitud);
+                    mensaje = "Error al procesar la solicitud";
+                    System.out.println("Error al procesar solicitud " + idSolicitud);
                 }
                 
             } else if ("rechazar".equals(accion)) {
@@ -108,7 +168,28 @@ public class ProcesarSolicitud extends HttpServlet {
                 
                 if (resultado) {
                     mensaje = "Solicitud rechazada correctamente";
-                    System.out.println("❌ Solicitud " + idSolicitud + " RECHAZADA por admin " + idAdministrador);
+                    System.out.println("Solicitud " + idSolicitud + " RECHAZADA por admin " + idAdministrador);
+                    
+                    // NUEVO: Enviar email de rechazo
+                    try {
+                        emailEnviado = EmailService.enviarEmailRechazo(
+                            solicitud.getEmailUsuarioSolicitante(),
+                            solicitud.getNombreUsuarioSolicitante(),
+                            solicitud.getNombreMateria(),
+                            solicitud.getNombreCarrera(),
+                            motivoRechazo
+                        );
+                        
+                        if (emailEnviado) {
+                            System.out.println("Email de rechazo enviado a: " + solicitud.getEmailUsuarioSolicitante());
+                        } else {
+                            System.out.println("No se pudo enviar el email de rechazo");
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error al enviar email de rechazo: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                    
                 } else {
                     mensaje = "Error al rechazar la solicitud";
                 }
@@ -116,7 +197,14 @@ public class ProcesarSolicitud extends HttpServlet {
             
             // Respuesta
             if (resultado) {
-                out.print("{\"success\": true, \"message\": \"" + mensaje + "\"}");
+                // Agregar información sobre el email en la respuesta
+                String mensajeFinal = mensaje;
+                if (emailEnviado) {
+                    mensajeFinal += ". Notificación enviada al usuario.";
+                } else {
+                    mensajeFinal += ". Advertencia: No se pudo enviar la notificación por email.";
+                }
+                out.print("{\"success\": true, \"message\": \"" + mensajeFinal + "\", \"emailEnviado\": " + emailEnviado + "}");
             } else {
                 out.print("{\"success\": false, \"message\": \"" + mensaje + "\"}");
             }
@@ -131,6 +219,4 @@ public class ProcesarSolicitud extends HttpServlet {
             out.flush();
         }
     }
-	}
-
-
+}

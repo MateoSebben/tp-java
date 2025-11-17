@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* ESTILOS GLOBALES */ 
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +16,7 @@ body {
     overflow-x: hidden;
 }
 
-/*  Header y Navegación */
+/*  HEADER Y NAVEGACION */
 
 header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -109,13 +111,13 @@ nav {
     box-shadow: 0 6px 20px rgba(255,255,255,0.4);
 }
 
-/* Contenido Principal */
+/* CONTENIDO PRINCIPAL */
 
 main {
     margin-top: 85px;
 }
 
-/* Sección hero */
+/* SECCION HERO */
 
 .hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -196,7 +198,7 @@ main {
     display: none;
 }
 
-/*  Section Header */
+/*  SECCION HEADER */
 
 .section-header {
     text-align: center;
@@ -217,7 +219,7 @@ main {
     margin: 0 auto;
 }
 
-/* Sección de Características */
+/* SECCION DE CARACTERISTICAS */
 
 .features {
     padding: 5rem 2rem;
@@ -283,7 +285,7 @@ main {
     font-size: 1rem;
 }
 
-/* Sección de Beneficios */
+/* SECCION DE BENEFICIOS */
 
 .benefits {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
@@ -354,7 +356,7 @@ main {
     line-height: 1.6;
 }
 
-/* Sección de Estadísticas */
+/* SECCION DE ESTADISTICAS */
 
 .stats {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -395,7 +397,7 @@ main {
     font-weight: 500;
 }
 
-/* Call to Action */
+/* CALL TO ACTION */
 
 .cta {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -436,7 +438,7 @@ main {
     margin-right: auto;
 }
 
-/*  Footer */
+/* FOOTER */
 
 footer {
     background: #1e293b;
@@ -468,7 +470,7 @@ footer p {
     margin: 0.5rem 0;
 }
 
-/* Responsive */
+/* RESPONSIVE */
 
 @media (max-width: 992px) {
     .hero h1 {

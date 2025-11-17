@@ -1,3 +1,16 @@
+# ARCHIVOS SENSIBLES - NO SUBIR NUNCA
+# IMPORTANTE: Contienen credenciales de email
+# Archivo de configuración de email con credenciales reales
+email.properties
+**/email.properties
+src/email.properties
+src/main/resources/email.properties
+WebContent/WEB-INF/classes/email.properties
+
+# Otros archivos sensibles
+*credentials*.properties
+*password*.properties
+*.secret
 # Archivos de Eclipse 
 .metadata/
 *.log

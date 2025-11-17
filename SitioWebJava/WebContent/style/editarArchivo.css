@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-/* ================================================
-   ESTILOS GLOBALES
-   ================================================ */
+/* ESTILOS GLOBALES */
 
 * {
     margin: 0;
@@ -23,9 +21,7 @@ body {
     padding: 0 1rem;
 }
 
-/* ================================================
-   BREADCRUMB
-   ================================================ */
+/* BREADCRUMB */
 
 .breadcrumb-nav {
     margin-bottom: 1.5rem;
@@ -96,9 +92,7 @@ body {
     margin: 0 0.75rem;
 }
 
-/* ================================================
-   CONTENEDOR DEL FORMULARIO
-   ================================================ */
+/* CONTENEDOR DEL FORMULARIO */
 
 .edit-form-container {
     background: white;
@@ -119,9 +113,7 @@ body {
     }
 }
 
-/* ================================================
-   HEADER DEL FORMULARIO
-   ================================================ */
+/* HEADER DEL FORMULARIO*/
 
 .form-header {
     background: linear-gradient(135deg, #7296f7 0%, #667eea 100%);
@@ -179,9 +171,7 @@ body {
     font-size: 1.05rem;
 }
 
-/* ================================================
-   ALERTAS
-   ================================================ */
+/* ALERTAS */
 
 .alert {
     padding: 1rem 1.5rem;
@@ -207,9 +197,7 @@ body {
     color: #dc2626;
 }
 
-/* ================================================
-   INFORMACIÓN DEL ARCHIVO
-   ================================================ */
+/* INFORMACIÓN DEL ARCHIVO */
 
 .file-info-display {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
@@ -254,9 +242,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* ================================================
-   FORMULARIO
-   ================================================ */
+/* FORMULARIO */
 
 form {
     padding: 0 2rem 2rem 2rem;
@@ -329,9 +315,7 @@ select.form-control:disabled {
     background-image: none; 
 }
 
-/* ================================================
-   FILA DE FORMULARIO (PARA FACULTAD Y CARRERA)
-   ================================================ */
+/* FILA DE FORMULARIO (PARA FACULTAD Y CARRERA) */
 
 .form-row {
     display: grid;
@@ -340,9 +324,7 @@ select.form-control:disabled {
     margin-bottom: 1.5rem;
 }
 
-/* ================================================
-   LOADING INDICATOR
-   ================================================ */
+/* LOADING INDICATOR */
 
 .loading-indicator {
     display: block;
@@ -359,9 +341,7 @@ select.form-control:disabled {
     display: none !important;
 }
 
-/* ================================================
-   ACCIONES DEL FORMULARIO
-   ================================================ */
+/* ACCIONES DEL FORMULARIO */
 
 .form-actions {
     display: flex;
@@ -417,9 +397,7 @@ select.form-control:disabled {
     font-size: 1.3rem;
 }
 
-/* ================================================
-   RESPONSIVE
-   ================================================ */
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
     body {

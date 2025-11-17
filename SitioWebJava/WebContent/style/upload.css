@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* ESTILOS GLOBALES */ 
+
 body{
 	background: linear-gradient(220deg, #7296f7 0%, #e7ffff 100%);
 }
@@ -75,9 +77,7 @@ body{
     font-size: 0.875rem;
 }
 
-/* ================================================
-   INFORMACIÓN DEL ARCHIVO SELECCIONADO
-   ================================================ */
+/* INFORMACIÓN DEL ARCHIVO SELECCIONADO */
 
 #file-info {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -151,7 +151,6 @@ body{
     color: #d1d5db;
 }
 
-/* Botón para cambiar archivo */
 .btn-change-file {
     position: absolute;
     top: 1rem;
@@ -178,9 +177,7 @@ body{
     box-shadow: 0 4px 12px rgba(114, 150, 247, 0.3);
 }
 
-/* ================================================
-   ESTILOS PARA TAGS
-   ================================================ */
+/* ESTILOS PARA TAGS */
 
 .tag-input {
     border: 2px solid #e5e7eb;
@@ -239,9 +236,7 @@ body{
     transform: scale(1.2);
 }
 
-/* ================================================
-   BREADCRUMB
-   ================================================ */
+/* BREADCRUMB */
 
 .breadcrumb-nav {
     margin-bottom: 2rem;
@@ -312,9 +307,7 @@ body{
     margin: 0 0.75rem;
 }
 
-/* ================================================
-   MODAL - ESTILOS MEJORADOS
-   ================================================ */
+/* MODAL - ESTILOS MEJORADOS */
 
 .modal-content {
     border: none;
@@ -412,7 +405,6 @@ body{
     line-height: 1.5;
 }
 
-/* Labels con barra decorativa solo en modal */
 .modal-body .form-label {
     font-weight: 600;
     color: #2c3e50;
@@ -432,7 +424,6 @@ body{
     border-radius: 2px;
 }
 
-/* Inputs mejorados solo dentro del modal */
 .modal-body .form-control {
     border: 2px solid #e0e7ff;
     border-radius: 12px;
@@ -470,7 +461,6 @@ body{
     gap: 0.75rem;
 }
 
-/* Botones del modal - específicos */
 .modal-footer .btn {
     padding: 0.75rem 1.5rem;
     border-radius: 12px;
@@ -511,11 +501,8 @@ body{
     box-shadow: none;
 }
 
-/* ================================================
-   BOTONES DEL FORMULARIO PRINCIPAL
-   ================================================ */
+/* BOTONES DEL FORMULARIO PRINCIPAL */
 
-/* Botón Limpiar (btn-danger) */
 .btn-danger {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
@@ -533,7 +520,6 @@ body{
     box-shadow: 0 6px 18px rgba(220, 53, 69, 0.4);
 }
 
-/* Botón Subir Material (btn-primary del formulario) */
 form .btn-primary {
     background: linear-gradient(135deg, #7296f7 0%, #667eea 100%);
     color: white;
@@ -554,7 +540,6 @@ form .btn-primary:hover {
     box-shadow: 0 6px 18px rgba(114, 150, 247, 0.4);
 }
 
-/* Botón outline primary (botón +) */
 .btn-outline-primary {
     border: 2px solid #7296f7;
     color: #7296f7;
@@ -578,9 +563,7 @@ form .btn-primary:hover {
     cursor: not-allowed;
 }
 
-/* ================================================
-   MENSAJES DE ALERTA
-   ================================================ */
+/* MENSAJES DE ALERTA */
 
 .alert {
     border: none;
@@ -613,13 +596,13 @@ form .btn-primary:hover {
     border-left: 4px solid #dc3545;
 }
 
-/* Backdrop personalizado */
 .modal-backdrop.show {
     opacity: 0.7;
     backdrop-filter: blur(8px);
 }
 
-/* Iconos */
+/* ICONOS */
+
 .info-circle{
 	color: #1976d2;
 	font-size: 30px !important;

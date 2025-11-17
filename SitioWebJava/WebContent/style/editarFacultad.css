@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-/* ================================================
-   ESTILOS GLOBALES
-   ================================================ */
+/* ESTILOS GLOBALES */
 
 * {
     margin: 0;
@@ -23,9 +21,7 @@ body {
     padding: 0 1rem;
 }
 
-/* ================================================
-   BREADCRUMB
-   ================================================ */
+/* BREADCRUMB */
 
 .breadcrumb-nav {
     margin-bottom: 1.5rem;
@@ -86,9 +82,7 @@ body {
     font-size: 1.2rem;
 }
 
-/* ================================================
-   CARD PRINCIPAL
-   ================================================ */
+/* CARD PRINCIPAL */
 
 .form-card {
     background: white;
@@ -105,9 +99,7 @@ body {
     transform: translateY(0);
 }
 
-/* ================================================
-   HEADER DEL CARD
-   ================================================ */
+/* HEADER DEL CARD */
 
 .card-header-custom {
     background: linear-gradient(135deg, #7296f7 0%, #667eea 100%);
@@ -167,9 +159,7 @@ body {
     font-size: 1.05rem;
 }
 
-/* ================================================
-   ALERT INFO
-   ================================================ */
+/* ALERT INFO */
 
 .info-alert {
     background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
@@ -200,9 +190,7 @@ body {
     margin-top: 0.5rem;
 }
 
-/* ================================================
-   SECCIONES DEL FORMULARIO
-   ================================================ */
+/* SECCIONES DEL FORMULARIO */
 
 .form-section {
     padding: 2rem;
@@ -228,9 +216,7 @@ body {
     font-size: 1.5rem;
 }
 
-/* ================================================
-   FORM GROUPS
-   ================================================ */
+/* FORM GROUPS */
 
 .form-group {
     margin-bottom: 1.5rem;
@@ -287,9 +273,7 @@ body {
     gap: 0.25rem;
 }
 
-/* ================================================
-   INFO BOX
-   ================================================ */
+/* INFO BOX */
 
 .info-box {
     padding: 2rem;
@@ -337,9 +321,7 @@ body {
     font-weight: 600;
 }
 
-/* ================================================
-   BOTONES DE ACCIÓN
-   ================================================ */
+/* BOTONES DE ACCIÓN */
 
 .form-actions {
     padding: 2rem;
@@ -392,9 +374,7 @@ body {
     box-shadow: 0 6px 20px rgba(114, 150, 247, 0.5);
 }
 
-/* ================================================
-   RESPONSIVE
-   ================================================ */
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
     body {

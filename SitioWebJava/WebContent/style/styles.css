@@ -1,4 +1,7 @@
-/* Contenido Principal */
+@charset "UTF-8";
+
+/* ESTILOS GLOBALES */
+
 * {
   margin: 0;
   padding: 0;
@@ -12,13 +15,15 @@ body {
   line-height: 1.6;
 }
 
-/* Container principal */
+/* CONTAINER PRINCIPAL */
+
 .app-container {
   display: flex;
   height: 100vh;
 }
 
-/* Sidebar */
+/* SIDEBAR */
+
 .sidebar {
   width: 256px;
   background-color: white;
@@ -32,13 +37,11 @@ body {
   width: 85px;
 }
 
-/* Sidebar colapsada - ocultar textos */
 .sidebar.collapsed .logo-text,
 .sidebar.collapsed .nav-text {
   display: none !important;
 }
 
-/* Sidebar colapsada - centrar íconos */
 .sidebar.collapsed .nav-item,
 .sidebar.collapsed .nav-section-header {
   justify-content: center;
@@ -46,18 +49,15 @@ body {
   padding-right: 12px;
 }
 
-/* Ajustar header cuando está colapsada */
 .sidebar.collapsed .sidebar-header {
   justify-content: center;
   padding: 16px 8px;
 }
 
-/* Logo centrado cuando colapsada */
 .sidebar.collapsed .logo {
   justify-content: center;
 }
 
-/* Tooltip para mostrar texto en hover cuando está colapsada */
 .sidebar.collapsed .nav-item {
   position: relative;
 }
@@ -113,7 +113,8 @@ body {
   background-color: #f3f4f6;
 }
 
-/* Navegación */
+/* NAVEGACION */
+
 .sidebar-nav {
   flex: 1;
   padding: 8px;
@@ -144,7 +145,6 @@ body {
   font-size: 14px;
 }
 
-/* Secciones del menú */
 .nav-section {
   margin-bottom: 4px;
 }
@@ -189,7 +189,8 @@ body {
   max-height: 0;
 }
 
-/* Contenido principal */
+/* CONTENIDO PRINCIPAL */
+
 .main-content {
   flex: 1;
   display: flex;
@@ -217,7 +218,8 @@ body {
   gap: 16px;
 }
 
-/* Botones */
+/* BOTONES */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -256,7 +258,8 @@ body {
   font-size: 16px;
 }
 
-/* Contenido */
+/* CONTENT */
+
 .content {
   flex: 1;
   padding: 24px;
@@ -271,7 +274,6 @@ body {
   gap: 32px;
 }
 
-/* Sección de bienvenida */
 .welcome-hero {
   text-align: center;
   display: flex;
@@ -310,14 +312,14 @@ body {
 	color:black;
 }
 
-/* Grid de características */
+/* GRID DE CARACTERISTICAS */
+
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
 
-/* Wrapper para hacer clickeable toda la card */
 .feature-card-link {
   text-decoration: none;
   color: inherit;
@@ -335,7 +337,8 @@ body {
   height: 100%;
 }
 
-/* Efecto hover para las cards */
+/* EFECTO DE HOVER PARA LAS CARDS */
+
 .feature-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
@@ -385,7 +388,8 @@ body {
   line-height: 1.6;
 }
 
-/* Tarjeta de información */
+/* CARDS DE INFORMACION */
+
 .info-card {
   background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
   border: 1px solid #c7d2fe;
@@ -465,7 +469,8 @@ body {
   transform: scale(1.3);
 }
 
-/* Call to action */
+/* CALL TO ACTION */
+
 .cta-section {
   background-color: white;
   padding: 32px;
@@ -512,7 +517,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* Efecto adicional para los botones dentro del CTA */
 .cta-section:hover .btn {
   transform: scale(1.05);
 }
@@ -521,7 +525,8 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Responsive */
+/* RESPONSIVE */
+
 @media (max-width: 768px) {
   .sidebar {
     width: 64px;
@@ -556,7 +561,8 @@ body {
   }
 }
 
-/* Modal de cierre de sesión */
+/* MODAL DE CIERRE DE SESION */
+
 #modalCerrarSesion .modal-content {
 	border: none;
 	border-radius: 20px;
@@ -576,7 +582,6 @@ body {
 				}
 }
 
-/* Header con advertencia */
 #modalCerrarSesion .modal-header {
 	background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
 	padding: 2rem;
@@ -601,7 +606,6 @@ body {
 	border-radius: 50%;
 }
 
-/* Icono de advertencia */
 .logout-icon {
 	width: 70px;
 	height: 70px;
@@ -657,7 +661,6 @@ body {
 	transform: rotate(90deg);
 }
 
-/* Body del modal */
 #modalCerrarSesion .modal-body {
 	padding: 2rem;
 	background: #ffffff;
@@ -708,7 +711,6 @@ body {
 	font-family: cursive;
 }
 
-/* Footer mejorado */
 #modalCerrarSesion .modal-footer {
 	border: none;
 	padding: 1.5rem 2rem 2rem;
@@ -717,7 +719,6 @@ body {
 	justify-content: center;
 }
 
-/* Botones mejorados */
 #modalCerrarSesion .btn {
 	padding: 0.75rem 2rem;
 	border-radius: 12px;
@@ -755,13 +756,13 @@ body {
 	box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
 }
 
-/* Backdrop personalizado */
 .modal-backdrop.show {
 	opacity: 0.7;
 	backdrop-filter: blur(8px);
 }
 
-/* Iconos */
+/* ICONOS */
+
 ion-icon {
    color: black;
 }
@@ -789,12 +790,12 @@ ion-icon {
     color: white;  
 }
 
-/* Estilos adicionales para nav-text */
+/* ESTILOS PARA EL NAV TEXT */
+
 .nav-text {
     font-weight: 500;
 }
 
-/* Asegurar que los subitems tengan el estilo correcto */
 .nav-subitem {
     display: flex;
     align-items: center;
@@ -818,4 +819,41 @@ ion-icon {
     font-size: 16px;
     width: 16px;
     text-align: center;
+}
+
+/* BADGE CONTADOR DE SOLICITUDES */
+
+.btn-solicitudes {
+    position: relative;
+}
+
+.badge-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 11px;
+    margin-left: 8px;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    animation: pulseNotification 2s ease-in-out infinite;
+}
+
+.btn-solicitudes:hover .badge-count {
+    animation: none;
+    transform: scale(1.15);
+}
+
+@media (max-width: 768px) {
+    .badge-count {
+        min-width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+        margin-left: 6px;
+    }
 }
