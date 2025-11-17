@@ -1,10 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.LinkedList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Set" %>
 <%@ page import="entities.Archivo" %>
 <%@ page import="entities.Carrera" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    
+    // Obtener listas de filtros
+    Set<String> tiposUnicos = (Set<String>) request.getAttribute("tiposUnicos");
+    Set<String> materiasUnicas = (Set<String>) request.getAttribute("materiasUnicas");
+    Set<String> carrerasUnicas = (Set<String>) request.getAttribute("carrerasUnicas");
+    Set<String> extensionesUnicas = (Set<String>) request.getAttribute("extensionesUnicas");
+    
+    // Obtener filtros actuales
+    String filtroTipo = (String) request.getAttribute("filtroTipo");
+    String filtroMateria = (String) request.getAttribute("filtroMateria");
+    String filtroCarrera = (String) request.getAttribute("filtroCarrera");
+    String filtroExtension = (String) request.getAttribute("filtroExtension");
+    String filtroFechaDesde = (String) request.getAttribute("filtroFechaDesde");
+    String filtroFechaHasta = (String) request.getAttribute("filtroFechaHasta");
+    String filtroBusqueda = (String) request.getAttribute("filtroBusqueda");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +34,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3197/3197967.png">
-    <link rel="stylesheet" href="style/filelist.css"> 
+    <link rel="stylesheet" href="style/filelist.css">
 </head>
 <body>
 <main class="main-content">
@@ -51,7 +67,7 @@
             </div>
             
             <%
-                LinkedList<Archivo> archivos = (LinkedList<Archivo>) request.getAttribute("archivos");
+                List<Archivo> archivos = (List<Archivo>) request.getAttribute("archivos");
                 int totalArchivos = (archivos != null) ? archivos.size() : 0;
             %>
             
@@ -61,11 +77,214 @@
             </div>
         </div>
 
-        <!-- Vista Toggle  -->
+        <!-- Sistema de Filtros -->
+        <div class="filters-container">
+            <div class="filters-header">
+                <div class="filters-title">
+                    <ion-icon name="options-outline"></ion-icon>
+                    Filtros de Búsqueda
+                </div>
+                <button class="filters-toggle" onclick="toggleFilters()">
+                    <ion-icon name="funnel-outline"></ion-icon>
+                    <span id="toggleText">Ocultar</span>
+                </button>
+            </div>
+            
+            <form id="filterForm" method="get" action="ListaArchivos">
+                <div id="filtersContent">
+                    <div class="filters-grid">
+                        <!-- Filtro por Tipo de Archivo -->
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <ion-icon name="document-outline"></ion-icon>
+                                Tipo de Material
+                            </label>
+                            <select name="tipoArchivo" class="filter-select">
+                                <option value="todos" <%= (filtroTipo == null || filtroTipo.equals("todos")) ? "selected" : "" %>>Todos los tipos</option>
+                                <%
+                                    if (tiposUnicos != null) {
+                                        for (String tipo : tiposUnicos) {
+                                %>
+                                <option value="<%= tipo %>" <%= (filtroTipo != null && filtroTipo.equals(tipo)) ? "selected" : "" %>><%= tipo %></option>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        
+                        <!-- Filtro por Materia -->
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <ion-icon name="book-outline"></ion-icon>
+                                Materia
+                            </label>
+                            <select name="materia" class="filter-select">
+                                <option value="todas" <%= (filtroMateria == null || filtroMateria.equals("todas")) ? "selected" : "" %>>Todas las materias</option>
+                                <%
+                                    if (materiasUnicas != null) {
+                                        for (String materia : materiasUnicas) {
+                                %>
+                                <option value="<%= materia %>" <%= (filtroMateria != null && filtroMateria.equals(materia)) ? "selected" : "" %>><%= materia %></option>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        
+                        <!-- Filtro por Carrera -->
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <ion-icon name="school-outline"></ion-icon>
+                                Carrera
+                            </label>
+                            <select name="carrera" class="filter-select">
+                                <option value="todas" <%= (filtroCarrera == null || filtroCarrera.equals("todas")) ? "selected" : "" %>>Todas las carreras</option>
+                                <%
+                                    if (carrerasUnicas != null) {
+                                        for (String carrera : carrerasUnicas) {
+                                %>
+                                <option value="<%= carrera %>" <%= (filtroCarrera != null && filtroCarrera.equals(carrera)) ? "selected" : "" %>><%= carrera %></option>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        
+                        <!-- Filtro por Extensión -->
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <ion-icon name="code-outline"></ion-icon>
+                                Formato
+                            </label>
+                            <select name="extension" class="filter-select">
+                                <option value="todas" <%= (filtroExtension == null || filtroExtension.equals("todas")) ? "selected" : "" %>>Todos los formatos</option>
+                                <%
+                                    if (extensionesUnicas != null) {
+                                        for (String ext : extensionesUnicas) {
+                                %>
+                                <option value="<%= ext %>" <%= (filtroExtension != null && filtroExtension.equalsIgnoreCase(ext)) ? "selected" : "" %>><%= ext %></option>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        
+                        <!-- Filtro por Fecha Desde -->
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <ion-icon name="calendar-outline"></ion-icon>
+                                Desde
+                            </label>
+                            <input type="date" name="fechaDesde" class="filter-input" 
+                                   value="<%= filtroFechaDesde != null ? filtroFechaDesde : "" %>">
+                        </div>
+                        
+                        <!-- Filtro por Fecha Hasta -->
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <ion-icon name="calendar-outline"></ion-icon>
+                                Hasta
+                            </label>
+                            <input type="date" name="fechaHasta" class="filter-input"
+                                   value="<%= filtroFechaHasta != null ? filtroFechaHasta : "" %>">
+                        </div>
+                    </div>
+                    
+                    <!-- Acciones de filtro -->
+                    <div class="filter-actions">
+                        <button type="button" class="btn-filter btn-clear" onclick="limpiarFiltros()">
+                            <ion-icon name="close-circle-outline"></ion-icon>
+                            Limpiar Filtros
+                        </button>
+                        <button type="submit" class="btn-filter btn-apply">
+                            <ion-icon name="checkmark-circle-outline"></ion-icon>
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Campo de búsqueda oculto para mantener el valor -->
+                <input type="hidden" name="busqueda" id="hiddenBusqueda" value="<%= filtroBusqueda != null ? filtroBusqueda : "" %>">
+            </form>
+            
+            <!-- Filtros activos -->
+            <%
+                boolean hayFiltrosActivos = false;
+                if ((filtroTipo != null && !filtroTipo.equals("todos")) ||
+                    (filtroMateria != null && !filtroMateria.equals("todas")) ||
+                    (filtroCarrera != null && !filtroCarrera.equals("todas")) ||
+                    (filtroExtension != null && !filtroExtension.equals("todas")) ||
+                    (filtroFechaDesde != null && !filtroFechaDesde.isEmpty()) ||
+                    (filtroFechaHasta != null && !filtroFechaHasta.isEmpty()) ||
+                    (filtroBusqueda != null && !filtroBusqueda.isEmpty())) {
+                    hayFiltrosActivos = true;
+                }
+                
+                if (hayFiltrosActivos) {
+            %>
+            <div class="active-filters">
+                <% if (filtroTipo != null && !filtroTipo.equals("todos")) { %>
+                <span class="filter-chip">
+                    Tipo: <%= filtroTipo %>
+                    <ion-icon name="close-circle" onclick="removeFilter('tipoArchivo')"></ion-icon>
+                </span>
+                <% } %>
+                
+                <% if (filtroMateria != null && !filtroMateria.equals("todas")) { %>
+                <span class="filter-chip">
+                    Materia: <%= filtroMateria %>
+                    <ion-icon name="close-circle" onclick="removeFilter('materia')"></ion-icon>
+                </span>
+                <% } %>
+                
+                <% if (filtroCarrera != null && !filtroCarrera.equals("todas")) { %>
+                <span class="filter-chip">
+                    Carrera: <%= filtroCarrera %>
+                    <ion-icon name="close-circle" onclick="removeFilter('carrera')"></ion-icon>
+                </span>
+                <% } %>
+                
+                <% if (filtroExtension != null && !filtroExtension.equals("todas")) { %>
+                <span class="filter-chip">
+                    Formato: <%= filtroExtension %>
+                    <ion-icon name="close-circle" onclick="removeFilter('extension')"></ion-icon>
+                </span>
+                <% } %>
+                
+                <% if (filtroFechaDesde != null && !filtroFechaDesde.isEmpty()) { %>
+                <span class="filter-chip">
+                    Desde: <%= filtroFechaDesde %>
+                    <ion-icon name="close-circle" onclick="removeFilter('fechaDesde')"></ion-icon>
+                </span>
+                <% } %>
+                
+                <% if (filtroFechaHasta != null && !filtroFechaHasta.isEmpty()) { %>
+                <span class="filter-chip">
+                    Hasta: <%= filtroFechaHasta %>
+                    <ion-icon name="close-circle" onclick="removeFilter('fechaHasta')"></ion-icon>
+                </span>
+                <% } %>
+                
+                <% if (filtroBusqueda != null && !filtroBusqueda.isEmpty()) { %>
+                <span class="filter-chip">
+                    Búsqueda: "<%= filtroBusqueda %>"
+                    <ion-icon name="close-circle" onclick="removeFilter('busqueda')"></ion-icon>
+                </span>
+                <% } %>
+            </div>
+            <% } %>
+        </div>
+
+        <!-- Barra de búsqueda y ordenamiento -->
         <div class="view-controls">
             <div class="search-box">
                 <ion-icon name="search-outline"></ion-icon>
-                <input type="text" id="searchFiles" placeholder="Buscar archivos...">
+                <input type="text" id="searchFiles" placeholder="Buscar archivos..." 
+                       value="<%= filtroBusqueda != null ? filtroBusqueda : "" %>">
             </div>
             <div class="sort-options">
                 <label>Ordenar por:</label>
@@ -211,7 +430,7 @@
                     <ion-icon name="folder-open-outline"></ion-icon>
                 </div>
                 <h3>No se encontraron archivos</h3>
-                <p>Aún no hay material disponible en esta sección.</p>
+                <p>Intenta ajustar los filtros de búsqueda para encontrar más resultados.</p>
             </div>
             
             <% } %>
@@ -224,20 +443,51 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <script>
-    
-    // Búsqueda en tiempo real
-    document.getElementById('searchFiles').addEventListener('input', function(e) {
-        const searchTerm = e.target.value.toLowerCase();
-        const cards = document.querySelectorAll('.file-card');
+    // Toggle de filtros
+    function toggleFilters() {
+        const content = document.getElementById('filtersContent');
+        const toggleText = document.getElementById('toggleText');
         
-        cards.forEach(card => {
-            const text = card.textContent.toLowerCase();
-            if (text.includes(searchTerm)) {
-                card.style.display = 'block';
+        if (content.classList.contains('filters-collapsed')) {
+            content.classList.remove('filters-collapsed');
+            toggleText.textContent = 'Ocultar';
+        } else {
+            content.classList.add('filters-collapsed');
+            toggleText.textContent = 'Mostrar';
+        }
+    }
+    
+    // Limpiar todos los filtros
+    function limpiarFiltros() {
+        window.location.href = 'ListaArchivos';
+    }
+    
+    // Remover un filtro específico
+    function removeFilter(filterName) {
+        const form = document.getElementById('filterForm');
+        const input = form.querySelector(`[name="${filterName}"]`);
+        
+        if (input.tagName === 'SELECT') {
+            if (filterName === 'tipoArchivo' || filterName === 'extension') {
+                input.value = 'todos';
             } else {
-                card.style.display = 'none';
+                input.value = 'todas';
             }
-        });
+        } else {
+            input.value = '';
+        }
+        
+        form.submit();
+    }
+    
+    // Búsqueda en tiempo real con actualización del formulario
+    document.getElementById('searchFiles').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const searchTerm = this.value;
+            document.getElementById('hiddenBusqueda').value = searchTerm;
+            document.getElementById('filterForm').submit();
+        }
     });
 
     // Efecto de acento de color en hover
@@ -249,6 +499,31 @@
         card.addEventListener('mouseleave', function() {
             this.style.borderTopColor = 'transparent';
         });
+    });
+    
+    // Ordenamiento local
+    document.getElementById('sortBy').addEventListener('change', function() {
+        const sortValue = this.value;
+        const grid = document.querySelector('.files-grid');
+        const cards = Array.from(document.querySelectorAll('.file-card'));
+        
+        cards.sort((a, b) => {
+            if (sortValue === 'name') {
+                const nameA = a.querySelector('.file-title h3').textContent.toLowerCase();
+                const nameB = b.querySelector('.file-title h3').textContent.toLowerCase();
+                return nameA.localeCompare(nameB);
+            } else if (sortValue === 'size') {
+                const sizeA = parseFloat(a.querySelector('.file-size').textContent);
+                const sizeB = parseFloat(b.querySelector('.file-size').textContent);
+                return sizeB - sizeA;
+            } else { // recent
+                const dateA = a.querySelector('.upload-date').textContent.trim();
+                const dateB = b.querySelector('.upload-date').textContent.trim();
+                return dateB.localeCompare(dateA);
+            }
+        });
+        
+        cards.forEach(card => grid.appendChild(card));
     });
 </script>
 </body>
