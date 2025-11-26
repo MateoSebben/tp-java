@@ -360,16 +360,22 @@
                     <span class="file-ext">.<%= archivo.getExtension() %></span>
                 </div>
 
-                <!-- Tipo y tamaño -->
-                <div class="file-meta">
-                    <span class="badge badge-<%= archivo.getTipoArchivo().toLowerCase().replace(" ", "-") %>">
-                        <%= archivo.getTipoArchivo() %>
-                    </span>
-                    <span class="file-size">
-                        <ion-icon name="cloud-outline"></ion-icon>
-                        <%= String.format("%.2f", archivo.getPeso()) %> MB
-                    </span>
-                </div>
+                <!-- Tipo, tamaño y año -->
+				<div class="file-meta">
+    				<span class="badge badge-<%= archivo.getTipoArchivo().toLowerCase().replace(" ", "-") %>">
+        				<%= archivo.getTipoArchivo() %>
+    				</span>
+    				<span class="file-size">
+        				<ion-icon name="cloud-outline"></ion-icon>
+        				<%= String.format("%.2f", archivo.getPeso()) %> MB
+    				</span>
+    					<% if (archivo.getAnioCursada() != null) { %>
+    				<span class="year-badge">
+        				<ion-icon name="calendar-outline"></ion-icon>
+        				Año de cursada <%= archivo.getAnioCursada() %>
+    				</span>
+    					<% } %>
+				</div>
 
                 <!-- Descripción -->
                 <div class="file-description">

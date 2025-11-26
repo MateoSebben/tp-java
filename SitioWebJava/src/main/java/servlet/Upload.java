@@ -85,7 +85,7 @@ public class Upload extends HttpServlet {
             int idFacultad = Integer.parseInt(request.getParameter("idFacultad"));
             int idCarrera = Integer.parseInt(request.getParameter("idCarrera"));
             int idMateria = Integer.parseInt(request.getParameter("idMateria")); 
-            String añoCursada = request.getParameter("año");
+            String anioCursada = request.getParameter("anioCursada");
             String tipoMaterial = request.getParameter("tipoMaterial");
             String titulo = request.getParameter("titulo");
             String descripcion = request.getParameter("descripcion");
@@ -109,7 +109,7 @@ public class Upload extends HttpServlet {
             System.out.println("Facultad ID: " + idFacultad);
             System.out.println("Carrera ID: " + idCarrera);
             System.out.println("Materia ID: " + idMateria);
-            System.out.println("Año de cursada: " + añoCursada);
+            System.out.println("Año de cursada: " + anioCursada);
             System.out.println("Tipo de material: " + tipoMaterial);
             System.out.println("Título: " + titulo);
             System.out.println("Descripción: " + descripcion);
@@ -130,6 +130,18 @@ public class Upload extends HttpServlet {
             nuevoArchivo.setEsFisico(true);
             nuevoArchivo.setFechaSubida(new Timestamp(System.currentTimeMillis()));
             nuevoArchivo.setNombreFisico(storedFileName);
+            
+            // Guardar ID de la carrera específica
+            nuevoArchivo.setIdCarrera(idCarrera);
+            
+            // Guardar año de cursada
+            if (anioCursada != null && !anioCursada.trim().isEmpty()) {
+                try {
+                    nuevoArchivo.setAnioCursada(Integer.parseInt(anioCursada));
+                } catch (NumberFormatException e) {
+                    System.err.println("Error al parsear año de cursada: " + anioCursada);
+                }
+            }
             
             // Guardamos en la BD 
             DataArchivo da = new DataArchivo();

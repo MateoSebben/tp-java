@@ -8,12 +8,14 @@ public class Archivo {
 	private int idArchivo;
 	private int idUsuario;
 	private int idMateria;
+	private int idCarrera;
 	private Usuario usuario;
 	private Materia materia;
 	private String nombre;
 	private String extension;
 	private String descripcion;
 	private double peso;
+	private int anioCursada;
 	private String tipoArchivo;
 	private boolean esFisico;
 	private Timestamp fechaSubida;
@@ -38,6 +40,14 @@ public class Archivo {
 	}
 	public void setIdMateria(int idMateria) {
 		this.idMateria = idMateria;
+	}
+	
+	public Integer getIdCarrera() {
+	    return idCarrera;
+	}
+
+	public void setIdCarrera(Integer idCarrera) {
+	    this.idCarrera = idCarrera;
 	}
 	public Usuario getUsuario() {
 		return usuario;
@@ -77,6 +87,14 @@ public class Archivo {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+	
+	public Integer getAnioCursada() {
+	    return anioCursada;
+	}
+
+	public void setAnioCursada(Integer anioCursada) {
+	    this.anioCursada = anioCursada;
+	}
 	public String getTipoArchivo() {
 		return tipoArchivo;
 	}
@@ -102,17 +120,15 @@ public class Archivo {
 	public void setNombreFisico(String nombreFisico) {
 		this.nombreFisico = nombreFisico;
 	}
+	
 	@Override
 	public String toString() {
 		return "Archivo [idArchivo=" + idArchivo + ", idUsuario=" + idUsuario + ", idMateria=" + idMateria
-				+ ", usuario=" + usuario + ", materia=" + materia + ", nombre=" + nombre + ", descripcion="
-				+ descripcion + ", peso=" + peso + ", tipoArchivo=" + tipoArchivo + ", esFisico=" + esFisico
-				+ ", fechaSubida=" + fechaSubida + "]";
-	}
-
-	
-
-	
+				+ ", idCarrera=" + idCarrera + ", usuario=" + usuario + ", materia=" + materia + ", nombre=" + nombre
+				+ ", extension=" + extension + ", descripcion=" + descripcion + ", peso=" + peso + ", anioCursada="
+				+ anioCursada + ", tipoArchivo=" + tipoArchivo + ", esFisico=" + esFisico + ", fechaSubida="
+				+ fechaSubida + ", nombreFisico=" + nombreFisico + "]";
+	}	
 	
 }
 	

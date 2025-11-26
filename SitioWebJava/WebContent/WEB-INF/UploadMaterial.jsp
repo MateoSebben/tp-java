@@ -156,8 +156,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-    								<label for="año" class="form-label fw-bold">Año de Cursada</label>
-    								<select class="form-select" id="año" name="año" required>
+    								<label for="anioCursada" class="form-label fw-bold">Año de Cursada</label>
+    								<select class="form-select" id="anioCursada" name="anioCursada" required>
         								<option value="">Selecciona el año</option>
         								<% 
             								for (int a = añoActual; a >= añoInicio; a--) { 

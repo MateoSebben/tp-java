@@ -29,54 +29,60 @@
             </div>
 
             <!-- Navegación principal -->
-            <nav class="sidebar-nav">
+			<nav class="sidebar-nav">
 
-                <!-- Inicio -->
-                <a href="bienvenida.jsp" class="nav-item active" title="Inicio">
-                    <ion-icon name="home-outline"></ion-icon>
-                    <span class="nav-text">Inicio</span>
-                </a>
+    		<!-- Inicio -->
+    		<a href="bienvenida.jsp" class="nav-item active" title="Inicio">
+        		<ion-icon name="home-outline"></ion-icon>
+        		<span class="nav-text">Inicio</span>
+    		</a>
 
-                <!-- Subir material -->
-                <a href="upload" class="nav-item" title="Subir Material">
-                    <ion-icon name="cloud-upload-outline"></ion-icon>
-                    <span class="nav-text">Subir Material</span>
-                </a>
+    		<!-- Subir material -->
+    		<a href="upload" class="nav-item" title="Subir Material">
+        		<ion-icon name="cloud-upload-outline"></ion-icon>
+        		<span class="nav-text">Subir Material</span>
+    		</a>
 
-                <!-- Mis recursos -->
-                <a href="ListarMisRecursos" class="nav-item" title="Mis Recursos">
-                    <ion-icon name="document-text-outline"></ion-icon>
-                    <span class="nav-text">Mis Recursos</span>
-                </a>
+    		<!-- Mis recursos -->
+    		<a href="ListarMisRecursos" class="nav-item" title="Mis Recursos">
+        		<ion-icon name="folder-open-outline"></ion-icon>
+        		<span class="nav-text">Mis Recursos</span>
+    		</a>
 
-                <!-- Buscar material -->
-                <a href="ListaArchivos" class="nav-item" title="Buscar Material">
-                    <ion-icon name="search-outline"></ion-icon>
-                    <span class="nav-text">Buscar Material</span>
-                </a>
+    		<!-- Buscar material -->
+    		<a href="ListaArchivos" class="nav-item" title="Buscar Material">
+        		<ion-icon name="search-outline"></ion-icon>
+        		<span class="nav-text">Buscar Material</span>
+    		</a>
 
-                <!-- Alta Facultades -->
-                <%
-    			Usuario usuarioMenu = (Usuario) session.getAttribute("usuario");
-    			boolean esAdmin = usuarioMenu != null && "administrador".equalsIgnoreCase(usuarioMenu.getRol());
-				%>
+    		<%
+    		Usuario usuarioMenu = (Usuario) session.getAttribute("usuario");
+    		boolean esAdmin = usuarioMenu != null && "administrador".equalsIgnoreCase(usuarioMenu.getRol());
+    		%>
 
+    		<!-- OPCIONES DE ADMINISTRADOR - Solo visibles para admin -->
+    		<% if (esAdmin) { %>
+    
+    		<!-- Alta Facultades -->
+    		<a href="ListaFacultades" class="nav-item" title="Alta Facultades">
+        		<ion-icon name="business-outline"></ion-icon>
+        		<span class="nav-text">Alta Facultades</span>
+    		</a>
+    
+    		<!-- Alta Carreras -->
+    		<a href="ListaCarreras" class="nav-item" title="Alta Carreras">
+        		<ion-icon name="duplicate-outline"></ion-icon>
+        		<span class="nav-text">Alta Carreras</span>
+    		</a>
+    
+    		<% } %>
 
-				<!-- Alta Facultades - Solo para administradores -->
-				<% if (esAdmin) { %>
-				<a href="ListaFacultades" class="nav-item" title="Alta facultades">
-    			<ion-icon name="duplicate-outline"></ion-icon>
-    			<span class="nav-text">Alta Facultades</span>
-				</a>
-				<% } %>
-
-
-                <!-- Cerrar sesión -->
-                <a href="#" class="nav-item" data-bs-toggle="modal" data-bs-target="#modalCerrarSesion" title="Cerrar Sesión">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                    <span class="nav-text">Cerrar Sesión</span>
-                </a>
-            </nav>
+    		<!-- Cerrar sesión -->
+    		<a href="#" class="nav-item" data-bs-toggle="modal" data-bs-target="#modalCerrarSesion" title="Cerrar Sesión">
+        		<ion-icon name="log-out-outline"></ion-icon>
+        		<span class="nav-text">Cerrar Sesión</span>
+    		</a>
+			</nav>
 
         </div>
 
@@ -85,10 +91,10 @@
         
             
             <!-- Header -->
-<header class="main-header">
-    <h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
-    <div class="header-actions">
-        <%
+			<header class="main-header">
+    		<h1>Sistema de Gestión de Recursos Académicos Compartidos</h1>
+    		<div class="header-actions">
+        	<%
             Usuario usuarioHeader = (Usuario) session.getAttribute("usuario");
             boolean esAdministrador = usuarioHeader != null && "administrador".equalsIgnoreCase(usuarioHeader.getRol());
             
@@ -176,7 +182,7 @@
                         <a href="listarMisRecursos" class="feature-card-link">
                             <div class="feature-card">
                                 <div class="feature-header">
-                                    <ion-icon name="document-text-outline" size="large"></ion-icon>
+                                    <ion-icon name="folder-open-outline" size="large"></ion-icon>
                                     <h3>Mis Aportes Académicos</h3>
                                 </div>
                                 <p>
