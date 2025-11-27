@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <%@ page import="java.util.*" %>
 <%@ page import="entities.*" %>
@@ -450,10 +451,33 @@
             document.getElementById('mensajeSolicitud').classList.add('d-none');
         });
 
-        // Manejo de Archivo
+     // Manejo de Archivo con VALIDACIÓN DE TAMAÑO
         document.getElementById('archivo').addEventListener('change', function(e) {
             const file = e.target.files[0];
+            
             if (file) {
+                // VALIDACIÓN: Máximo 50MB
+                const maxSize = 50 * 1024 * 1024; // 50MB en bytes
+                
+                if (file.size > maxSize) {
+                    //Archivo muy grande
+                    mostrarAlerta(
+                        'El archivo supera el límite de 50MB. Por favor, selecciona un archivo más pequeño. ' +
+                        'Tamaño actual: ' + formatFileSize(file.size),
+                        'danger'
+                    );
+                    
+                    // Limpiar el input
+                    this.value = '';
+                    
+                    // Resetear la UI
+                    document.getElementById('upload-content').classList.remove('d-none');
+                    document.getElementById('file-info').classList.add('d-none');
+                    
+                    return; // Detener ejecución
+                }
+                
+                // Archivo válido - Mostrar información
                 document.getElementById('upload-content').classList.add('d-none');
                 document.getElementById('file-info').classList.remove('d-none');
                 
@@ -496,7 +520,7 @@
             }
         });
 
-        // Manejo de tags
+        // Manejo de tags (código sin cambios)
         document.getElementById('tagInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -565,7 +589,39 @@
             updateTagsInput();
         }
 
-        // Drag and drop
+        // Mostrar alertas dinámicas
+        function mostrarAlerta(mensaje, tipo) {
+            // Eliminar alertas previas
+            const alertasExistentes = document.querySelectorAll('.alert-dinamica');
+            alertasExistentes.forEach(alerta => alerta.remove());
+            
+            // Crear nueva alerta
+            const alerta = document.createElement('div');
+            alerta.className = `alert alert-${tipo} alert-dinamica`;
+            alerta.style.animation = 'slideDown 0.3s ease-out';
+            
+            // Icono según el tipo
+            const icono = tipo === 'success' 
+                ? '<i class="fas fa-check-circle me-2"></i>' 
+                : '<i class="fas fa-exclamation-triangle me-2"></i>';
+            
+            alerta.innerHTML = icono + mensaje;
+            
+            // Insertar al inicio del card-body
+            const cardBody = document.querySelector('.card-body');
+            cardBody.insertBefore(alerta, cardBody.firstChild);
+            
+            // Scroll suave hacia la alerta
+            alerta.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Auto-ocultar después de 6 segundos
+            setTimeout(() => {
+                alerta.style.animation = 'slideUp 0.3s ease-out';
+                setTimeout(() => alerta.remove(), 300);
+            }, 6000);
+        }
+
+        // Drag and drop (código sin cambios)
         const uploadArea = document.querySelector('.upload-area');
         
         uploadArea.addEventListener('dragover', function(e) {
@@ -589,7 +645,7 @@
             }
         });
         
-        // Ocultar mensaje de éxito después de 4 segundos
+     // Ocultar mensaje de éxito después de 4 segundos
         document.addEventListener('DOMContentLoaded', function() {
             const successAlert = document.querySelector('.alert-success');
             if (successAlert) {

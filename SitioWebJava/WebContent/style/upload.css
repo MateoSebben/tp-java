@@ -608,3 +608,34 @@ form .btn-primary:hover {
 	font-size: 30px !important;
 	margin-right: 8px;
 } 
+
+/* ANIMACIÓN PARA OCULTAR ALERTA */
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 200px;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+    }
+}
+
+
+.alert-dinamica {
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.alert-dinamica i {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
