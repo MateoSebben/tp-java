@@ -62,17 +62,12 @@ public class Upload extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)      
             throws ServletException, IOException {
         
-        // Recargar facultades para el formulario
-        DataFacultad df = new DataFacultad();
-        LinkedList<Facultad> facultades = df.getAllFacultades();
-        request.setAttribute("facultades", facultades);
-        
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("usuario") == null) {
             // Si el usuario NO está logueado, redirige a la página principal o de login
             // Usamos un mensaje flash para notificar al usuario.
             request.getSession().setAttribute("infoMessage", "La sesión expiró o no iniciaste sesión. Por favor, vuelve a iniciar sesión.");
-            response.sendRedirect(request.getContextPath() + "/WEB-INF/Signin.jsp"); 
+            response.sendRedirect(request.getContextPath() + "/Signin"); 
             return;
         }
         Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -147,14 +142,18 @@ public class Upload extends HttpServlet {
             DataArchivo da = new DataArchivo();
             da.agregarArchivo(nuevoArchivo, idMateria);
             
-            // Mensaje de éxito
-            request.setAttribute("success", "Archivo subido correctamente.");
-            request.getRequestDispatcher("/WEB-INF/UploadMaterial.jsp").forward(request, response);
+            session.setAttribute("successMessage", "Archivo subido correctamente.");
+            
+            // Redirigir en lugar de forward para evitar reenvío de formulario
+            response.sendRedirect(request.getContextPath() + "/upload");
+            // ========================================================
             
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Ocurrió un error al subir el archivo: " + e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/UploadMaterial.jsp").forward(request, response);
+            
+            session.setAttribute("errorMessage", "Ocurrió un error al subir el archivo: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/upload");
+            // ====================================================
         }
     }
 }

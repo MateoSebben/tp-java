@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <%@ page import="java.util.*" %>
 <%@ page import="entities.*" %>
@@ -67,10 +66,15 @@
                             </div>
                         <% } %>
                         
-                        <% if (request.getAttribute("success") != null) { %>
-                            <div class="alert alert-success">
+                        <% 
+                            // Obtener mensaje de sesión y eliminarlo inmediatamente
+                            String successMessage = (String) session.getAttribute("successMessage");
+                            if (successMessage != null) {
+                                session.removeAttribute("successMessage");
+                        %>
+                            <div class="alert alert-success" id="success-alert">
                                 <i class="fas fa-check-circle me-2"></i>
-                                <%= request.getAttribute("success") %>
+                                <%= successMessage %>
                             </div>
                         <% } %>
 
@@ -88,19 +92,19 @@
                                         <small class="text-muted">PDF, DOC, TXT, PNG, JPG, Excel, PowerPoint (máx. 50MB)</small>
                                     </div>
                                 </div>
-                              <div id="file-info" class="mt-2 d-none">
-    								<button type="button" class="btn-change-file" onclick="cambiarArchivo()">
-       							    <ion-icon name="sync-outline"></ion-icon>
-       								 Cambiar
-    								</button>
-    									<div class="d-flex align-items-center">
-        								<i id="file-icon" class="fas fa-file fa-2x"></i>
-        									<div style="flex: 1;">
-            								<div id="file-name" class="fw-bold"></div>
-           								 <div id="file-size" class="text-muted small"></div>
-        									</div>
-    									</div>
-							 </div>
+                                <div id="file-info" class="mt-2 d-none">
+                                    <button type="button" class="btn-change-file" onclick="cambiarArchivo()">
+                                        <ion-icon name="sync-outline"></ion-icon>
+                                        Cambiar
+                                    </button>
+                                    <div class="d-flex align-items-center">
+                                        <i id="file-icon" class="fas fa-file fa-2x"></i>
+                                        <div style="flex: 1;">
+                                            <div id="file-name" class="fw-bold"></div>
+                                            <div id="file-size" class="text-muted small"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Información académica -->
@@ -157,18 +161,18 @@
                                 </div>
 
                                 <div class="col-md-6">
-    								<label for="anioCursada" class="form-label fw-bold">Año de Cursada</label>
-    								<select class="form-select" id="anioCursada" name="anioCursada" required>
-        								<option value="">Selecciona el año</option>
-        								<% 
-            								for (int a = añoActual; a >= añoInicio; a--) { 
-        								%>
-            								<option value="<%= a %>"><%= a %></option>
-        								<% 
-            								} 
-        								%>
-    								</select>
-								</div>
+                                    <label for="anioCursada" class="form-label fw-bold">Año de Cursada</label>
+                                    <select class="form-select" id="anioCursada" name="anioCursada" required>
+                                        <option value="">Selecciona el año</option>
+                                        <% 
+                                            for (int a = añoActual; a >= añoInicio; a--) { 
+                                        %>
+                                            <option value="<%= a %>"><%= a %></option>
+                                        <% 
+                                            } 
+                                        %>
+                                    </select>
+                                </div>
                             </div>
 
                             <!-- Tipo de archivo y título -->
@@ -258,14 +262,12 @@
         </div>
     </div>
 
-	<!-- Iconos -->
+    <!-- Iconos -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>	
     
     <script>
-        let tags = [];
-
         // DROPDOWNS EN CASCADA - AJAX
 
         // Cuando cambia la Facultad, cargar Carreras
@@ -392,7 +394,6 @@
             btnEnviar.disabled = true;
             btnEnviar.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Enviando...';
             
-            // CAMBIAR FormData por URLSearchParams
             const params = new URLSearchParams();
             params.append('nombreMateria', nombreMateria);
             params.append('descripcion', descripcion);
@@ -451,12 +452,13 @@
             document.getElementById('mensajeSolicitud').classList.add('d-none');
         });
 
-     // Manejo de Archivo con VALIDACIÓN DE TAMAÑO
+        // Manejo de Archivo con 
         document.getElementById('archivo').addEventListener('change', function(e) {
             const file = e.target.files[0];
             
             if (file) {
-                // VALIDACIÓN: Máximo 50MB
+                
+            	// Validacion: Máximo 50MB
                 const maxSize = 50 * 1024 * 1024; // 50MB en bytes
                 
                 if (file.size > maxSize) {
@@ -520,51 +522,6 @@
             }
         });
 
-        // Manejo de tags (código sin cambios)
-        document.getElementById('tagInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                addTag();
-            }
-        });
-
-        function addTag() {
-            const input = document.getElementById('tagInput');
-            const tag = input.value.trim().toLowerCase();
-            
-            if (tag && !tags.includes(tag)) {
-                tags.push(tag);
-                updateTagDisplay();
-                input.value = '';
-                updateTagsInput();
-            }
-        }
-
-        function removeTag(tag) {
-            tags = tags.filter(t => t !== tag);
-            updateTagDisplay();
-            updateTagsInput();
-        }
-
-        function updateTagDisplay() {
-            const container = document.getElementById('tagContainer');
-            const input = document.getElementById('tagInput');
-            
-            const existingTags = container.querySelectorAll('.tag');
-            existingTags.forEach(tag => tag.remove());
-            
-            tags.forEach(tag => {
-                const tagElement = document.createElement('span');
-                tagElement.className = 'tag';
-                tagElement.innerHTML = `${tag} <span class="remove-tag" onclick="removeTag('${tag}')">&times;</span>`;
-                container.insertBefore(tagElement, input);
-            });
-        }
-
-        function updateTagsInput() {
-            document.getElementById('tags').value = tags.join(',');
-        }
-
         function formatFileSize(bytes) {
             if (bytes === 0) return '0 Bytes';
             const k = 1024;
@@ -583,10 +540,6 @@
             document.getElementById('materia').innerHTML = '<option value="">Primero selecciona una carrera</option>';
             document.getElementById('materia').disabled = true;
             document.getElementById('btnSolicitarMateria').disabled = true;
-            
-            tags = [];
-            updateTagDisplay();
-            updateTagsInput();
         }
 
         // Mostrar alertas dinámicas
@@ -621,7 +574,7 @@
             }, 6000);
         }
 
-        // Drag and drop (código sin cambios)
+        // Drag and drop
         const uploadArea = document.querySelector('.upload-area');
         
         uploadArea.addEventListener('dragover', function(e) {
@@ -645,19 +598,38 @@
             }
         });
         
-     // Ocultar mensaje de éxito después de 4 segundos
-        document.addEventListener('DOMContentLoaded', function() {
-            const successAlert = document.querySelector('.alert-success');
-            if (successAlert) {
-                setTimeout(function() {
-                    successAlert.style.display = 'none';
-                }, 4000);
-            }
-        });
-        
         function cambiarArchivo() {
             document.getElementById('archivo').click();
         }
+
+        // ===== CORRECCIONES APLICADAS =====
+        
+        // 1. Ocultar y eliminar mensaje de éxito después de 4 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+            const successAlert = document.getElementById('success-alert');
+            if (successAlert) {
+                setTimeout(function() {
+                    // Animación de salida suave
+                    successAlert.style.transition = 'opacity 0.3s ease-out';
+                    successAlert.style.opacity = '0';
+                    
+                    // Eliminar del DOM después de la animación
+                    setTimeout(function() {
+                        successAlert.remove();
+                    }, 300);
+                }, 4000);
+            }
+        });
+
+        // 2. Prevenir reenvío de formulario (Patrón PRG en el cliente)
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
+        // 3. Marcar formulario como enviado
+        document.getElementById('uploadForm').addEventListener('submit', function() {
+            this.dataset.submitted = 'true';
+        });
     </script>
 </body>
 </html>
