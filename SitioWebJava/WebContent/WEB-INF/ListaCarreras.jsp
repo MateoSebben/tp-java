@@ -294,15 +294,6 @@
             form.submit();
         }
         
-        // Búsqueda en tiempo real (opcional - descomentar si quieres)
-        /*
-        document.querySelector('input[name="busqueda"]').addEventListener('input', function() {
-            clearTimeout(this.searchTimeout);
-            this.searchTimeout = setTimeout(() => {
-                document.getElementById('filterForm').submit();
-            }, 500);
-        });
-        */
     </script>
 </body>
 </html>

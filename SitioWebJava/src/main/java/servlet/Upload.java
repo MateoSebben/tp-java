@@ -71,7 +71,7 @@ public class Upload extends HttpServlet {
             return;
         }
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        // ==========================================================
+        
         
         request.setCharacterEncoding("UTF-8");
         
@@ -146,14 +146,14 @@ public class Upload extends HttpServlet {
             
             // Redirigir en lugar de forward para evitar reenvío de formulario
             response.sendRedirect(request.getContextPath() + "/upload");
-            // ========================================================
+            
             
         } catch (Exception e) {
             e.printStackTrace();
             
             session.setAttribute("errorMessage", "Ocurrió un error al subir el archivo: " + e.getMessage());
             response.sendRedirect(request.getContextPath() + "/upload");
-            // ====================================================
+            
         }
     }
 }

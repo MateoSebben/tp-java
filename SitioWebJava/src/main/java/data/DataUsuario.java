@@ -135,7 +135,7 @@ import java.util.LinkedList;
 public class DataUsuario {
 
     public LinkedList<Usuario> getAll() {
-        //DataRol dr=new DataRol(); // Comentado si no usas roles externos
+        
         Statement stmt = null;
         ResultSet rs = null;
         LinkedList<Usuario> usua = new LinkedList<>();
@@ -161,23 +161,16 @@ public class DataUsuario {
                     u.setEmail(rs.getString("email"));
                     u.setRol(rs.getString("rol"));
 
-                    //dr.setRoles(p); // Lógica para roles externos, si aplica.
-
                     usua.add(u);
                 }
             }
 
         } catch (SQLException e) {
-            // Captura cualquier error SQL que ocurra, incluida la falla de conexión.
             e.printStackTrace();
-            // Considera lanzar una excepción personalizada (ej. DataAccessException)
-            // para una mejor gestión de errores en la capa superior.
         } finally {
-            // Asegúrate de cerrar los recursos en el orden inverso al que se abrieron.
             try {
                 if (rs != null) { rs.close(); }
                 if (stmt != null) { stmt.close(); }
-                // Solo libera la conexión si fue obtenida exitosamente.
                 if (conn != null) { DbConnector.getInstancia().releaseConn(); }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -190,48 +183,39 @@ public class DataUsuario {
         Usuario u = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Connection conn = null; // Declarar Connection aquí
+        Connection conn = null; 
 
         try {
-            // Obtener la conexión a la base de datos.
-            // Esto puede lanzar una SQLException si la conexión falla.
             conn = DbConnector.getInstancia().getConn();
 
-            // Preparar la sentencia SQL con parámetros.
-            // Se seleccionan todos los atributos necesarios, incluyendo 'rol'.
             stmt = conn.prepareStatement(
                     "SELECT id, nombre, apellido, email, password, rol FROM usuario WHERE email=? AND password=?"
             );
             stmt.setString(1, usu.getEmail());
-            stmt.setString(2, usu.getPassword()); // ¡RECORDATORIO DE SEGURIDAD: Usar hashing para passwords!
+            stmt.setString(2, usu.getPassword()); 
 
             // Ejecutar la consulta.
             rs = stmt.executeQuery();
 
-            // Procesar el resultado (solo se espera un usuario).
+            // Procesar el resultado 
             if (rs != null && rs.next()) {
                 u = new Usuario();
                 u.setId(rs.getInt("id"));
                 u.setNombre(rs.getString("nombre"));
                 u.setApellido(rs.getString("apellido"));
                 u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password")); // guarda el hash de la BD
-                u.setSalt(rs.getString("salt"));         // guarda el salt de la BD
-                u.setRol(rs.getString("rol")); // Asigna el rol directamente de la tabla 'usuario'.
+                u.setPassword(rs.getString("password")); 
+                u.setSalt(rs.getString("salt"));         
+                u.setRol(rs.getString("rol")); 
 
-                //dr.setRoles(p); // Lógica para roles externos, si aplica.
             }
 
         } catch (SQLException e) {
-            // Captura cualquier error SQL, incluida la falla de conexión.
             e.printStackTrace();
-            // Puedes lanzar una excepción personalizada para mejor manejo en capas superiores.
         } finally {
-            // Cerrar recursos de forma segura.
             try {
                 if (rs != null) { rs.close(); }
                 if (stmt != null) { stmt.close(); }
-                // Solo libera la conexión si fue obtenida.
                 if (conn != null) { DbConnector.getInstancia().releaseConn(); }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -240,54 +224,6 @@ public class DataUsuario {
         return u;
     }
     
-    /*
-    public void add(Usuario u) {
-        PreparedStatement stmt = null;
-        ResultSet keyResultSet = null;
-        Connection conn = null; // Declarar Connection aquí
-
-        try {
-            // Obtener la conexión a la base de datos.
-            // Esto puede lanzar una SQLException si la conexión falla.
-            conn = DbConnector.getInstancia().getConn();
-
-            // Preparar la sentencia INSERT con retorno de claves generadas.
-            stmt = conn.prepareStatement(
-                    "INSERT INTO usuario(nombre, apellido, email, password, rol) VALUES(?,?,?,?,?)",
-                    PreparedStatement.RETURN_GENERATED_KEYS
-            );
-            stmt.setString(1, u.getNombre());
-            stmt.setString(2, u.getApellido());
-            stmt.setString(3, u.getEmail());
-            stmt.setString(4, u.getPassword()); // ¡RECORDATORIO DE SEGURIDAD: Hashing para passwords!
-            stmt.setString(5, u.getRol());
-
-            // Ejecutar la actualización.
-            stmt.executeUpdate();
-
-            // Obtener la clave primaria generada (ID).
-            keyResultSet = stmt.getGeneratedKeys();
-            if (keyResultSet != null && keyResultSet.next()) {
-                u.setId(keyResultSet.getInt(1));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Lanza una excepción para notificar el fallo de la operación de inserción.
-        } finally {
-            // Cerrar recursos de forma segura.
-            try {
-                if (keyResultSet != null) { keyResultSet.close(); }
-                if (stmt != null) { stmt.close(); }
-                // Solo libera la conexión si fue obtenida.
-                if (conn != null) { DbConnector.getInstancia().releaseConn(); }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-          
-        }
-    }
-    */
     
     public void add(Usuario u) throws NoSuchAlgorithmException {
         PreparedStatement stmt = null;
@@ -298,7 +234,7 @@ public class DataUsuario {
             conn = DbConnector.getInstancia().getConn();
 
             // Generar salt y hash con la contraseña que viene en el Usuario
-         // Ya viene hasheada desde el servlet Signup
+           // Ya viene hasheada desde el servlet Signup
             System.out.println("Contraseña (hash) recibida: " + u.getPassword());
             System.out.println("Salt recibido: " + u.getSalt());
 
@@ -310,8 +246,8 @@ public class DataUsuario {
             stmt.setString(1, u.getNombre());
             stmt.setString(2, u.getApellido());
             stmt.setString(3, u.getEmail());
-            stmt.setString(4, u.getPassword()); // guardás el hash
-            stmt.setString(5, u.getSalt());     // guardás el salt
+            stmt.setString(4, u.getPassword()); 
+            stmt.setString(5, u.getSalt());     
             stmt.setString(6, u.getRol());
 
             stmt.executeUpdate();
@@ -384,8 +320,8 @@ public class DataUsuario {
                 u.setNombre(rs.getString("nombre"));
                 u.setApellido(rs.getString("apellido"));
                 u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password").trim()); // hash de BD
-                u.setSalt(rs.getString("salt").trim());         // salt de BD
+                u.setPassword(rs.getString("password").trim()); 
+                u.setSalt(rs.getString("salt").trim());         
                 u.setRol(rs.getString("rol"));
             }
         } catch (SQLException e) {

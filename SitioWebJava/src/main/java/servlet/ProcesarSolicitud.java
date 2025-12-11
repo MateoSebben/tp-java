@@ -29,7 +29,7 @@ public class ProcesarSolicitud extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // No se usa GET
+        
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,7 +77,7 @@ public class ProcesarSolicitud extends HttpServlet {
             
             DataSolicitudMateria dataSolicitud = new DataSolicitudMateria();
             
-            // NUEVO: Obtener los datos de la solicitud ANTES de procesarla
+            // Obtener los datos de la solicitud antes de procesarla
             SolicitudMateria solicitud = dataSolicitud.getSolicitudById(idSolicitud);
             
             if (solicitud == null) {
@@ -94,7 +94,7 @@ public class ProcesarSolicitud extends HttpServlet {
                 resultado = dataSolicitud.aprobarSolicitud(idSolicitud, idAdministrador);
                 
                 if (resultado) {
-                    // NUEVO: Verificar el estado final de la solicitud
+                    // Verificar el estado final de la solicitud
                     SolicitudMateria solicitudFinal = dataSolicitud.getSolicitudById(idSolicitud);
                     
                     if ("APROBADA".equals(solicitudFinal.getEstado())) {
@@ -170,7 +170,7 @@ public class ProcesarSolicitud extends HttpServlet {
                     mensaje = "Solicitud rechazada correctamente";
                     System.out.println("Solicitud " + idSolicitud + " RECHAZADA por admin " + idAdministrador);
                     
-                    // NUEVO: Enviar email de rechazo
+                    // Enviar email de rechazo
                     try {
                         emailEnviado = EmailService.enviarEmailRechazo(
                             solicitud.getEmailUsuarioSolicitante(),

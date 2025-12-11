@@ -68,7 +68,7 @@ public class DataMateria {
 	/* Obtener Facultad y Carrera por Materia */
 	
 	public int[] getFacultadYCarreraPorMateria(int idMateria) {
-	    int[] resultado = new int[2]; // [0] = idFacultad, [1] = idCarrera
+	    int[] resultado = new int[2]; 
 	    
 	    String sql = "SELECT cf.idFacultad, cm.idCarrera " +
 	                 "FROM carrera_materia cm " +

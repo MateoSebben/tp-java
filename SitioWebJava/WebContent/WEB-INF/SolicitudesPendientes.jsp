@@ -280,7 +280,7 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // NUEVO: Detectar si es un rechazo automático por duplicado
+                // Detectar si es un rechazo automático por duplicado
                 const esDuplicado = data.message.toLowerCase().includes('ya existe') || 
                                   data.message.toLowerCase().includes('ya existía') ||
                                   data.message.toLowerCase().includes('duplicado');

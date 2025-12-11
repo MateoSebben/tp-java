@@ -126,12 +126,8 @@ public class DataSolicitudMateria {
         return sm;
     }
 	
-	/**
-	 * NUEVO: Verifica si una materia ya existe en una carrera específica
-	 * @param nombreMateria Nombre de la materia a verificar
-	 * @param idCarrera ID de la carrera
-	 * @return true si la materia ya existe, false en caso contrario
-	 */
+	/* Verifica si una materia ya existe en una carrera específica */
+	
 	private boolean existeMateriaEnCarrera(String nombreMateria, int idCarrera) {
 	    String sql = "SELECT COUNT(*) as total " +
 	                 "FROM materia m " +
@@ -159,7 +155,7 @@ public class DataSolicitudMateria {
 	}
 	
 	// Metodo para aprobar la solicitud, crear la materia y asociarla con la carrera 
-	// ACTUALIZADO: Ahora valida duplicados antes de crear
+	// Ahora valida duplicados antes de crear
 	
 	public boolean aprobarSolicitud(int idSolicitud, int idAdministrador) {
 	    Connection conn = null;
@@ -199,17 +195,17 @@ public class DataSolicitudMateria {
 	            return rechazada;
 	        }
 	        
-	        // 3. NUEVO: Buscar si la materia existe en OTRA carrera
+	        // 3. Buscar si la materia existe en otra carrera
 	        Integer idMateriaExistente = buscarIdMateriaPorNombre(solicitud.getNombreMateria());
 	        int idMateria;
 	        
 	        if (idMateriaExistente != null) {
-	            // ✅ La materia existe en otra carrera - REUTILIZAR el ID
+	            // La materia existe en otra carrera - Reutilizar el ID
 	            idMateria = idMateriaExistente;
 	            System.out.println("Materia '" + solicitud.getNombreMateria() + 
 	                             "' ya existe (ID: " + idMateria + ") - Reutilizando para nueva carrera");
 	        } else {
-	            // ❌ La materia NO existe en ninguna carrera - CREAR NUEVA
+	            // La materia NO existe en ninguna carrera - Crear nueva
 	            String sqlMateria = "INSERT INTO materia (nombre) VALUES (?)";
 	            PreparedStatement stmtMateria = conn.prepareStatement(sqlMateria, 
 	                    Statement.RETURN_GENERATED_KEYS);

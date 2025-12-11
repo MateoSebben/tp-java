@@ -58,11 +58,11 @@ public class Signin extends HttpServlet {
         Usuario usuarioValidado = ctrl.validate(usu);
         
         if (usuarioValidado != null) {
-            // Login válido - REDIRIGIR A BIENVENIDA
+            // Login válido - Redirigir a Bienvenida
             HttpSession session = request.getSession();
             session.setAttribute("usuario", usuarioValidado);
             
-            // Redirigir a la página de bienvenida
+            // Redirigir a la página de Bienvenida
             response.sendRedirect("bienvenida.jsp");
             
         } else {

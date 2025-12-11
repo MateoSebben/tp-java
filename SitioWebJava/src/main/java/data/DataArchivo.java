@@ -19,7 +19,6 @@ public class DataArchivo {
 	    try {
 	        conn = DbConnector.getInstancia().getConn();
 
-	        // ACTUALIZADO: Agregar idCarrera al INSERT
 	        stmt = conn.prepareStatement(
 	            "INSERT INTO archivo " +
 	            "(idUsuario, idMateria, idCarrera, anioCursada, nombre, nombreFisico, extension, descripcion, peso, tipoArchivo, esFisico, fechaSubida) " +
@@ -218,7 +217,6 @@ public class DataArchivo {
         try {
             Connection conn = DbConnector.getInstancia().getConn();
             
-            // ACTUALIZADO: Incluir idCarrera del archivo
             String sql = 
                 "SELECT a.idArchivo, a.nombre, a.extension, a.descripcion, a.peso, a.tipoArchivo, " +
                 "       a.esFisico, a.fechaSubida, a.anioCursada, a.idCarrera, " +
@@ -250,7 +248,7 @@ public class DataArchivo {
                     archivo.setAnioCursada(anioCursada);
                 }
                 
-                // NUEVO: ID de carrera específica del archivo
+                // ID de carrera específica del archivo
                 int idCarrera = rs.getInt("idCarrera");
                 if (!rs.wasNull()) {
                     archivo.setIdCarrera(idCarrera);
@@ -327,7 +325,7 @@ public class DataArchivo {
                 archivo.setEsFisico(rs.getBoolean("esFisico"));
                 archivo.setFechaSubida(rs.getTimestamp("fechaSubida"));
                 
-                // IMPORTANTE: Cargar la materia asociada
+                // Cargar la materia asociada
                 int idMateria = rs.getInt("idMateria");
                 if (idMateria > 0) {
                     Materia materia = new Materia();

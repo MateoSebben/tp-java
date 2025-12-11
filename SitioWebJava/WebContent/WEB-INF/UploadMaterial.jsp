@@ -601,10 +601,8 @@
         function cambiarArchivo() {
             document.getElementById('archivo').click();
         }
-
-        // ===== CORRECCIONES APLICADAS =====
-        
-        // 1. Ocultar y eliminar mensaje de éxito después de 4 segundos
+     
+        //  Ocultar y eliminar mensaje de éxito después de 4 segundos
         document.addEventListener('DOMContentLoaded', function() {
             const successAlert = document.getElementById('success-alert');
             if (successAlert) {
@@ -621,12 +619,12 @@
             }
         });
 
-        // 2. Prevenir reenvío de formulario (Patrón PRG en el cliente)
+        // Prevenir reenvío de formulario (Patrón PRG en el cliente)
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
 
-        // 3. Marcar formulario como enviado
+        // Marcar formulario como enviado
         document.getElementById('uploadForm').addEventListener('submit', function() {
             this.dataset.submitted = 'true';
         });
